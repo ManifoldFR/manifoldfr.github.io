@@ -4,4 +4,7 @@
 
 layout: home
 ---
+
+I am a student in the WILLOW Team at Inria, in Paris.
+
 My work focuses on optimization and control of dynamical systems for robotics.
