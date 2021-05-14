@@ -31,6 +31,7 @@ github_username:  ManifoldFR
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-assets
 
 markdown: kramdown
 gist:
@@ -38,6 +39,10 @@ gist:
 kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
+
+minima:
+  social_links:
+    github: ManifoldFR
 
 # Exclude from processing.
 # The following items will not be processed, by default.
