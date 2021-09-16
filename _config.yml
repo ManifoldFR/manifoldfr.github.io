@@ -18,20 +18,28 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: manifold
-email: ManifoldFR@outlook.com
+title: Wilson Jallet
+
+author:
+  name: Wilson Jallet
+  email: wilson.jallet[at]m4x.org
+
 description: >- # this means to ignore newlines until "baseurl:"
-  This is a description.
+
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-# twitter_username: jekyllrb
 github_username:  ManifoldFR
+
+header_pages:
 
 # Build settings
 theme: minima
 plugins:
   - jekyll-feed
   - jekyll-assets
+  - jekyll-github-metadata
+  - jekyll-gist
+  - jekyll-toc
 
 markdown: kramdown
 gist:
@@ -40,7 +48,11 @@ kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
 
+titles_from_headings:
+  enabled: false
+
 minima:
+  date_format: "%e %B %Y"
   social_links:
     github: ManifoldFR
 
