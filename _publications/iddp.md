@@ -2,7 +2,7 @@
 title: Implicit Differential Dynamic Programming
 HAL: https://hal.archives-ouvertes.fr/hal-03351641
 pdf: https://hal.archives-ouvertes.fr/hal-03351641/document
-comment: Submitted to ICRA 2022
+comment: #Submitted to ICRA 2022
 authors:
     - Wilson Jallet
     - Justin Carpentier
