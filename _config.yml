@@ -30,8 +30,6 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  ManifoldFR
 
-header_pages:
-
 # Build settings
 theme: minima
 plugins:
@@ -40,6 +38,12 @@ plugins:
   - jekyll-github-metadata
   - jekyll-gist
   - jekyll-toc
+  - jekyll-scholar
+
+collections:
+  publications:
+    output: false
+    permalink: /:collection/:name
 
 markdown: kramdown
 gist:
@@ -47,7 +51,8 @@ gist:
 kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
-
+scholar:
+  style: modern-language-association
 titles_from_headings:
   enabled: false
 
