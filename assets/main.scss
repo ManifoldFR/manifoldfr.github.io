@@ -1,3 +1,8 @@
+---
+---
+
+@import "minima";
+
 ul.pub-list {
 }
 
@@ -34,5 +39,5 @@ a.pub-link:link, a.pub-link:visited {
     text-align: justify;
 }
 
-@import "minima/skins/{{ site.minima.skin | default: 'classic' }}";
-@import "minima/initialize";
+// @import "minima/skins/{{ site.minima.skin | default: 'classic' }}";
+// @import "minima/initialize";
