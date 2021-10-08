@@ -11,9 +11,9 @@ layout: default
 
   {%- if site.publications.size > 0 -%}
     <h1>Publications</h1>
-    See also my <a href="https://scholar.google.fr/citations?user=aVgy-0gAAAAJ&hl=en" style="font-weight: 600;">Google Scholar</a>.
-    </br>
-    </br>
+    <p style="margin-bottom: 15px;">
+      See also my <a href="https://scholar.google.fr/citations?user=aVgy-0gAAAAJ&hl=en" style="font-weight: 600;">Google Scholar</a>.
+    </p>
     <ul class="pub-list">
       {% for publ in site.publications %}
       <li class="pub-item">
@@ -30,7 +30,7 @@ layout: default
           {% endfor %}
         </p>
       
-        <p>{{ publ.content | markdownify | strip_newlines | truncate: 200 }}</p>
+        <p>{{ publ.content | markdownify | strip_newlines | truncate: 240 }}</p>
 
         {%- if publ.HAL -%}
           <a href="{{ publ.HAL }}" class="pub-link">HAL</a>
