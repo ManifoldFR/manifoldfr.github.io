@@ -3,21 +3,30 @@
 
 @import "minima";
 
-ul.pub-list {
+.address {
+    font-size: larger;
+    font-weight: 400;
+    display: block;
+}
+
+.pub-list {
+    @extend .post-list;
 }
 
 li.pub-item {
     border-left-style: solid;
     padding-left: 10px;
+    padding-bottom: 10px;
     border-left-color: bisque;
     border-left-width: 2px;
-    margin-left: 1%;
+    margin-left: 0;
     list-style: none;
+    @extend li;
 }
 
 .pub-title {
-    font-weight: bold;
-    color: dodgerblue;
+    color: #2a7ae2;
+    @extend .post-link;
 }
 
 a.pub-link:link, a.pub-link:visited {
