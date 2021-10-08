@@ -20,14 +20,7 @@ layout: default
         <h3 class="pub-title">{{ publ.title | escape }}</h3>
         <span style="font-style: italic;">{{ publ.comment | escape }}</span>
         <p>
-          Authors: 
-          {% for author in publ.authors %}
-            {% if author == site.author.name %}
-              <span style="font-weight: 600;">{{ author }}</span>
-            {% else %}
-              <span>{{ author }} </span>
-            {% endif %}
-          {% endfor %}
+          Authors: {{ publ.authors | join: ", " }}
         </p>
       
         <p>{{ publ.content | markdownify | strip_newlines | truncate: 240 }}</p>
