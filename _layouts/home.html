@@ -17,7 +17,15 @@ layout: default
     <ul class="pub-list">
       {% for publ in site.publications %}
       <li class="pub-item">
-        <h3 class="pub-title">{{ publ.title | escape }}</h3>
+        <h3 class="pub-title">
+          {%- if publ.link -%}
+            <a href="{{ publ.link }}">
+          {%- endif -%}
+          {{ publ.title | escape }}
+          {%- if publ.link -%}
+            </a>
+          {%- endif -%}
+        </h3>
         <span style="font-style: italic;">{{ publ.comment | escape }}</span>
         <p>
           Authors: {{ publ.authors | join: ", " }}
@@ -25,8 +33,8 @@ layout: default
       
         <p>{{ publ.content | markdownify | strip_newlines | truncate: 240 }}</p>
 
-        {%- if publ.HAL -%}
-          <a href="{{ publ.HAL }}" class="pub-link">HAL</a>
+        {%- if publ.link -%}
+          <a href="{{ publ.link }}" class="pub-link">Link</a>
         {%- endif -%}
         {%- if publ.pdf -%}
           <a href="{{ publ.pdf }}" class="pub-link">pdf</a>

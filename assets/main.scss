@@ -36,14 +36,17 @@ a.pub-link:link, a.pub-link:visited {
     padding: 0.2ex 0.8ex;
     border: black;
     border-style: solid;
-    border-width: 1px;
+    border-width: 0;
     border-radius: 2px;
-    background-color: rgb(236, 69, 69);
+    background-color: rgb(236, 157, 157);
     display: inline-block;
     text-align: center;
     text-decoration: none;
+    transition: background-color 400ms ease;
+    &:hover {
+        background-color: rgb(241, 50, 50);
+    }
 }
-
 .pub-item p {
     text-align: justify;
 }
