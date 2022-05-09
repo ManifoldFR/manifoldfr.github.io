@@ -7,9 +7,7 @@ tags: optimal-transport
 
 [Last time](2021-05-13-ot.md) we had an introductory look at OT, the definition and computation of the Wasserstein distance.
 
-
 A year ago, I wrote a solver for this variational formulation of mean-field games, as part of a project. This eventually led to a [small C++ library](https://github.com/ManifoldFR/entropic-mfg) as a toy project, which I reworked a bit recently and might be usable.
-
 
 ## Mean-Field Games
 
