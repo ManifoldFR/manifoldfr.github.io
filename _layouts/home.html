@@ -15,7 +15,7 @@ layout: default
       See also my <a href="https://scholar.google.fr/citations?user=aVgy-0gAAAAJ&hl=en" style="font-weight: 600;">Google Scholar</a>.
     </p>
     <ul class="pub-list">
-      {% for publ in site.publications %}
+      {% for publ in site.publications reversed %}
       <li class="pub-item">
         <h3 class="pub-title">
           {%- if publ.link -%}
@@ -28,7 +28,7 @@ layout: default
         </h3>
         <span style="font-style: italic;">{{ publ.comment | escape }}</span>
         <p>
-          Authors: {{ publ.authors | join: ", " }}
+          <span style="font-weight: 500;">Authors:</span> {{ publ.authors | join: ", " }}
         </p>
       
         <p>{{ publ.content | markdownify | strip_newlines | truncate: 240 }}</p>

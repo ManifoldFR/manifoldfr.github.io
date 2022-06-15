@@ -3,6 +3,35 @@
 
 @import "minima";
 
+div#subheader {
+    background-color: rgba(220, 20, 60, 0.031);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+    display: flex;
+    div {
+        padding-left: 20px;
+    }
+    div:first-of-type {
+        padding-left: 0;
+    }
+}
+
+div.profile-picture {
+    img {
+        display: block;
+        max-height: 800px;
+        // min-height: 400px;
+        width: auto;
+        border-radius: 1%;
+    }
+}
+
+div.subheader-right {
+    text-align: justify;
+}
+
 .address {
     font-size: larger;
     font-weight: 400;
