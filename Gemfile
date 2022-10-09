@@ -20,6 +20,7 @@ group :jekyll_plugins do
   gem "jekyll-toc"
   gem "jekyll-gist"
   gem "jekyll-github-metadata"
+  gem "jekyll-scholar", "~> 5.16"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -38,4 +39,3 @@ gem "kramdown-parser-gfm", "~> 1.1"
 
 gem "webrick", "~> 1.7"
 
-gem "jekyll-scholar", "~> 5.16"
