@@ -79,6 +79,18 @@ a.pub-link:link, a.pub-link:visited {
 .pub-item p {
     text-align: justify;
 }
+.grey {
+    color: #828282;
+}
+
+.social-media-list {
+
+    img {
+        vertical-align: text-top;
+        display: inline-block;
+        padding-right: 5px;
+    }
+}
 
 // @import "minima/skins/{{ site.minima.skin | default: 'classic' }}";
 // @import "minima/initialize";

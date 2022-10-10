@@ -7,42 +7,8 @@ layout: default
     <h1 class="page-heading">{{ page.title }}</h1>
   {%- endif -%}
 
+
   {{ content }}
-
-  {%- if site.publications.size > 0 -%}
-    <h1>Publications</h1>
-    <p style="margin-bottom: 15px;">
-      See also my <a href="https://scholar.google.fr/citations?user=aVgy-0gAAAAJ&hl=en" style="font-weight: 600;">Google Scholar</a>.
-    </p>
-    <ul class="pub-list">
-      {% for publ in site.publications reversed %}
-      <li class="pub-item">
-        <h3 class="pub-title">
-          {%- if publ.link -%}
-            <a href="{{ publ.link }}">
-          {%- endif -%}
-          {{ publ.title | escape }}
-          {%- if publ.link -%}
-            </a>
-          {%- endif -%}
-        </h3>
-        <span style="font-style: italic;">{{ publ.comment | escape }}</span>
-        <p>
-          <span style="font-weight: 500;">Authors:</span> {{ publ.authors | join: ", " }}
-        </p>
-      
-        <p>{{ publ.content | markdownify | strip_newlines | truncate: 240 }}</p>
-
-        {%- if publ.link -%}
-          <a href="{{ publ.link }}" class="pub-link">Link</a>
-        {%- endif -%}
-        {%- if publ.pdf -%}
-          <a href="{{ publ.pdf }}" class="pub-link">pdf</a>
-        {%- endif -%}
-      </li>
-      {% endfor %}
-    </ul>
-  {%- endif -%}
 
   {% if site.paginate %}
     {% assign posts = paginator.posts %}
@@ -52,9 +18,9 @@ layout: default
 
 
   {%- if posts.size > 0 -%}
-    <h1>Posts</h1>
+    <h2>Posts</h2>
     {%- if page.list_title -%}
-      <h2 class="post-list-heading">{{ page.list_title }}</h2>
+      <h3 class="post-list-heading">{{ page.list_title }}</h3>
     {%- endif -%}
     <ul class="post-list">
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}

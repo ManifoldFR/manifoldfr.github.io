@@ -34,14 +34,22 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-assets
-  - jekyll-github-metadata
   - jekyll-gist
   - jekyll-toc
   - jekyll-scholar
 
 scholar:
-  style: ieee
+  style: apa
   locale: en
+  bibliography_template: bib
+  sort_by: month
+  order: descending
+  group_by: year
+  remove_duplicates: true
+  bibliography_list_tag: ul
+  bibliography_item_tag: li
+  bibliography_item_attributes: {}
+
 collections:
   publications:
     output: false
@@ -58,8 +66,10 @@ titles_from_headings:
 
 minima:
   date_format: "%e %B %Y"
-github_username:  ManifoldFR
-linkedin_username: will-jallet
+  social_links:
+    github:  ManifoldFR
+    linkedin: will-jallet
+    researchgate: Wilson-Jallet
 
 # Exclude from processing.
 # The following items will not be processed, by default.

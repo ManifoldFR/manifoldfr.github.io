@@ -1,0 +1,14 @@
+---
+---
+{{ reference }}
+
+{% if entry.abstract %}
+<p><span style="font-weight: 600;">Abstract:</span>
+    {{ entry.abstract | truncatewords: 200 }}
+</p>
+{% endif %}
+
+{% if entry.bibtex %}
+<span style="font-weight: 500;">BibTeX:</span>
+<pre>{{ entry.bibtex }}</pre>
+{% endif %}
