@@ -7,4 +7,4 @@ title: Publications
 ================
 
 
-{% bibliography --query @*[author^=Jallet] %}
+{% bibliography --query @*[author~=Jallet] %}
