@@ -40,6 +40,8 @@ plugins:
   - jekyll-scholar
 
 scholar:
+  style: ieee
+  locale: en
 collections:
   publications:
     output: false
@@ -51,9 +53,6 @@ gist:
 kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
-scholar:
-  style: ieee
-  locale: en
 titles_from_headings:
   enabled: false
 
