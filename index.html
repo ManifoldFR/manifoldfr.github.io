@@ -38,14 +38,17 @@ layout: home
     </div>
 </div>
 
-<h2>
-    <a href="/publications">Publications
-    </a>
-</h2>
-<p>
+<div>
+
+    <h2>
+        <a href="/publications">Publications</a>
+    </h2>
+    <p>
     See my <a href="https://scholar.google.fr/citations?user=aVgy-0gAAAAJ&hl=en" style="font-weight: 600;">Google
         Scholar</a>, as well as my <a href="http://github.com/ManifoldFR">GitHub</a>.
-</p>
+    </p>
+</div>
+
 
 {%- assign date_format = "%B %Y" -%}
 
@@ -53,7 +56,7 @@ layout: home
     News
 </h2>
 {% assign news = site.news %}
-{%- for item in news -%}
+{%- for item in news reversed -%}
     <span class="post-meta">{{ item.date | date: date_format }}</span>
     <p>
         {{ item.content | markdownify }}
