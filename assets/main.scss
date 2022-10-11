@@ -3,18 +3,24 @@
 
 @import "minima";
 
-div#subheader {
+#subheader {
     background-color: rgba(220, 20, 60, 0.031);
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-right: 5px;
-    padding-left: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
     display: flex;
     div {
-        padding-left: 20px;
+        padding-left: 10px;
     }
     div:first-of-type {
         padding-left: 0;
+    }
+}
+
+div.home {
+    h2 {
+        margin-top: 15px;
     }
 }
 
@@ -89,6 +95,12 @@ a.pub-link:link, a.pub-link:visited {
         vertical-align: text-top;
         display: inline-block;
         padding-right: 5px;
+    }
+}
+
+.bibliography {
+    p {
+        text-align: justify;
     }
 }
 

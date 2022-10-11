@@ -12,7 +12,6 @@ gem "minima"
 
 # If you have any plugins, put them here!
 gem "jekyll", "~> 4.2.0"
-gem "jekyll-feed", "~> 0.12"
 gem "jekyll-toc"
 gem "jekyll-gist"
 gem "jekyll-assets", "~> 1.0"

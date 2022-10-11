@@ -32,7 +32,6 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # Build settings
 theme: minima
 plugins:
-  - jekyll-feed
   - jekyll-assets
   - jekyll-gist
   - jekyll-toc
@@ -51,9 +50,8 @@ scholar:
   bibliography_item_attributes: {}
 
 collections:
-  publications:
+  news:
     output: false
-    permalink: /:collection/:name
 
 markdown: kramdown
 gist:
@@ -70,6 +68,10 @@ minima:
     github:  ManifoldFR
     linkedin: will-jallet
     researchgate: Wilson-Jallet
+    google_scholar_id: aVgy-0gAAAAJ
+
+keep_files:
+  - ".git"
 
 # Exclude from processing.
 # The following items will not be processed, by default.
