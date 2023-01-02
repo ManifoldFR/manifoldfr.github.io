@@ -89,6 +89,16 @@ a.pub-link:link, a.pub-link:visited {
     color: #828282;
 }
 
+.rouge-table {
+  margin: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  pre, code {
+    border: none;
+  }
+}
+
 .social-media-list {
 
     img {
