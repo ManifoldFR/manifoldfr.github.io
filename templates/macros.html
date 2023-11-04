@@ -1,0 +1,3 @@
+{% macro process_bib(text) %}
+    {{text | replace(from="{", to="") | replace(from="}", to="") | trim}}
+{% endmacro %}

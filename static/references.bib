@@ -1,0 +1,69 @@
+@inproceedings{jalletConstrainedDifferentialDynamic2022,
+  title = {Constrained Differential Dynamic Programming: A Primal-Dual Augmented Lagrangian Approach},
+  shorttitle = {Constrained Differential Dynamic Programming},
+  booktitle = {2022 IEEE/RSJ International Conference on Intelligent Robots and Systems},
+  author = {Jallet, Wilson and Bambade, Antoine and Mansard, Nicolas and Carpentier, Justin},
+  year = {2022},
+  month = {oct},
+  address = {Kyoto, Japan},
+  urldate = {2022-09-25},
+  doi = {10.1109/IROS47612.2022.9981586},
+  abstract = {Trajectory optimization is an efficient approach for solving optimal control problems for complex robotic systems. It relies on two key components: first the transcription into a sparse nonlinear program, and second the corresponding solver to iteratively compute its solution. On one hand, differential dynamic programming (DDP) provides an efficient approach to transcribe the optimal control problem into a finite-dimensional problem while optimally exploiting the sparsity induced by time. On the other hand, augmented Lagrangian methods make it possible to formulate efficient algorithms with advanced constraint-satisfaction strategies. In this paper, we propose to combine these two approaches into an efficient optimal control algorithm accepting both equality and inequality constraints. Based on the augmented Lagrangian literature, we first derive a generic primal-dual augmented Lagrangian strategy for nonlinear problems with equality and inequality constraints. We then apply it to the dynamic programming principle to solve the value-greedy optimization problems inherent to the backward pass of DDP, which we combine with a dedicated globalization strategy, resulting in a Newton-like algorithm for solving constrained trajectory optimization problems. Contrary to previous attempts of formulating an augmented Lagrangian version of DDP, our approach exhibits adequate convergence properties without any switch in strategies. We empirically demonstrate its interest with several case-studies from the robotics literature.},
+  keywords = {Optimal control,Robotics and automation,Trajectory optimization}
+}
+
+@inproceedings{jalletImplicitDifferentialDynamic2022,
+  title = {Implicit Differential Dynamic Programming},
+  booktitle = {2022 International Conference on Robotics and Automation (ICRA)},
+  author = {Jallet, Wilson and Mansard, Nicolas and Carpentier, Justin},
+  year = {2022},
+  month = {may},
+  publisher = {IEEE Robotics and Automation Society},
+  address = {Philadelphia, United States},
+  urldate = {2022-02-18},
+  doi = {10.1109/ICRA46639.2022.9811647},
+  abstract = {Over the past decade, the Differential Dynamic Programming (DDP) method has gained in maturity and popularity within the robotics community. Several recent contributions have led to the integration of constraints within the original DDP formulation, hence enlarging its domain of application while making it a strong and easy-to-implement competitor against alternative methods of the state of the art such as collocation or multiple-shooting approaches. Yet, and similarly to its competitors, DDP remains unable to cope with high-dimensional dynamics within a receding horizon fashion, such as in the case of online generation of athletic motion on humanoid robots. In this paper, we propose to make a step toward this objective by reformulating classic DDP as an implicit optimal control problem, allowing the use of more advanced integration schemes such as implicit or variational integrators. To that end, we introduce a primal-dual proximal Lagrangian approach capable of handling dynamic and path constraints in a unified manner, while taking advantage of the time sparsity inherent to optimal control problems. We show that his reformulation enables us to relax the dynamics along the optimization process by solving it inexactly: far from the optimality conditions, the dynamics are only partially fulfilled, but continuously enforced as the solver get closer to the local optimal solution. This inexactness enables our approach to robustly handle large time steps (100 ms or more), unlike other DDP solvers of the state of the art, as experimentally validated through different robotic scenarios.},
+  keywords = {Dynamic programming,Dynamics,Humanoid robots,Legged locomotion,Optimal control,Reliability,Stability analysis}
+}
+
+@inproceedings{jalletProxNLPPrimaldualAugmented2022,
+  title = {ProxNLP: A Primal-Dual Augmented Lagrangian Solver for Nonlinear Programming in Robotics and Beyond},
+  shorttitle = {ProxNLP},
+  booktitle = {6th Legged Robots Workshop},
+  author = {Jallet, Wilson and Bambade, Antoine and Mansard, Nicolas and Carpentier, Justin},
+  year = {2022},
+  month = {may},
+  address = {Philadelphia, Pennsylvania, United States},
+  urldate = {2022-10-10},
+  doi = {10.48550/arXiv.2210.02109},
+  abstract = {Mathematical optimization is the workhorse behind several aspects of modern robotics and control. In these applications, the focus is on constrained optimization, and the ability to work on manifolds (such as the classical matrix Lie groups), along with a specific requirement for robustness and speed. In recent years, augmented Lagrangian methods have seen a resurgence due to their robustness and flexibility, their connections to (inexact) proximal-point methods, and their interoperability with Newton or semismooth Newton methods. In the sequel, we present primal-dual augmented Lagrangian method for inequality-constrained problems on manifolds, which we introduced in our recent work, as well as an efficient C++ implementation suitable for use in robotics applications and beyond.}
+}
+
+@misc{lelidecContactModelsRobotics2023,
+  title = {Contact Models in Robotics: A Comparative Analysis},
+  shorttitle = {Contact Models in Robotics},
+  author = {Le Lidec, Quentin and Jallet, Wilson and Montaut, Louis and Laptev, Ivan and Schmid, Cordelia and Carpentier, Justin},
+  year = {2023},
+  month = {apr},
+  number = {arXiv:2304.06372},
+  eprint = {2304.06372},
+  primaryclass = {cs},
+  publisher = {arXiv},
+  doi = {10.48550/arXiv.2304.06372},
+  urldate = {2023-07-02},
+  abstract = {Physics simulation is ubiquitous in robotics. Whether in model-based approaches (e.g., trajectory optimization), or model-free algorithms (e.g., reinforcement learning), physics simulators are a central component of modern control pipelines in robotics. Over the past decades, several robotic simulators have been developed, each with dedicated contact modeling assumptions and algorithmic solutions. In this article, we survey the main contact models and the associated numerical methods commonly used in robotics for simulating advanced robot motions involving contact interactions. In particular, we recall the physical laws underlying contacts and friction (i.e., Signorini condition, Coulomb's law, and the maximum dissipation principle), and how they are transcribed in current simulators. For each physics engine, we expose their inherent physical relaxations along with their limitations due to the numerical techniques employed. Based on our study, we propose theoretically grounded quantitative criteria on which we build benchmarks assessing both the physical and computational aspects of simulation. We support our work with an open-source and efficient C++ implementation of the existing algorithmic variations. Our results demonstrate that some approximations or algorithms commonly used in robotics can severely widen the reality gap and impact target applications. We hope this work will help motivate the development of new contact models, contact solvers, and robotic simulators in general, at the root of recent progress in motion generation in robotics.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Robotics}
+}
+
+@inproceedings{lidecEnforcingConsensusTrajectory2023,
+  title = {Enforcing the Consensus between Trajectory Optimization and Policy Learning for Precise Robot Control},
+  booktitle = {2023 IEEE International Conference on Robotics and Automation (ICRA)},
+  author = {Lidec, Quentin Le and Jallet, Wilson and Laptev, Ivan and Schmid, Cordelia and Carpentier, Justin},
+  year = {2023},
+  month = {may},
+  pages = {946--952},
+  doi = {10.1109/ICRA48891.2023.10160387},
+  urldate = {2023-11-04},
+  abstract = {Reinforcement learning (RL) and trajectory opti-mization (TO) present strong complementary advantages. On one hand, RL approaches are able to learn global control policies directly from data, but generally require large sample sizes to properly converge towards feasible policies. On the other hand, TO methods are able to exploit gradient-based information extracted from simulators to quickly converge towards a locally optimal control trajectory which is only valid within the vicinity of the solution. Over the past decade, several approaches have aimed to adequately combine the two classes of methods in order to obtain the best of both worlds. Following on from this line of research, we propose several improvements on top of these approaches to learn global control policies quicker, notably by leveraging sensitivity information stemming from TO methods via Sobolev learning, and Augmented Lagrangian (AL) techniques to enforce the consensus between TO and policy learning. We evaluate the benefits of these improvements on various classical tasks in robotics through comparison with existing approaches in the literature.}
+}

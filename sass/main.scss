@@ -33,10 +33,6 @@ div.subheader-right {
     font-weight: 400;
 }
 
-.pub-list {
-    @extend .post-list;
-}
-
 li.pub-item {
     border-left-style: solid;
     padding-left: 10px;
@@ -97,11 +93,18 @@ a.pub-link:link, a.pub-link:visited {
     }
 }
 
+.content {
+    display: block;
+}
+
+.publication {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
 .bibliography {
     p {
         text-align: justify;
     }
 }
-
-// @import "minima/skins/{{ site.minima.skin | default: 'classic' }}";
-// @import "minima/initialize";

@@ -1,0 +1,37 @@
+{% import "macros.html" as macros %}
+{% extends "index.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="main.css">
+
+{% set data = load_data(path="static/references.bib", format="bibtex") -%}
+{% set sorted_bib = data.bibliographies %}
+
+{% set_global last_year = "" %}
+{%- for bib in sorted_bib | sort(attribute="tags.year") | reverse %}
+    {%- if last_year != bib.tags.year %}
+        <h1>{{bib.tags.year}}</h1>
+        {%- set_global last_year = bib.tags.year -%}
+    {% endif -%}
+
+    <div class="publication">
+        {% set _title = macros::process_bib(text=bib.tags.title) %}
+        <h2>
+            {% if bib.tags.doi %}
+            <a href="http://dx.doi.org/{{bib.tags.doi}}">
+                {{_title}}
+            </a>
+            {% else %}
+                {{_title}}
+            {% endif %}
+        </h2>
+        {{ bib.tags.author }}.
+        {% if bib.tags.booktitle %}
+            <em>{{macros::process_bib(text=bib.tags.booktitle)}}</em>
+        {% endif %}
+    </div>
+{% endfor -%}
+
+ 
+{% endblock content %}
