@@ -1,6 +1,6 @@
 {
     "no-inline-html": {
-        "allowed_elements": ["span"]
+        "allowed_elements": ["span", "a", "p", "div", "br", "img", "link"]
     },
     "line-length": false
 }
