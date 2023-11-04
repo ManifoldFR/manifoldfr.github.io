@@ -35,3 +35,5 @@ menu_items = [
     {name = "github", url = "https://github.com/ManifoldFR"},
     {name = "google scholar", url = "https://scholar.google.com/citations?user=aVgy-0gAAAAJ&hl=en"}
 ]
+
+page_titles = "Combined"
