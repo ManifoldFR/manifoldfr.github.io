@@ -20,7 +20,7 @@ weight = 0
   </p>
 
   <p>
-      I am a second-year PhD student between the <a href="https://www.laas.fr/public/fr/gepetto">Gepetto team</a>
+      I am a third-year PhD student between the <a href="https://www.laas.fr/public/fr/gepetto">Gepetto team</a>
       at LAAS-CNRS,
       and the <a href="https://di.ens.fr/willow">WILLOW team</a> of Inria Paris, under the supervision of
       <a href="https://gepettoweb.laas.fr/nmansard">Nicolas Mansard</a> and
