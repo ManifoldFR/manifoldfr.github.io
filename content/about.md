@@ -11,13 +11,13 @@ weight = 0
 </div>
 
 <div class="subheader-right">
-  <p class="address">
+  <div class="address">
       <span style="font-style: italic;">
           PhD student
       </span><br>
       <a href="https://www.laas.fr/public/en/gepetto/">Gepetto team, LAAS-CNRS</a><br>
       <a href="https://www.di.ens.fr/willow/">WILLOW team, D.I. ENS and Inria</a>
-  </p>
+  </div>
 
   <p>
       I am a third-year PhD student between the <a href="https://www.laas.fr/public/fr/gepetto">Gepetto team</a>
