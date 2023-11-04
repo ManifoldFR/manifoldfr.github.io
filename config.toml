@@ -28,9 +28,9 @@ menu_items = [
     # each of these is optional, name and url are required
     # $BASE_URL is going to be substituted by base_url from configuration
     {name = "posts", url = "$BASE_URL/posts"},
-    
+
     # {name = "about", url = "$BASE_URL"},
-    
+
     # set newtab to true to make the link open in new tab
     {name = "github", url = "https://github.com/ManifoldFR"},
     {name = "google scholar", url = "https://scholar.google.com/citations?user=aVgy-0gAAAAJ&hl=en"}
