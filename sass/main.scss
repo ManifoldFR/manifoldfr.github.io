@@ -15,19 +15,12 @@
     }
 }
 
-div.home {
-    h2 {
-        margin-top: 15px;
-    }
-}
-
 div.profile-picture {
     img {
         display: block;
-        max-height: 800px;
-        // min-height: 400px;
+        max-height: 1000px;
         width: auto;
-        border-radius: 1%;
+        border-radius: 3%;
     }
 }
 
@@ -38,7 +31,6 @@ div.subheader-right {
 .address {
     font-size: larger;
     font-weight: 400;
-    display: block;
 }
 
 .pub-list {
