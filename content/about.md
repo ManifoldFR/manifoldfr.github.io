@@ -3,7 +3,7 @@ title = "About me"
 weight = 0
 +++
 
-<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="custom.css">
 
 <div id="subheader">
 <div class="profile-picture">

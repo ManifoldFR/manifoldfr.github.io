@@ -1,4 +1,4 @@
 +++
 template = "bib.html"
-render = false
+render = true
 +++

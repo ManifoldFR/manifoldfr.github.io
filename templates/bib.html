@@ -3,15 +3,21 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="custom.css">
+<style>
+    .content {
+        display: block;
+    }
+</style>
 
 {% set data = load_data(path="static/references.bib", format="bibtex") -%}
 {% set sorted_bib = data.bibliographies %}
 
-{% set_global last_year = "" %}
-{%- for bib in sorted_bib | sort(attribute="tags.year") | reverse %}
+<div>
+    {% set_global last_year = "" %}
+    {%- for bib in sorted_bib | sort(attribute="tags.year") | reverse %}
     {%- if last_year != bib.tags.year %}
-        <h1>{{bib.tags.year}}</h1>
+        <h1 class="pub-year">{{bib.tags.year}}</h1>
         {%- set_global last_year = bib.tags.year -%}
     {% endif -%}
 
@@ -19,19 +25,21 @@
         {% set _title = macros::process_bib(text=bib.tags.title) %}
         <h2>
             {% if bib.tags.doi %}
-            <a href="http://dx.doi.org/{{bib.tags.doi}}">
+            <a href="http://dx.doi.org/{{bib.tags.doi}}" class="pub-link">
                 {{_title}}
             </a>
             {% else %}
-                {{_title}}
+            {{_title}}
             {% endif %}
         </h2>
-        {{ bib.tags.author }}.
-        {% if bib.tags.booktitle %}
-            <em>{{macros::process_bib(text=bib.tags.booktitle)}}</em>
-        {% endif %}
+        <p>
+            {{ bib.tags.author }}.
+            {% if bib.tags.booktitle %}
+            <span class="pub-journal">{{macros::process_bib(text=bib.tags.booktitle)}}.</span>
+            {% endif %}
+        </p>
     </div>
-{% endfor -%}
-
+    {% endfor -%}
+</div>
  
 {% endblock content %}
