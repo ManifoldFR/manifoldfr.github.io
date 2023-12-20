@@ -3,13 +3,6 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="custom.css">
-<style>
-    .content {
-        display: block;
-    }
-</style>
-
 {% set data = load_data(path="static/references.bib", format="bibtex") -%}
 {% set sorted_bib = data.bibliographies %}
 
@@ -41,5 +34,5 @@
     </div>
     {% endfor -%}
 </div>
- 
+
 {% endblock content %}

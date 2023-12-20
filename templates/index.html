@@ -2,4 +2,5 @@
 
 {% block extra_head %}
     {% include "mathjax.html" %}
+    <link rel="stylesheet" href='{{ get_url(path="custom.css", trailing_slash=false) | safe}}'>
 {% endblock %}
