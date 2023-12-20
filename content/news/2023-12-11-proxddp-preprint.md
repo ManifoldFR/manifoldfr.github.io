@@ -1,5 +1,6 @@
----
----
++++
+title = "New preprint"
++++
 
 We have submitted a new journal paper, _PROXDDP: Proximal Constrained Trajectory Optimization_.
 
