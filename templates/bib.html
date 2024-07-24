@@ -30,6 +30,9 @@
             {% if bib.tags.booktitle %}
             <span class="pub-journal">{{macros::process_bib(text=bib.tags.booktitle)}}.</span>
             {% endif %}
+            {% if bib.tags.journal %}
+            <span class="pub-journal">{{macros::process_bib(text=bib.tags.journal)}}.</span>
+            {% endif %}
         </p>
     </div>
     {% endfor -%}
