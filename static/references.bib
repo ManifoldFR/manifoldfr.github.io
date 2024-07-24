@@ -1,3 +1,14 @@
+@misc{dantecCentroidalWholebodyModels2024,
+  title = {From Centroidal to Whole-Body Models for Legged Locomotion: A Comparative Analysis},
+  shorttitle = {From Centroidal to Whole-Body Models for Legged Locomotion},
+  author = {Dantec, Ewen and Jallet, Wilson and Carpentier, Justin},
+  year = {2024},
+  month = jul,
+  urldate = {2024-07-15},
+  abstract = {Model predictive control is one of the most common methods for stabilizing the dynamics of a legged robot. Yet, it remains unclear which level of complexity should be considered for modeling the system dynamics. On the one hand, most embedded pipelines for legged locomotion rely on reduced models with low computational load in order to ensure real-time capabilities at the price of not exploiting the full potential of the whole-body dynamics. On the other hand, recent numerical solvers can now generate whole-body trajectories on the fly while still respecting tight time constraints. This paper compares the performances of common dynamic models of increasing complexity (centroidal, kino-dynamics, and whole-body models) in simulation over locomotion problems involving challenging gaits, stairs climbing and balance recovery. We also present a new kino-dynamics model that reformulates centroidal dynamics in the coordinates of the base frame by efficiently leveraging the centroidal momentum equation at the acceleration level. This comparative study uses the humanoid robot Talos and the augmented Lagrangian-based solver ALIGATOR to enforce hard constraints on the optimization problem.},
+  langid = {english}
+}
+
 @inproceedings{jalletConstrainedDifferentialDynamic2022,
   title = {Constrained Differential Dynamic Programming: A Primal-Dual Augmented Lagrangian Approach},
   shorttitle = {Constrained Differential Dynamic Programming},
@@ -28,12 +39,11 @@
 
 @inproceedings{jalletParallelProximalConstrained2024,
   title = {Parallel and Proximal Constrained Linear-Quadratic Methods for Real-Time Nonlinear MPC},
-  booktitle = {Robotics: Science and Systems XX},
+  booktitle = {Proceedings of Robotics: Science and Systems},
   author = {Jallet, Wilson and Dantec, Ewen and Arlaud, Etienne and Mansard, Nicolas and Carpentier, Justin},
   year = {2024},
   month = jul,
   address = {Delft, Netherlands},
-  doi = {10.48550/arXiv.2405.09197},
   urldate = {2024-06-03},
   abstract = {Recent strides in nonlinear model predictive control (NMPC) underscore a dependence on numerical advancements to efficiently and accurately solve large-scale problems. Given the substantial number of variables characterizing typical whole-body optimal control (OC) problems ---often numbering in the thousands--- exploiting the sparse structure of the numerical problem becomes crucial to meet computational demands, typically in the range of a few milliseconds. Addressing the linear-quadratic regulator (LQR) problem is a fundamental building block for computing Newton or Sequential Quadratic Programming (SQP) steps in direct optimal control methods. This paper concentrates on equality-constrained problems featuring implicit system dynamics and dual regularization, a characteristic of advanced interiorpoint or augmented Lagrangian solvers. Here, we introduce a parallel algorithm for solving an LQR problem with dual regularization. Leveraging a rewriting of the LQR recursion through block elimination, we first enhanced the efficiency of the serial algorithm and then subsequently generalized it to handle parametric problems. This extension enables us to split decision variables and solve multiple subproblems concurrently. Our algorithm is implemented in our nonlinear numerical optimal control library ALIGATOR. It showcases improved performance over previous serial formulations and we validate its efficacy by deploying it in the model predictive control of a real quadruped robot.},
   langid = {english}
@@ -59,20 +69,16 @@
   abstract = {Mathematical optimization is the workhorse behind several aspects of modern robotics and control. In these applications, the focus is on constrained optimization, and the ability to work on manifolds (such as the classical matrix Lie groups), along with a specific requirement for robustness and speed. In recent years, augmented Lagrangian methods have seen a resurgence due to their robustness and flexibility, their connections to (inexact) proximal-point methods, and their interoperability with Newton or semismooth Newton methods. In the sequel, we present primal-dual augmented Lagrangian method for inequality-constrained problems on manifolds, which we introduced in our recent work, as well as an efficient C++ implementation suitable for use in robotics applications and beyond.}
 }
 
-@misc{lelidecContactModelsRobotics2023,
+@article{lelidecContactModelsRobotics2024,
   title = {Contact Models in Robotics: A Comparative Analysis},
   shorttitle = {Contact Models in Robotics},
   author = {Le Lidec, Quentin and Jallet, Wilson and Montaut, Louis and Laptev, Ivan and Schmid, Cordelia and Carpentier, Justin},
-  year = {2023},
-  month = apr,
-  number = {arXiv:2304.06372},
-  eprint = {2304.06372},
-  primaryclass = {cs},
-  publisher = {arXiv},
-  doi = {10.48550/arXiv.2304.06372},
-  urldate = {2023-07-02},
+  year = {2024},
+  month = jun,
+  journal = {IEEE Transactions on Robotics},
+  urldate = {2024-07-19},
   abstract = {Physics simulation is ubiquitous in robotics. Whether in model-based approaches (e.g., trajectory optimization), or model-free algorithms (e.g., reinforcement learning), physics simulators are a central component of modern control pipelines in robotics. Over the past decades, several robotic simulators have been developed, each with dedicated contact modeling assumptions and algorithmic solutions. In this article, we survey the main contact models and the associated numerical methods commonly used in robotics for simulating advanced robot motions involving contact interactions. In particular, we recall the physical laws underlying contacts and friction (i.e., Signorini condition, Coulomb's law, and the maximum dissipation principle), and how they are transcribed in current simulators. For each physics engine, we expose their inherent physical relaxations along with their limitations due to the numerical techniques employed. Based on our study, we propose theoretically grounded quantitative criteria on which we build benchmarks assessing both the physical and computational aspects of simulation. We support our work with an open-source and efficient C++ implementation of the existing algorithmic variations. Our results demonstrate that some approximations or algorithms commonly used in robotics can severely widen the reality gap and impact target applications. We hope this work will help motivate the development of new contact models, contact solvers, and robotic simulators in general, at the root of recent progress in motion generation in robotics.},
-  archiveprefix = {arXiv},
+  langid = {english},
   keywords = {Computer Science - Robotics}
 }
 
@@ -93,10 +99,10 @@
   booktitle = {IEEE International Conference on Soft Robotics (RoboSoft)},
   author = {Ménager, Etienne and Bilger, Alexandre and Jallet, Wilson and Carpentier, Justin and Duriez, Christian},
   year = {2024},
-  doi = {10.1109/RoboSoft60065.2024.10521997},
   month = apr,
   publisher = {IEEE},
   address = {San Diego (CA), United States},
+  doi = {10.1109/RoboSoft60065.2024.10521997},
   urldate = {2024-04-10},
   abstract = {Over the past decades, trajectory optimization (TO) has become an effective solution for solving complex motion generation problems in robotics, ranging from autonomous driving to humanoids. Yet, TO methods remain limited to robots with tens of degrees of freedom (DoFs), limiting their usage in soft robotics, where kinematic models may require hundreds of DoFs in general. In this work, we introduce a generic method to perform trajectory optimization based on continuum mechanics to describe the behavior of soft robots. The core idea is to condense the dynamics of the soft robot in the constraint space in order to obtain a reduced dynamics formulation, which can then be plugged into numerical TO methods. In particular, we show that these condensed dynamics can be easily coupled with differential dynamic programming methods for solving TO problems involving soft robots. This method is evaluated on three different soft robots with different geometries and actuation.},
   keywords = {Modeling Control and Learning for Soft Robots,Optimization and Optimal Control,Soft Robot Applications}
