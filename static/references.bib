@@ -46,7 +46,8 @@
   address = {Delft, Netherlands},
   urldate = {2024-06-03},
   abstract = {Recent strides in nonlinear model predictive control (NMPC) underscore a dependence on numerical advancements to efficiently and accurately solve large-scale problems. Given the substantial number of variables characterizing typical whole-body optimal control (OC) problems ---often numbering in the thousands--- exploiting the sparse structure of the numerical problem becomes crucial to meet computational demands, typically in the range of a few milliseconds. Addressing the linear-quadratic regulator (LQR) problem is a fundamental building block for computing Newton or Sequential Quadratic Programming (SQP) steps in direct optimal control methods. This paper concentrates on equality-constrained problems featuring implicit system dynamics and dual regularization, a characteristic of advanced interiorpoint or augmented Lagrangian solvers. Here, we introduce a parallel algorithm for solving an LQR problem with dual regularization. Leveraging a rewriting of the LQR recursion through block elimination, we first enhanced the efficiency of the serial algorithm and then subsequently generalized it to handle parametric problems. This extension enables us to split decision variables and solve multiple subproblems concurrently. Our algorithm is implemented in our nonlinear numerical optimal control library ALIGATOR. It showcases improved performance over previous serial formulations and we validate its efficacy by deploying it in the model predictive control of a real quadruped robot.},
-  langid = {english}
+  langid = {english},
+  doi = {10.15607/RSS.2024.XX.002}
 }
 
 @misc{jalletPROXDDPProximalConstrained2023,
@@ -74,12 +75,13 @@
   shorttitle = {Contact Models in Robotics},
   author = {Le Lidec, Quentin and Jallet, Wilson and Montaut, Louis and Laptev, Ivan and Schmid, Cordelia and Carpentier, Justin},
   year = {2024},
-  month = jun,
+  month = july,
   journal = {IEEE Transactions on Robotics},
-  urldate = {2024-07-19},
+  urldate = {2024-07-26},
   abstract = {Physics simulation is ubiquitous in robotics. Whether in model-based approaches (e.g., trajectory optimization), or model-free algorithms (e.g., reinforcement learning), physics simulators are a central component of modern control pipelines in robotics. Over the past decades, several robotic simulators have been developed, each with dedicated contact modeling assumptions and algorithmic solutions. In this article, we survey the main contact models and the associated numerical methods commonly used in robotics for simulating advanced robot motions involving contact interactions. In particular, we recall the physical laws underlying contacts and friction (i.e., Signorini condition, Coulomb's law, and the maximum dissipation principle), and how they are transcribed in current simulators. For each physics engine, we expose their inherent physical relaxations along with their limitations due to the numerical techniques employed. Based on our study, we propose theoretically grounded quantitative criteria on which we build benchmarks assessing both the physical and computational aspects of simulation. We support our work with an open-source and efficient C++ implementation of the existing algorithmic variations. Our results demonstrate that some approximations or algorithms commonly used in robotics can severely widen the reality gap and impact target applications. We hope this work will help motivate the development of new contact models, contact solvers, and robotic simulators in general, at the root of recent progress in motion generation in robotics.},
   langid = {english},
-  keywords = {Computer Science - Robotics}
+  keywords = {Computer Science - Robotics},
+  doi = {10.1109/TRO.2024.3434208}
 }
 
 @inproceedings{lelidecEnforcingConsensusTrajectory2023,
