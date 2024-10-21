@@ -1,10 +1,12 @@
-@misc{dantecCentroidalWholebodyModels2024,
+@inproceedings{dantecCentroidalWholebodyModels2024,
   title = {From Centroidal to Whole-Body Models for Legged Locomotion: A Comparative Analysis},
   shorttitle = {From Centroidal to Whole-Body Models for Legged Locomotion},
+  booktitle = {2024 IEEE-RAS International Conference on Humanoid Robots},
   author = {Dantec, Ewen and Jallet, Wilson and Carpentier, Justin},
   year = {2024},
   month = jul,
-  urldate = {2024-07-15},
+  publisher = {IEEE},
+  address = {Nancy, France},
   abstract = {Model predictive control is one of the most common methods for stabilizing the dynamics of a legged robot. Yet, it remains unclear which level of complexity should be considered for modeling the system dynamics. On the one hand, most embedded pipelines for legged locomotion rely on reduced models with low computational load in order to ensure real-time capabilities at the price of not exploiting the full potential of the whole-body dynamics. On the other hand, recent numerical solvers can now generate whole-body trajectories on the fly while still respecting tight time constraints. This paper compares the performances of common dynamic models of increasing complexity (centroidal, kino-dynamics, and whole-body models) in simulation over locomotion problems involving challenging gaits, stairs climbing and balance recovery. We also present a new kino-dynamics model that reformulates centroidal dynamics in the coordinates of the base frame by efficiently leveraging the centroidal momentum equation at the acceleration level. This comparative study uses the humanoid robot Talos and the augmented Lagrangian-based solver ALIGATOR to enforce hard constraints on the optimization problem.},
   langid = {english}
 }
