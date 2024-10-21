@@ -43,22 +43,44 @@ $$
 
 Furthermore, it holds that, as functions, $L\_{gh} = L_g \circ L_h$ for all $g,h\in G$. Hence $g \mapsto L_g$ is a group homomorphism between $G$ and the automorphism group $\mathrm{Aut}(G)$.
 
-We can define a _group action_ of $G$ on its Lie algebra $\mathfrak{g}$ as follows: for $g\in G$ and $\xi \in \mathfrak{g}$,
+We can define a (left) _group action_ of $G$ on its Lie algebra $\mathfrak{g}$ as follows: for $g\in G$ and $\xi \in \mathfrak{g}$,
 \begin{equation}
     g \cdot \xi \defeq (\dif L_g)_e(\xi).
 \end{equation}
+
+Similarly, $G$ can act on the right by defining
+$$
+  \xi \cdot g \defeq (\dif R_g)_e(\xi) = \frac{d}{dt}(\gamma(t)g)\lvert\_{t=0}
+$$
+(for some curve $\gamma$ satisfying $\gamma(0)=e$, $\dot\gamma(0) = \xi$).
 
 ## Trivialisations
 
 The question of trivialisation is actually that of choosing _a representation of the tangent spaces_ to the Lie group $G$ through the Lie algebra $\mathfrak{g}$, using the isomorphisms given by the tangent maps $\dif L_g$ and $\dif R_g$.
 
-_Left-trivialisation_, obviously, represents elements in the tangent space $ T_gG $ as $g \cdot $
+_Left-trivialisation_, obviously, represents elements in the tangent space $ T_gG $ as $g \cdot \xi$ for $\xi \in \mathfrak{g}$ (where $\cdot$ is the group-on-Lie algebra action efined previously).
 
 Pinocchio, for instance, uses _left-trivialisations_.
 
 ## Lie group exp and log
 
+The Lie group $\exp$ map can be defined as the "natural choice" for a curve $\gamma$ from the Lie algebra to the group when defining derivatives.
+We switch notation here, considering $X \in \mathfrak{g} = T_eG$ as a vector field, and $\gamma$ the integral curve of $X$ through $e$, i.e. solving the differential equation:
+$$
+  \dot\gamma(t) = X(\gamma(t)), \gamma(0) = e.
+$$
 
+The Riemannian $\mathrm{Exp}$ in this case is defined through the Lie group exponential map: given $g\in G$ and a tangent vector $\delta g\in T_gG$,
+$$
+  \mathrm{Exp}_g(\delta g) = g \exp(g^{-1} \cdot \delta g) = \exp(\delta g \cdot g^{-1})g.
+$$
+The two expressions on the right respectively correspond to a left- and right-trivialisation of the increment $\delta g$.
+
+In Pinocchio, the `integrate(q, v)` function maps a configuration $q\in G$ and left-trivialised increment (or _body-frame velocity_) $v \in \mathfrak{g}$ to
+$$
+  \mathrm{Exp}_q(q \cdot v) = q \exp(v) = q \oplus v
+$$
+where the last notation often appears in the robotics literature.
 
 ## Some formulas
 
