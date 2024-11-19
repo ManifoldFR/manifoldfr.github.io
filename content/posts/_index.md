@@ -1,5 +1,6 @@
 +++
-paginate_by = 4
+paginate_by = 6
 sort_by = "date"
+render = true
 template = "index.html"
 +++
