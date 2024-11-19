@@ -1,3 +1,4 @@
+title = "ManifoldFR"
 # The URL the site will be built for
 base_url = "https://manifoldfr.github.io"
 
@@ -37,4 +38,4 @@ menu_items = [
     {name = "google scholar", url = "https://scholar.google.com/citations?user=aVgy-0gAAAAJ&hl=en"}
 ]
 
-page_titles = "Combined"
+page_titles = "combined"
