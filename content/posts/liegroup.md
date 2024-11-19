@@ -11,6 +11,8 @@ They do _not_ constitute an easy subject. A lot of presentation is either overly
 
 In this blog post, we will be taking a tour of Lie groups, Lie algebras, and useful computational facts.
 
+<!-- more -->
+
 In the sequel, $G$ is a Lie group, and $\mathfrak{g}$ its Lie algebra.
 The Lie algebra corresponds to the tangent space at the neutral element of the group $e \in G$.
 
