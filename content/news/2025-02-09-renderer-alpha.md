@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "A WIP renderer for robotics based on SDL3-GPU"
-tags: rendering", "visualization", "robotics", "3D graphics
+tags: rendering, visualization, robotics, 3D graphics
 ---
 
 <video controls autoplay class="my-video">
