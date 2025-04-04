@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "IEEE T-RO paper accepted"
-tags: robotics
+tags: robotics, paper
 ---
 
 I am very happy to announce that our _IEEE Transactions on Robotics_ (T-RO) paper, _PROXDDP: Proximal Constrained Trajectory Optimization_, has been accepted!
