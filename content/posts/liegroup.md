@@ -5,7 +5,7 @@ draft = false
 date = 2024-10-10
 +++
 
-Lie groups are an essential element of modelling in applications such as computer vision and computer graphis (namely handling cameras), and also robotics and machine learning.
+Lie groups are an essential element of modelling in applications such as computer vision and computer graphics (namely handling cameras), and also robotics and machine learning.
 
 They do _not_ constitute an easy subject. A lot of presentation is either overly technical, or glosses over mathematical foundations or properties which enables practitioners to carry out computations on Lie groups by themselves, or understand often unsaid assumptions or conventions in many implementations.
 
