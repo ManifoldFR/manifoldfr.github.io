@@ -1,3 +1,22 @@
-{%- macro process_bib(text) -%}
-{{text | safe | replace(from="{", to="") | replace(from="}", to="") | trim}}
-{%- endmacro -%}
+{% macro process_bib(text) %}
+    {{ text | replace(from="--",to="—") | replace(from="{", to="") | replace(from="}", to="") | safe }}
+{% endmacro %}
+
+{% macro bib_proceedings(ref) %}
+    {{ ref.tags.author }},
+    in <span class="pub-journal">{{ref.tags.booktitle}},</span>
+    {% if ref.tags.address %}{{ref.tags.address}},{% endif %}
+    {% if ref.tags.pages %}pp. {{ ref.tags.pages }},{% endif %}
+    {{ ref.tags.year }}.
+{% endmacro bib_proceedings %}
+
+{% macro bib_journal(ref) %}
+    {{ ref.tags.author }},
+    in <span class="pub-journal">
+        {{ ref.tags.journal }},
+    </span>
+    vol. {{ ref.tags.volume }},
+    pp. {{ ref.tags.pages }},
+    {% if ref.tags.month %}{{ref.tags.month}}{% endif %}
+    {{ ref.tags.year }}.
+{% endmacro %}

@@ -3,8 +3,8 @@
 
 {% block content %}
 
-{% set data = load_data(path="static/references.bib", format="bibtex") -%}
-{% set sorted_bib = data.bibliographies %}
+{% set citations = load_data(path="static/references.bib", format="bibtex") -%}
+{% set sorted_bib = citations.bibliographies %}
 
 <div>
     {% set_global last_year = "" %}
@@ -16,23 +16,16 @@
 
     <div class="publication">
         {% set _title = macros::process_bib(text=bib.tags.title) %}
-        <h2>
-            {% if bib.tags.doi %}
-            <a href="http://dx.doi.org/{{bib.tags.doi}}" class="pub-link">
-                {{_title}}
-            </a>
-            {% else %}
-            {{_title}}
-            {% endif %}
-        </h2>
+        <h2>{{_title}}</h2>
         <p>
-            {{ bib.tags.author }}.
-            {% if bib.tags.booktitle %}
-            <span class="pub-journal">{{macros::process_bib(text=bib.tags.booktitle)}}.</span>
-            {% endif %}
-            {% if bib.tags.journal %}
-            <span class="pub-journal">{{macros::process_bib(text=bib.tags.journal)}}.</span>
-            {% endif %}
+            {%- if bib.entry_type == "inproceedings" %}
+                {{macros::process_bib(text=macros::bib_proceedings(ref=bib))}}
+            {%- elif bib.entry_type == "article" %}
+                {{macros::process_bib(text=macros::bib_journal(ref=bib))}}
+            {%- endif %}
+            {%- if bib.tags.doi -%}
+                DOI: <a href="https://doi.org//{{ bib.tags.doi }}" class="pub-link">{{ bib.tags.doi }}</a>
+            {%- endif -%}
         </p>
     </div>
     {% endfor -%}
