@@ -20,3 +20,14 @@
     {% if ref.tags.month %}{{ref.tags.month}}{% endif %}
     {{ ref.tags.year }}.
 {% endmacro %}
+
+{% macro print_ref(bib) %}
+    {%- if bib.entry_type == "inproceedings" %}
+        {{macros::process_bib(text=macros::bib_proceedings(ref=bib))}}
+    {%- elif bib.entry_type == "article" %}
+        {{macros::process_bib(text=macros::bib_journal(ref=bib))}}
+    {%- endif %}
+    {%- if bib.tags.doi -%}
+        DOI: <a href="https://doi.org//{{ bib.tags.doi }}" class="pub-link">{{ bib.tags.doi }}</a>
+    {%- endif -%}
+{% endmacro print_ref %}

@@ -18,14 +18,7 @@
         {% set _title = macros::process_bib(text=bib.tags.title) %}
         <h2>{{_title}}</h2>
         <p>
-            {%- if bib.entry_type == "inproceedings" %}
-                {{macros::process_bib(text=macros::bib_proceedings(ref=bib))}}
-            {%- elif bib.entry_type == "article" %}
-                {{macros::process_bib(text=macros::bib_journal(ref=bib))}}
-            {%- endif %}
-            {%- if bib.tags.doi -%}
-                DOI: <a href="https://doi.org//{{ bib.tags.doi }}" class="pub-link">{{ bib.tags.doi }}</a>
-            {%- endif -%}
+            {{macros::print_ref(bib=bib)}}
         </p>
     </div>
     {% endfor -%}
