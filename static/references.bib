@@ -3,10 +3,10 @@
   shorttitle = {From Centroidal to Whole-Body Models for Legged Locomotion},
   booktitle = {2024 IEEE-RAS 23rd International Conference on Humanoid Robots (Humanoids)},
   author = {Dantec, Ewen and Jallet, Wilson and Carpentier, Justin},
-  address = {Nancy, France},
   year = {2024},
   month = nov,
   pages = {335--342},
+  address = {Nancy, France},
   issn = {2164-0580},
   doi = {10.1109/Humanoids58906.2024.10769597},
   urldate = {2025-04-22},
@@ -51,7 +51,7 @@
   month = jul,
   address = {Delft, Netherlands},
   doi = {10.15607/RSS.2024.XX.002},
-  abstract = {Recent strides in nonlinear model predictive control (NMPC) underscore a dependence on numerical advancements to efficiently and accurately solve large-scale problems. Given the substantial number of variables characterizing typical whole-body optimal control (OC) problems ---often numbering in the thousands--- exploiting the sparse structure of the numerical problem becomes crucial to meet computational demands, typically in the range of a few milliseconds. Addressing the linear-quadratic regulator (LQR) problem is a fundamental building block for computing Newton or Sequential Quadratic Programming (SQP) steps in direct optimal control methods. This paper concentrates on equality-constrained problems featuring implicit system dynamics and dual regularization, a characteristic of advanced interiorpoint or augmented Lagrangian solvers. Here, we introduce a parallel algorithm for solving an LQR problem with dual regularization. Leveraging a rewriting of the LQR recursion through block elimination, we first enhanced the efficiency of the serial algorithm and then subsequently generalized it to handle parametric problems. This extension enables us to split decision variables and solve multiple subproblems concurrently. Our algorithm is implemented in our nonlinear numerical optimal control library ALIGATOR. It showcases improved performance over previous serial formulations and we validate its efficacy by deploying it in the model predictive control of a real quadruped robot.},
+  abstract = {Recent strides in nonlinear model predictive control (NMPC) underscore a dependence on numerical advancements to efficiently and accurately solve large-scale problems. Given the substantial number of variables characterizing typical whole-body optimal control (OC) problems —often numbering in the thousands— exploiting the sparse structure of the numerical problem becomes crucial to meet computational demands, typically in the range of a few milliseconds. Addressing the linear-quadratic regulator (LQR) problem is a fundamental building block for computing Newton or Sequential Quadratic Programming (SQP) steps in direct optimal control methods. This paper concentrates on equality-constrained problems featuring implicit system dynamics and dual regularization, a characteristic of advanced interiorpoint or augmented Lagrangian solvers. Here, we introduce a parallel algorithm for solving an LQR problem with dual regularization. Leveraging a rewriting of the LQR recursion through block elimination, we first enhanced the efficiency of the serial algorithm and then subsequently generalized it to handle parametric problems. This extension enables us to split decision variables and solve multiple subproblems concurrently. Our algorithm is implemented in our nonlinear numerical optimal control library ALIGATOR. It showcases improved performance over previous serial formulations and we validate its efficacy by deploying it in the model predictive control of a real quadruped robot.},
   langid = {english}
 }
 
@@ -67,7 +67,7 @@
   issn = {1941-0468},
   doi = {10.1109/TRO.2025.3554437},
   urldate = {2025-04-04},
-  abstract = {Trajectory optimization has been a popular choice for motion generation and control in robotics for at least a decade. Several numerical approaches have exhibited the required speed to enable online computation of trajectories for real-time of various systems, including complex robots. Many of these said are based on the differential dynamic programming (DDP) algorithm -- initially designed for unconstrained trajectory optimization problems -- and its variants, which are relatively easy to implement and provide good runtime performance. However, several problems in robot control call for using constrained formulations (e.g. torque limits, obstacle avoidance), from which several difficulties arise when trying to adapt DDP-type methods: numerical stability, computational efficiency, and constraint satisfaction. In this article, we leverage proximal methods for constrained optimization and introduce a DDP-type method for fast, constrained trajectory optimization suited for model-predictive control (MPC) applications with easy warm-starting. Compared to earlier solvers, our approach effectively manages hard constraints without warm-start limitations and exhibits good convergence behavior. We provide a complete implementation as part of an open-source and flexible C++ trajectory optimization library called ALIGATOR. These algorithmic contributions are validated through several trajectory planning scenarios from the robotics literature and the real-time whole-body MPC of a quadruped robot.},
+  abstract = {Trajectory optimization has been a popular choice for motion generation and control in robotics for at least a decade. Several numerical approaches have exhibited the required speed to enable online computation of trajectories for real-time of various systems, including complex robots. Many of these said are based on the differential dynamic programming (DDP) algorithm – initially designed for unconstrained trajectory optimization problems – and its variants, which are relatively easy to implement and provide good runtime performance. However, several problems in robot control call for using constrained formulations (e.g. torque limits, obstacle avoidance), from which several difficulties arise when trying to adapt DDP-type methods: numerical stability, computational efficiency, and constraint satisfaction. In this article, we leverage proximal methods for constrained optimization and introduce a DDP-type method for fast, constrained trajectory optimization suited for model-predictive control (MPC) applications with easy warm-starting. Compared to earlier solvers, our approach effectively manages hard constraints without warm-start limitations and exhibits good convergence behavior. We provide a complete implementation as part of an open-source and flexible C++ trajectory optimization library called ALIGATOR. These algorithmic contributions are validated through several trajectory planning scenarios from the robotics literature and the real-time whole-body MPC of a quadruped robot.},
   keywords = {Convergence,Heuristic algorithms,Legged Robots,Libraries,Linear systems,Minimization,Model-Predictive Control,Newton method,Optimization,Optimization and Optimal Control,Predictive control,Robots,Trajectory optimization}
 }
 
@@ -113,7 +113,7 @@
 @inproceedings{menagerCondensedSemiimplicitDynamics2024,
   title = {Condensed Semi-Implicit Dynamics for Trajectory Optimization in Soft Robotics},
   booktitle = {IEEE International Conference on Soft Robotics (RoboSoft)},
-  author = {M{\'e}nager, Etienne and Bilger, Alexandre and Jallet, Wilson and Carpentier, Justin and Duriez, Christian},
+  author = {Ménager, Etienne and Bilger, Alexandre and Jallet, Wilson and Carpentier, Justin and Duriez, Christian},
   year = {2024},
   month = apr,
   publisher = {IEEE},
@@ -123,4 +123,3 @@
   abstract = {Over the past decades, trajectory optimization (TO) has become an effective solution for solving complex motion generation problems in robotics, ranging from autonomous driving to humanoids. Yet, TO methods remain limited to robots with tens of degrees of freedom (DoFs), limiting their usage in soft robotics, where kinematic models may require hundreds of DoFs in general. In this work, we introduce a generic method to perform trajectory optimization based on continuum mechanics to describe the behavior of soft robots. The core idea is to condense the dynamics of the soft robot in the constraint space in order to obtain a reduced dynamics formulation, which can then be plugged into numerical TO methods. In particular, we show that these condensed dynamics can be easily coupled with differential dynamic programming methods for solving TO problems involving soft robots. This method is evaluated on three different soft robots with different geometries and actuation.},
   keywords = {Modeling Control and Learning for Soft Robots,Optimization and Optimal Control,Soft Robot Applications}
 }
-
