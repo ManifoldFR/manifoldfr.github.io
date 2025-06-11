@@ -58,6 +58,14 @@ $$
 $$
 This makes sense: the right factor maps $T_eG \to T_hG$, the left factor maps $T_hG \to T\_{gh} G $.
 
+**Properties on the right-multiplication**
+
+It holds that for all $g,h\in G$,
+$$
+  R\_{gh} = R_h \circ R_g,
+$$
+so we have similar properties for the right-multiplication, except that the morphism from the group product on $G$ to composition on $\Aut(G)$ is reversed.
+
 ### Group action on the Lie algebra: the adjoint action $\\,\Ad$
 
 We can define a (left) _group action_ of $G$ on its Lie algebra $\mathfrak{g}$ as follows: for $g\in G$ and $\xi \in \mathfrak{g}$,
@@ -137,6 +145,30 @@ $$
 $$
 where the last notation often appears in the robotics literature.
 
+## Trivialisation and differential calculus
+
+Let $f \colon G \to H$ be a smooth mapping between two Lie groups $G$ and $H$, and $g\in G$. As usual, one can define the tangent map to $f$ at $g$, as the linear mapping
+$$
+  \dif f_g \colon v \in T_gG \longmapsto \dif f_g(v) \in T\_{f(g)}H.
+$$
+
+The machinery of Lie groups and the invariances due to the group structure allow us to rethink of this tangent map as one between the Lie algebras $\mathfrak g$ and $\mathfrak h$.
+
+*Twice* left-trivialisation of the tangent map consists in left-trivialising both the input vector $v$ and the output $w = \dif f_g(v) \in T_hH$ (where $h = f(g)\in H$).
+
+This means writing $v = (\dif L^G_g)_e\xi$, and $w = (\dif L^H_h)_e\eta$. In fact, we can prove there exists a *left-Jacobian* $J\colon \mathfrak g \to \mathfrak h$ such that
+$$
+  w = \dif f_g(v) = (\dif f_g) \circ (\dif L^G_g)_e = (\dif L^H_h)_e \circ J(\xi),
+$$
+i.e.
+$$
+\begin{equation}
+\boxed{
+  J(\xi) \defeq (\dif L_h^H)_e^{-1} \circ (\dif f_g) \circ (\dif L_g^G)_e.
+}
+\end{equation}
+$$
+
 ## Some formulas
 
 ### Multiplication map
@@ -146,18 +178,25 @@ Denote $m(g, h) = gh$ the multiplication map $m\colon G\times G \rightarrow G$, 
     \dif m_{(g,h)}(u, v) = (\dif R_h)_g(u) + (\dif L_g)_h(v) \in T\_{gh}G.
 \end{equation}
 
-Trivialising the tangent vectors as $u = (\dif L_g)_e\xi$, $v = (\dif L_h)_e \eta$ with $(\xi,\eta) \in \mathfrak{g}\times \mathfrak{g}$, we can now write a left-trivialised Jacobian mapping ($\mathfrak g \times \mathfrak g \to \mathfrak g$) of $m$:
+Trivialising the tangent vectors as $u = (\dif L_g)_e\xi$, $v = (\dif L_h)_e \eta$ with $(\xi,\eta) \in \mathfrak{g}\times \mathfrak{g}$, we can now write a left-trivialised Jacobian mapping $J_m(g,h) \colon \mathfrak g \times \mathfrak g \to \mathfrak g$ of $m$:
 $$
 \begin{equation}
 \begin{aligned}
-    (\dif R\_{gh})_e^{-1}
+    (\dif L\_{gh})_e
     J_m(g, h) [\xi, \eta] &= \dif m\_{(g,h)}(u,v)
     \\\\
     &=
     (\dif R_h)_g \circ (\dif L_g)_e\xi + (\dif L_g)_h \circ (\dif L_h)_e\eta \\\\
-    &= 
+    &= (\dif R_h)_g \circ (\dif R_g)_e \circ \Ad_g(\xi)  + (\dif L\_{gh})_e(\eta) \\\\
+    &= (\dif R\_{gh})_e \Ad_g (\xi) + (\dif L\_{gh})_e(\eta).
 \end{aligned}
 \end{equation}
+$$
+
+Thus:
+$$
+  J_m(g,h)[\xi, \nu] = \Ad\_{gh}^{-1}\circ \Ad_g(\xi) + \eta
+    = \Ad_{h}^{-1}(\xi) + \eta.
 $$
 
 ### Differential of the inverse
