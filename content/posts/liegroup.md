@@ -66,6 +66,8 @@ $$
 $$
 (for some curve $\gamma$ satisfying $\gamma(0)=e$, $\dot\gamma(0) = \xi$).
 
+By the isomorphism property, note that the left- and right-actions $g\cdot$ and $\cdot g$ on the Lie algebra are *both* isomorphisms from the Lie algebra $\mathfrak{g}$ to the tangent space $T_gG$.
+
 ## Trivialisations
 
 The question of trivialisation is actually that of choosing _a representation of the tangent spaces_ to the Lie group $G$ through the Lie algebra $\mathfrak{g}$, using the isomorphisms given by the tangent maps $\dif L_g$ and $\dif R_g$.
