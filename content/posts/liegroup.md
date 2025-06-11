@@ -154,17 +154,21 @@ $$
 
 The machinery of Lie groups and the invariances due to the group structure allow us to rethink of this tangent map as one between the Lie algebras $\mathfrak g$ and $\mathfrak h$.
 
-*Twice* left-trivialisation of the tangent map consists in left-trivialising both the input vector $v$ and the output $w = \dif f_g(v) \in T_hH$ (where $h = f(g)\in H$).
+*Twice* left-trivialisation of the tangent map consists in left-trivialising both the input vector $v$ and the output $w = \dif f_g(v) \in T_hH$, where $h = f(g)\in H$.
 
-This means writing $v = (\dif L^G_g)_e\xi$, and $w = (\dif L^H_h)_e\eta$. In fact, we can prove there exists a *left-Jacobian* $J\colon \mathfrak g \to \mathfrak h$ such that
+This means writing $v = (\dif L^G_g)_e\xi$, and $(\dif L^H_h)_e\eta$. In fact, we can prove there exists a *left-Jacobian*, a linear map between Lie algebras
 $$
-  w = \dif f_g(v) = (\dif f_g) \circ (\dif L^G_g)_e = (\dif L^H_h)_e \circ J(\xi),
+  J(g)\colon \mathfrak g \to \mathfrak h
+$$
+such that
+$$
+  \dif f_g(v) = (\dif f_g) \circ (\dif L_g)_e = (\dif L_h)_e \circ J(g) \xi,
 $$
 i.e.
 $$
 \begin{equation}
 \boxed{
-  J \defeq (\dif L_h^H)_e^{-1} \circ (\dif f_g) \circ (\dif L_g^G)_e.
+  J(g) \defeq (\dif L\_{h^{-1}})_e \circ (\dif f_g) \circ (\dif L_g)_e.
 }
 \end{equation}
 $$
