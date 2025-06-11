@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Some notes on Lie groups | ManifoldFR</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://manifoldfr.github.io/style.css">
+    <link rel="stylesheet" href="https://manifoldfr.github.io/color/orange.css">
+
+        <link rel="stylesheet" href="https://manifoldfr.github.io/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://manifoldfr.github.io/font-hack-subset.css">
+
+    <meta name="description" content="">
+
+    <meta property="og:description" content="">
+    <meta property="og:title" content="Some notes on Lie groups | ManifoldFR">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://manifoldfr.github.io/posts/liegroup/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="Some notes on Lie groups | ManifoldFR">
+    <meta property="twitter:domain" content="manifoldfr.github.io">
+    <meta property="twitter:url" content="https://manifoldfr.github.io/posts/liegroup/">
+
+        <link rel="shortcut icon" type="image/png" href="/favicon-32x32.png">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            // customised options
+            // • auto-render specific keys, e.g.:
+            delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: "\\begin{equation}", right: "\\end{equation}", display: true},
+            {left: "\\begin{align}", right: "\\end{align}", display: true},
+            {left: "\\begin{alignat}", right: "\\end{alignat}", display: true},           
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+            ],
+            macros: {
+                "\\R": "\\mathbb{R}",
+                "\\defeq": ":=",
+                "\\suchthat": "\\mathrm{s.t.}\\ ",
+                "\\argmin": "\\operatorname*{argmin}",
+                "\\argmax": "\\operatorname*{argmax}",
+                "\\dif": "\\operatorname*{d}\\!",
+                "\\prox": "\\operatorname*{prox}",
+                "\\KL": "\\operatorname{KL}",
+                "\\EE": "\\mathbb{E}",
+                "\\RR": "\\mathbb{R}",
+                "\\ZZ": "\\mathbb{Z}",
+                "\\NN": "\\mathbb{N}",
+                "\\calF": "\\mathcal{F}",
+                "\\calL": "\\mathcal{L}",
+                "\\calM": "\\mathcal{M}",
+                "\\calW": "\\mathcal{W}",
+                "\\calU": "\\mathcal{U}",
+                "\\calX": "\\mathcal{X}",
+                "\\calY": "\\mathcal{Y}",
+                "\\calZ": "\\mathcal{Z}",
+                "\\bfm": "\\mathbf",
+                "\\bfx": "\\bfm{x}",
+                "\\bfu": "\\bfm{u}",
+                "\\Aut": "\\operatorname{Aut}",
+                "\\Ad": "\\operatorname{Ad}",
+                "\\GL": "\\operatorname{GL}"
+            },
+            // • rendering keys, e.g.:
+            throwOnError : false
+        });
+    });
+</script>
+
+    <link rel="stylesheet" href='https://manifoldfr.github.io/custom.css'>
+</head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://manifoldfr.github.io" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            manifoldfr
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li class="active"><a href="https://manifoldfr.github.io/posts">posts</a></li>
+            
+                <li><a href="https://manifoldfr.github.io/publications">publications</a></li>
+            
+                <li><a href="https://github.com/ManifoldFR">github</a></li>
+            
+                <li><a href="https://scholar.google.com/citations?user=aVgy-0gAAAAJ&hl=en">google scholar</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://manifoldfr.github.io/posts/liegroup/">Some notes on Lie groups</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2024-10-10
+        </span>
+
+    </div>
+
+    
+
+        <div class="post-content">
+            <p>Lie groups are an essential element of modelling in applications such as computer vision and computer graphics (namely handling cameras), and also robotics and machine learning.</p>
+<p>They do <em>not</em> constitute an easy subject. A lot of presentation is either overly technical, or glosses over mathematical foundations or properties which enables practitioners to carry out computations on Lie groups by themselves, or understand often unsaid assumptions or conventions in many implementations.</p>
+<p>In this blog post, we will be taking a tour of Lie groups, Lie algebras, and useful computational facts.</p>
+<span id="continue-reading"></span>
+<p>In the sequel, $G$ is a Lie group, and $\mathfrak{g}$ its Lie algebra.
+The Lie algebra corresponds to the tangent space at the neutral element of the group $e \in G$.</p>
+<h2 id="left-multiplication-right-multiplication">Left-multiplication, right-multiplication</h2>
+<p>The left-multiplication map by an element $g\in G$ is
+$$
+\begin{equation}
+\begin{aligned}
+L_g \colon G &amp;\longrightarrow G \\
+h &amp;\longmapsto g\cdot h.
+\end{aligned}
+\end{equation}
+$$
+The right-multiplication map by an element $g\in G$ is
+$$
+\begin{equation}
+\begin{aligned}
+R_g \colon G &amp;\longrightarrow G \\
+h &amp;\longmapsto h\cdot g.
+\end{aligned}
+\end{equation}
+$$
+These maps are smooth by the axioms of Lie groups, and their inverses $L_{g^{-1}}$ and $R_{g^{-1}}$ are also smooth. Thus they define <em>diffeomorphisms from $G$ to itself</em>.</p>
+<p>This implies that for every $g\in G$, the differential of $L_g$ (or $R_g$) at $h\in G$ defines an isomorphism between tangent spaces:
+$$
+(\dif{L_g})_h \colon T_h G \xrightarrow{\simeq} T_{gh } G.
+$$</p>
+<p>Furthermore, it holds that, as functions,</p>
+<ul>
+<li>$L_e = \operatorname{id}$,</li>
+<li>$L_{gh} = L_g \circ L_h$ for all $g,h\in G$,</li>
+<li>and indeed $L_g^{-1} = L_{g^{-1}}$ because $L_{g^{-1}} \circ L_g = L_e = \operatorname{id}$.</li>
+</ul>
+<p>Hence $g \mapsto L_g$ is a group homomorphism between $G$ and the automorphism group $\Aut(G)$.</p>
+<p>This further implies that for all $g,h\in G$, by the chain rule
+$$
+\begin{equation}
+(\dif{L_{gh}})_e = \dif (L_g \circ L_h)_e = (\dif{L_g})_h \circ (\dif L_h)_e
+\end{equation}
+$$
+This makes sense: the right factor maps $T_eG \to T_hG$, the left factor maps $T_hG \to T_{gh} G $.</p>
+<p><strong>Properties on the right-multiplication</strong></p>
+<p>It holds that for all $g,h\in G$,
+$$
+R_{gh} = R_h \circ R_g,
+$$
+so we have similar properties for the right-multiplication, except that the morphism from the group product on $G$ to composition on $\Aut(G)$ is reversed.</p>
+<h3 id="group-action-on-the-lie-algebra-the-adjoint-action-ad">Group action on the Lie algebra: the adjoint action $\,\Ad$</h3>
+<p>We can define a (left) <em>group action</em> of $G$ on its Lie algebra $\mathfrak{g}$ as follows: for $g\in G$ and $\xi \in \mathfrak{g}$,
+\begin{equation}
+g \cdot \xi \defeq \dif(R_{g^{-1}} \circ L_g)_e(\xi) \in \mathfrak{g}.
+\end{equation}
+In fact, this action is the differential map of the inner automorphism $\Phi_g$ defined by $\Phi_g(h) = g h g^{-1}$, or
+$$
+\Phi_g = R_{g^{-1}} \circ L_g.
+$$
+Remarking this, we can see that it is indeed an action, because it holds that
+$$
+h \cdot (g\cdot \xi) = (hg) \cdot \xi.
+$$</p>
+<p>This action is called the <em>adjoint</em> action, denoted
+$$
+\begin{aligned}
+\Ad_g \colon \mathfrak{g} &amp;\longrightarrow \mathfrak{g}
+\\
+\xi &amp;\longmapsto \Ad_g(\xi) = (\dif\Phi_g)_e(\xi)
+\end{aligned}
+$$</p>
+<p>Note that
+$$
+\begin{equation}
+\Ad_g(\xi) = (\dif R_g)^{-1}_e \circ (\dif L_g)_e (\xi).
+\end{equation}
+$$</p>
+<p><strong>Some properties</strong></p>
+<ul>
+<li>Given $g\in G$, the mapping $\Ad_g$ is a linear automorphism in $\mathfrak g$, with inverse $\Ad_g^{-1} = \Ad_{g^{-1}}$.</li>
+<li>The adjoint action, seen as a mapping $g\in G\mapsto \Ad_g \in \GL(\mathfrak g)$, is a group homomorphism.</li>
+</ul>
+<h2 id="trivialisations">Trivialisations</h2>
+<p>The question of trivialisation is actually that of choosing <em>a representation of the tangent spaces</em> to the Lie group $G$ through the Lie algebra $\mathfrak{g}$, using the isomorphisms given by the tangent maps $(\dif L_g)_e$ and $(\dif R_g)_e$.</p>
+<p><em>Left-trivialisation</em>, obviously, represents elements in the tangent space $ T_gG $ as $g \cdot \xi$ for $\xi \in \mathfrak{g}$.</p>
+<p>Pinocchio, for instance, uses <em>left-trivialisations</em>.</p>
+<p>The tool for going from left- to right-trivialisations is the adjoint action. Indeed, given a vector $v \in T_gG$ expressed simultaneously as $v = (\dif L_g)_e\xi $ with $\xi \in \mathfrak{g}$ the left-trivialisation, and $v = (\dif R_g)_e\eta$ with $\eta$ the right-trivialisation, it holds that:
+$$
+v = (\dif L_g)_e\xi = (\dif R_g)_e\eta
+$$
+thus
+$$
+\begin{equation}
+\boxed{
+\eta = (\dif R_g)^{-1}_e \circ (\dif L_g)_e \xi = \Ad_g(\xi).
+}
+\end{equation}
+$$</p>
+<h2 id="lie-group-exp-and-log">Lie group exp and log</h2>
+<p>The Lie group $\exp$ map can be defined as the "natural choice" for a curve $\gamma$ from the Lie algebra to the group when defining derivatives.
+We switch notation here, considering $X \in \mathfrak{g} = T_eG$ as a vector field, and $\gamma$ the integral curve of $X$ through $e$, i.e. solving the differential equation:
+$$
+\dot\gamma(t) = X(\gamma(t)), \gamma(0) = e.
+$$</p>
+<p>The Riemannian $\mathrm{Exp}$ in this case is defined through the Lie group exponential map: given $g\in G$ and a tangent vector $\delta g\in T_gG$,
+$$
+\mathrm{Exp}_g(\delta g) = g \exp(g^{-1} \cdot \delta g) = \exp(\delta g \cdot g^{-1})g.
+$$
+The two expressions on the right respectively correspond to a left- and right-trivialisation of the increment $\delta g$.</p>
+<p>In Pinocchio, the <code>integrate(q, v)</code> function maps a configuration $q\in G$ and left-trivialised increment (or <em>body-frame velocity</em>) $v \in \mathfrak{g}$ to
+$$
+\mathrm{Exp}_q(q \cdot v) = q \exp(v) = q \oplus v
+$$
+where the last notation often appears in the robotics literature.</p>
+<h2 id="trivialisation-and-differential-calculus">Trivialisation and differential calculus</h2>
+<p>Let $f \colon G \to H$ be a smooth mapping between two Lie groups $G$ and $H$, and $g\in G$. As usual, one can define the tangent map to $f$ at $g$, as the linear mapping
+$$
+\dif f_g \colon v \in T_gG \longmapsto \dif f_g(v) \in T_{f(g)}H.
+$$</p>
+<p>The machinery of Lie groups and the invariances due to the group structure allow us to rethink of this tangent map as one between the Lie algebras $\mathfrak g$ and $\mathfrak h$.</p>
+<p><em>Twice</em> left-trivialisation of the tangent map consists in left-trivialising both the input vector $v$ and the output $w = \dif f_g(v) \in T_hH$, where $h = f(g)\in H$.</p>
+<p>This means writing $v = (\dif L^G_g)_e\xi$, and $(\dif L^H_h)_e\eta$. In fact, we can prove there exists a <em>left-Jacobian</em>, a linear map between Lie algebras
+$$
+J(g)\colon \mathfrak g \to \mathfrak h
+$$
+such that
+$$
+\dif f_g(v) = (\dif f_g) \circ (\dif L_g)_e = (\dif L_h)_e \circ J(g) \xi,
+$$
+i.e.
+$$
+\begin{equation}
+\boxed{
+J(g) \defeq (\dif L_{h^{-1}})_e \circ (\dif f_g) \circ (\dif L_g)_e.
+}
+\end{equation}
+$$</p>
+<h2 id="some-formulas">Some formulas</h2>
+<h3 id="multiplication-map">Multiplication map</h3>
+<p>Denote $m(g, h) = gh$ the multiplication map $m\colon G\times G \rightarrow G$, which is smooth. For $(u, v) \in T_gG \times T_hG$, the differential of $m$ is
+\begin{equation}
+\dif m_{(g,h)}(u, v) = (\dif R_h)_g(u) + (\dif L_g)_h(v) \in T_{gh}G.
+\end{equation}</p>
+<p>Trivialising the tangent vectors as $u = (\dif L_g)_e\xi$, $v = (\dif L_h)_e \eta$ with $(\xi,\eta) \in \mathfrak{g}\times \mathfrak{g}$, we can now write a left-trivialised Jacobian mapping $J_m(g,h) \colon \mathfrak g \times \mathfrak g \to \mathfrak g$ of $m$:
+$$
+\begin{equation}
+\begin{aligned}
+(\dif L_{gh})_e
+J_m(g, h) [\xi, \eta] &amp;= \dif m_{(g,h)}(u,v)
+\\
+&amp;=
+(\dif R_h)_g \circ (\dif L_g)_e\xi + (\dif L_g)_h \circ (\dif L_h)_e\eta \\
+&amp;= (\dif R_h)_g \circ (\dif R_g)_e \circ \Ad_g(\xi)  + (\dif L_{gh})_e(\eta) \\
+&amp;= (\dif R_{gh})_e \Ad_g (\xi) + (\dif L_{gh})_e(\eta).
+\end{aligned}
+\end{equation}
+$$</p>
+<p>Thus:
+$$
+J_m(g,h)[\xi, \nu] = \Ad_{gh}^{-1}\circ \Ad_g(\xi) + \eta
+= \Ad_{h}^{-1}(\xi) + \eta.
+$$</p>
+<h3 id="differential-of-the-inverse">Differential of the inverse</h3>
+<p>Let $i$ denote the inverse map $i\colon g \mapsto g^{-1}$, which is smooth.
+We start by considering $g = e$. Let $\gamma\colon (-\epsilon,\epsilon) \to G$ be a curve, such that $\gamma(0) = e$, $\dot\gamma(0) = v \in \mathfrak{g}$. Then,
+$$
+0 = \frac{d}{dt}\gamma(t)\gamma(t)^{-1}\lvert_{t=0} = \gamma(0)\frac{d}{dt}\gamma(t)^{-1}\lvert_{t=0} + \frac{d}{dt}\gamma(t)\lvert_{t=0}\gamma(0)^{-1} = \frac{d}{dt}\gamma(t)^{-1}\lvert_{t=0} + v
+$$
+so that
+$$
+\dif i_e(v) = \frac{d}{dt}\gamma(t)^{-1}\lvert_{t=0} = -v.
+$$</p>
+<p>Then, for all $g\in G$, $v \in T_gG$,
+\begin{equation}
+\dif i_g(v) = - \dif (R_{g^{-1}} \circ L_{g^{-1}})\cdot v.
+\end{equation}
+If $G \subset \mathrm{GL}_{n}(\RR)$ is a subgroup of the general linear matrix Lie group, then this formula reduces to ($v$ is now a matrix in $\mathfrak{gl}_n(\RR)$):
+\begin{equation}
+\dif i_g(v) = - g^{-1} v g^{-1}.
+\end{equation}</p>
+<h2 id="other-resources">Other resources</h2>
+<p>On <a href="https://maxime-tournier.github.io/notes/lie-groups.html">Maxime Tournier's blog</a>.</p>
+
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                        <span class="button previous">
+                            <a href="https://manifoldfr.github.io/posts/ot2/">
+                                <span class="button__icon">←</span>&nbsp;
+                                <span class="button__text">Optimal Transport and Mean-field games</span>
+                            </a>
+                        </span>
+                    
+                    </div>
+            </div>
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2025
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

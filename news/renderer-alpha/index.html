@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>A WIP renderer for robotics based on SDL3-GPU | ManifoldFR</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://manifoldfr.github.io/style.css">
+    <link rel="stylesheet" href="https://manifoldfr.github.io/color/orange.css">
+
+        <link rel="stylesheet" href="https://manifoldfr.github.io/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://manifoldfr.github.io/font-hack-subset.css">
+
+    <meta name="description" content="">
+
+    <meta property="og:description" content="">
+    <meta property="og:title" content="A WIP renderer for robotics based on SDL3-GPU | ManifoldFR">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://manifoldfr.github.io/news/renderer-alpha/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="A WIP renderer for robotics based on SDL3-GPU | ManifoldFR">
+    <meta property="twitter:domain" content="manifoldfr.github.io">
+    <meta property="twitter:url" content="https://manifoldfr.github.io/news/renderer-alpha/">
+
+        <link rel="shortcut icon" type="image/png" href="/favicon-32x32.png">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            // customised options
+            // • auto-render specific keys, e.g.:
+            delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: "\\begin{equation}", right: "\\end{equation}", display: true},
+            {left: "\\begin{align}", right: "\\end{align}", display: true},
+            {left: "\\begin{alignat}", right: "\\end{alignat}", display: true},           
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+            ],
+            macros: {
+                "\\R": "\\mathbb{R}",
+                "\\defeq": ":=",
+                "\\suchthat": "\\mathrm{s.t.}\\ ",
+                "\\argmin": "\\operatorname*{argmin}",
+                "\\argmax": "\\operatorname*{argmax}",
+                "\\dif": "\\operatorname*{d}\\!",
+                "\\prox": "\\operatorname*{prox}",
+                "\\KL": "\\operatorname{KL}",
+                "\\EE": "\\mathbb{E}",
+                "\\RR": "\\mathbb{R}",
+                "\\ZZ": "\\mathbb{Z}",
+                "\\NN": "\\mathbb{N}",
+                "\\calF": "\\mathcal{F}",
+                "\\calL": "\\mathcal{L}",
+                "\\calM": "\\mathcal{M}",
+                "\\calW": "\\mathcal{W}",
+                "\\calU": "\\mathcal{U}",
+                "\\calX": "\\mathcal{X}",
+                "\\calY": "\\mathcal{Y}",
+                "\\calZ": "\\mathcal{Z}",
+                "\\bfm": "\\mathbf",
+                "\\bfx": "\\bfm{x}",
+                "\\bfu": "\\bfm{u}",
+                "\\Aut": "\\operatorname{Aut}",
+                "\\Ad": "\\operatorname{Ad}",
+                "\\GL": "\\operatorname{GL}"
+            },
+            // • rendering keys, e.g.:
+            throwOnError : false
+        });
+    });
+</script>
+
+    <link rel="stylesheet" href='https://manifoldfr.github.io/custom.css'>
+</head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://manifoldfr.github.io" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            manifoldfr
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://manifoldfr.github.io/posts">posts</a></li>
+            
+                <li><a href="https://manifoldfr.github.io/publications">publications</a></li>
+            
+                <li><a href="https://github.com/ManifoldFR">github</a></li>
+            
+                <li><a href="https://scholar.google.com/citations?user=aVgy-0gAAAAJ&hl=en">google scholar</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://manifoldfr.github.io/news/renderer-alpha/">A WIP renderer for robotics based on SDL3-GPU</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2025-02-09
+        </span>
+
+    </div>
+
+    
+
+        <div class="post-content">
+            <video controls autoplay class="my-video">
+    <source src="/ur5.mp4" type="video/mp4">
+</video>
+<p>Recently, I made public a <a href="https://github.com/ManifoldFR/candlewick">new repo</a> on GitHub, which is supposed to be a new renderer for robotics applications. It's very much a work in progress, read on for more details on the rationale behind it.</p>
+<span id="continue-reading"></span><h2 id="rationale">Rationale</h2>
+<p>For a while, my colleagues and I have been discussing if we could find a satisfactory solution for rendering robot scenes in a window.</p>
+<ul>
+<li>It needed to be modern and cross-platform, supporting Metal on macOS and Vulkan on Linux (<em>maybe</em> Windows in the future), with consistent behaviour.</li>
+<li>It also needed to be real-time capable.</li>
+<li>It needed be extendable with some interaction capabilities (adding sliders, buttons, such as the kind one can add with <a href="https://github.com/ocornut/imgui">ImGui</a> or <a href="https://github.com/emilk/egui">egui</a> in Rust-world).</li>
+<li>It needs to provide both C++ and Python APIs.</li>
+<li>It needs to have facilities to dump images or video.</li>
+</ul>
+<p>Possible uses for such a renderer would be, visualizing trajectories for debugging motion generation algorithms, controllers, monitoring the behaviour of real-time controllers (MPC or RL), debugging and visualizing scenarios for a real-time physics simulator (like the upcoming <a href="https://github.com/Simple-Robotics/simple">Simple</a>).</p>
+<p>A good reason to support Vulkan, is support for complex modern real-time rendering workflows, more consistency in the way they behave across GPU vendors and OSes, and better performance. The OpenGL standard hasn't been updated by Khronos since 4.6 in 2016, and Apple itself stopped OpenGL support for macOS at 4.1 back in 2010 (Apple doing Apple things).</p>
+<h2 id="prior-software">Prior software</h2>
+<p>There's a host of software which already exists for robotics visualization.</p>
+<p>Historically, there was <a href="https://github.com/Gepetto/gepetto-viewer">gepetto-viewer</a>, a viewer created for the Pinocchio and HPP suite of libraries based on the old <a href="https://openscenegraph.github.io/openscenegraph.io/">OpenSceneGraph</a> (OSG) 3D toolkit, itself based on the classic OpenGL API and written in C++.
+It has been used for offline trajectory visualization and replay, debugging planning algorithms, and so on.
+While OSG has been deprecated for a few years and succeeded by <a href="https://vsg-dev.github.io/vsg-dev.io/">VulkanSceneGraph</a> (VSG, name self-explanatory), gepetto-viewer is not really updated anymore apart from maintenance, and a transition to VSG was never made.</p>
+<p>Our team has been using <a href="https://github.com/meshcat-dev/meshcat">meshcat</a> for the last few years as a stopgap replacement. It is a WebGL-based renderer running in the browser, using the ThreeJS toolkit which is essentially a middleware for WebGL (1.x and 2.x, with <a href="https://www.youtube.com/watch?v=7we9mqIOKyw">still-evolving</a> WebGPU support).
+Meshcat, and especially its <a href="https://github.com/meshcat-dev/meshcat-python">Python bindings</a> don't seem to be maintained anymore.
+The last release was never pushed to <a href="https://pypi.org/project/meshcat/">PyPi</a>, and no PRs have been accepted in months on either repo.
+There is a C++ API as part of the <a href="https://drake.mit.edu/doxygen_cxx/classdrake_1_1geometry_1_1_meshcat_visualizer.html">Drake framework</a> from TRI, although there was <a href="https://github.com/ami-iit/meshcat-cpp">an attempt</a> to port it to a standalone package by some of our Italian colleagues.<br />
+Our experience with meshcat-python had been okay, but with some major drawbacks that make it unsuitable for the full breadth of applications we want. It is <em>definitely</em> not real-time capable, there is quite a bit of latency between e.g. changing the camera's pose matrix or changing a node in the scene, and getting the result on screen.
+It has a rather complex structure: a Python client communicating with a server over ZeroMQ, which talks to the ThreeJS browser code by websocket...
+Extending the visualizer (even statically) is quite painful due to this complex structure (which <em>might</em> account for a bit of the Python API's latency): there's a mix of adding Python ZeroMQ commands which get transferred to JS as websocket messages.
+Dynamic extensions are a no-go. There is basically no interaction capability beyond changing some flags in the scene tree. This might be fundamentally because it was never intended for such things.</p>
+<p>We've also looked at <a href="https://rerun.io">Rerun</a>, a Rust-based multi-use data visualization framework which is properly cross-platform. This is thank to its use of the excellent <a href="https://wgpu.rs/">wgpu</a>, Mozilla's WebGPU implementation (it is also used by other projects such as the <a href="https://bevyengine.org/">bevy</a> game engine).
+I've even written a small <a href="https://github.com/ManifoldFR/pinocchio-rerun">proof-of-concept library</a> for loading and visualizing Pinocchio models and geometries through Rerun.
+At that point, customisability (adding rendering options, environments, skyboxes, interactibility...) came up as an issue.</p>
+<h2 id="custom-software">Custom software</h2>
+<p><a href="https://libsdl.org/">Simple Directmedia Layer (SDL)</a> is a wonderful, widely-used C library for writing multi-media applications such as games. It provides a host of systems for creating windows, programming keyboard, mouse, and gamepad interactions. It can be used to provide window contexts and surfaces for DirectX, OpenGL and Vulkan to render to.</p>
+<p>Recently, the people behind SDL released <a href="https://github.com/libsdl-org/SDL/releases/tag/release-3.2.0">version 3</a>, which adds many improvements and features to the library.
+One major addition is a new GPU API which dynamically wraps around modern graphics APIs Vulkan, DirectX 12, and Metal (much like the WebGPU implementations wgpu and <a href="https://github.com/google/dawn">Dawn</a> do).</p>
+<p>I decided to take a crack at building my own renderer using it. One advantage here is that we only have a single major dependency (SDL).</p>
+<p>Turns out, it's really really hard (no sh!t). There's a whole lot of questions around code organization, loading assets (meshes, textures, shaders) and interacting with them, implementing cameras, and properly articulating this with the actual rendering.</p>
+<p>I have virtually no experience with this stuff. I've messed around with writing one-shot OpenGL code and basic shaders in the past, with no thought towards factorization and making something that can actually be used.
+Writing an actual renderer with tools, and loaders, and shaders is another story entirely.</p>
+<p>Other dependencies which are useful to get things going include ImGui (mentiond above) for writing immediate-mode GUIs for interaction, assimp for loading assets (which our collision geometry and algorithms library <a href="https://github.com/coal-library/coal">Coal</a> uses), and <a href="https://github.com/skypjack/entt">EnTT</a> for organizing the way we render objects using an entity-component-systems (ECS) design.</p>
+<hr />
+<div class="iframely-embed"><div class="iframely-responsive" style="padding-bottom: 50%; padding-top: 120px;"><a href="https://github.com/ManifoldFR/candlewick" data-iframely-url="//iframely.net/vWKCoW7"></a></div></div><script async src="//iframely.net/embed.js"></script>
+
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                        <span class="button previous">
+                            <a href="https://manifoldfr.github.io/news/defence/">
+                                <span class="button__icon">←</span>&nbsp;
+                                <span class="button__text">Graduation</span>
+                            </a>
+                        </span>
+                    
+                    
+                        <span class="button next">
+                            <a href="https://manifoldfr.github.io/news/tro-paper-accepted/">
+                                <span class="button__text">IEEE T-RO paper accepted</span>&nbsp;
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    </div>
+            </div>
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2025
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

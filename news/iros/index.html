@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>IROS 2022 paper | ManifoldFR</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://manifoldfr.github.io/style.css">
+    <link rel="stylesheet" href="https://manifoldfr.github.io/color/orange.css">
+
+        <link rel="stylesheet" href="https://manifoldfr.github.io/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://manifoldfr.github.io/font-hack-subset.css">
+
+    <meta name="description" content="">
+
+    <meta property="og:description" content="">
+    <meta property="og:title" content="IROS 2022 paper | ManifoldFR">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://manifoldfr.github.io/news/iros/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="IROS 2022 paper | ManifoldFR">
+    <meta property="twitter:domain" content="manifoldfr.github.io">
+    <meta property="twitter:url" content="https://manifoldfr.github.io/news/iros/">
+
+        <link rel="shortcut icon" type="image/png" href="/favicon-32x32.png">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            // customised options
+            // • auto-render specific keys, e.g.:
+            delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: "\\begin{equation}", right: "\\end{equation}", display: true},
+            {left: "\\begin{align}", right: "\\end{align}", display: true},
+            {left: "\\begin{alignat}", right: "\\end{alignat}", display: true},           
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+            ],
+            macros: {
+                "\\R": "\\mathbb{R}",
+                "\\defeq": ":=",
+                "\\suchthat": "\\mathrm{s.t.}\\ ",
+                "\\argmin": "\\operatorname*{argmin}",
+                "\\argmax": "\\operatorname*{argmax}",
+                "\\dif": "\\operatorname*{d}\\!",
+                "\\prox": "\\operatorname*{prox}",
+                "\\KL": "\\operatorname{KL}",
+                "\\EE": "\\mathbb{E}",
+                "\\RR": "\\mathbb{R}",
+                "\\ZZ": "\\mathbb{Z}",
+                "\\NN": "\\mathbb{N}",
+                "\\calF": "\\mathcal{F}",
+                "\\calL": "\\mathcal{L}",
+                "\\calM": "\\mathcal{M}",
+                "\\calW": "\\mathcal{W}",
+                "\\calU": "\\mathcal{U}",
+                "\\calX": "\\mathcal{X}",
+                "\\calY": "\\mathcal{Y}",
+                "\\calZ": "\\mathcal{Z}",
+                "\\bfm": "\\mathbf",
+                "\\bfx": "\\bfm{x}",
+                "\\bfu": "\\bfm{u}",
+                "\\Aut": "\\operatorname{Aut}",
+                "\\Ad": "\\operatorname{Ad}",
+                "\\GL": "\\operatorname{GL}"
+            },
+            // • rendering keys, e.g.:
+            throwOnError : false
+        });
+    });
+</script>
+
+    <link rel="stylesheet" href='https://manifoldfr.github.io/custom.css'>
+</head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://manifoldfr.github.io" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            manifoldfr
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://manifoldfr.github.io/posts">posts</a></li>
+            
+                <li><a href="https://manifoldfr.github.io/publications">publications</a></li>
+            
+                <li><a href="https://github.com/ManifoldFR">github</a></li>
+            
+                <li><a href="https://scholar.google.com/citations?user=aVgy-0gAAAAJ&hl=en">google scholar</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://manifoldfr.github.io/news/iros/">IROS 2022 paper</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2022-06-30
+        </span>
+
+    </div>
+
+    
+
+        <div class="post-content">
+            <p>Our paper <em>Constrained Differential Dynamic Programming: A primal-dual augmented Lagrangian approach</em> has been accepted at IROS 2022.</p>
+<p>Check out the preprint <a href="https://hal.archives-ouvertes.fr/hal-03597630/document">here</a>.</p>
+
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                        <span class="button previous">
+                            <a href="https://manifoldfr.github.io/news/icra-accepted/">
+                                <span class="button__icon">←</span>&nbsp;
+                                <span class="button__text">ICRA 2022 paper</span>
+                            </a>
+                        </span>
+                    
+                    
+                        <span class="button next">
+                            <a href="https://manifoldfr.github.io/news/icra23/">
+                                <span class="button__text">ICRA 2023 paper</span>&nbsp;
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    </div>
+            </div>
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2025
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

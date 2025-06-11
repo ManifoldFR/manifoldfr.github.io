@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Optimal Transport: Wasserstein distance and Sinkhorn | ManifoldFR</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://manifoldfr.github.io/style.css">
+    <link rel="stylesheet" href="https://manifoldfr.github.io/color/orange.css">
+
+        <link rel="stylesheet" href="https://manifoldfr.github.io/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://manifoldfr.github.io/font-hack-subset.css">
+
+    <meta name="description" content="">
+
+    <meta property="og:description" content="">
+    <meta property="og:title" content="Optimal Transport: Wasserstein distance and Sinkhorn | ManifoldFR">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://manifoldfr.github.io/posts/ot/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="Optimal Transport: Wasserstein distance and Sinkhorn | ManifoldFR">
+    <meta property="twitter:domain" content="manifoldfr.github.io">
+    <meta property="twitter:url" content="https://manifoldfr.github.io/posts/ot/">
+
+        <link rel="shortcut icon" type="image/png" href="/favicon-32x32.png">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            // customised options
+            // • auto-render specific keys, e.g.:
+            delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: "\\begin{equation}", right: "\\end{equation}", display: true},
+            {left: "\\begin{align}", right: "\\end{align}", display: true},
+            {left: "\\begin{alignat}", right: "\\end{alignat}", display: true},           
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+            ],
+            macros: {
+                "\\R": "\\mathbb{R}",
+                "\\defeq": ":=",
+                "\\suchthat": "\\mathrm{s.t.}\\ ",
+                "\\argmin": "\\operatorname*{argmin}",
+                "\\argmax": "\\operatorname*{argmax}",
+                "\\dif": "\\operatorname*{d}\\!",
+                "\\prox": "\\operatorname*{prox}",
+                "\\KL": "\\operatorname{KL}",
+                "\\EE": "\\mathbb{E}",
+                "\\RR": "\\mathbb{R}",
+                "\\ZZ": "\\mathbb{Z}",
+                "\\NN": "\\mathbb{N}",
+                "\\calF": "\\mathcal{F}",
+                "\\calL": "\\mathcal{L}",
+                "\\calM": "\\mathcal{M}",
+                "\\calW": "\\mathcal{W}",
+                "\\calU": "\\mathcal{U}",
+                "\\calX": "\\mathcal{X}",
+                "\\calY": "\\mathcal{Y}",
+                "\\calZ": "\\mathcal{Z}",
+                "\\bfm": "\\mathbf",
+                "\\bfx": "\\bfm{x}",
+                "\\bfu": "\\bfm{u}",
+                "\\Aut": "\\operatorname{Aut}",
+                "\\Ad": "\\operatorname{Ad}",
+                "\\GL": "\\operatorname{GL}"
+            },
+            // • rendering keys, e.g.:
+            throwOnError : false
+        });
+    });
+</script>
+
+    <link rel="stylesheet" href='https://manifoldfr.github.io/custom.css'>
+</head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://manifoldfr.github.io" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            manifoldfr
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li class="active"><a href="https://manifoldfr.github.io/posts">posts</a></li>
+            
+                <li><a href="https://manifoldfr.github.io/publications">publications</a></li>
+            
+                <li><a href="https://github.com/ManifoldFR">github</a></li>
+            
+                <li><a href="https://scholar.google.com/citations?user=aVgy-0gAAAAJ&hl=en">google scholar</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://manifoldfr.github.io/posts/ot/">Optimal Transport: Wasserstein distance and Sinkhorn</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2021-05-13
+        </span>
+
+    </div>
+
+    
+
+        <div class="post-content">
+            <p>The goal of optimal transport problems, is to find optimal mappings between probability meaures: these mappings are also called transport plans, and can take the form of functional transforms (in Monge's original problem) or joint probability distributions (in the Kantorovitch relaxation).</p>
+<span id="continue-reading"></span>
+<p>OT formulations have found practical applications in imaging, notably in <a href="https://twitter.com/gabrielpeyre/status/1013663602514030592?lang=en">histogram equalization</a>, in machine learning (for distribution matching), and also in the study of partial differential equations (see the work of Villani, Ambrosio, Benamou and Brenier). The first two sets of applications have grown from the development of efficient numerical solvers.</p>
+<p>In this blog post I will quickly summarize what OT problems, and introduce a simple, efficient algorithm that is able to solve quite a few problems and can have quite a few extensions.</p>
+<p>Let \( \mu_0, \mu_1 \) be probability measures on the spaces \( \mathcal{X} \) and \( \mathcal{Y} \), and \( c: \mathcal{X}\times\mathcal{Y}\to \RR \) be a cost function on the product space.</p>
+<p>$$
+\begin{equation}
+\begin{aligned}
+&amp;\inf_\gamma \int_{X\times Y} c(x,y) d\gamma  \
+&amp;\suchthat P^1_{#}\gamma = \mu, P^2_{#}\gamma = \nu.
+\end{aligned}
+\end{equation}
+$$</p>
+<p>Notice that the constraint by which \(  \gamma  \) is a probability measure summing to \(  1  \) is implied by the constraint that its marginals are the problem data \(  \mu, \nu  \). The latter constraint is also called the <em>coupling constraint</em>.</p>
+<p>In the case where \(  \mathcal{X} = \mathcal{Y}  \), the value of the minimum is called the <strong>Wasserstein</strong> or <strong>Kantorovitch-Rubinstein</strong> distance and is denoted \(  \mathcal{W}(\mu, \nu)  \) -- it is a distance function of the space of probability measures \(  \mathcal{M}^1(\mathcal{X})  \).</p>
+<p>Generalizations exist, such as the multi-marginal case, where the transport problem pertains to multiple measures \(  \mu_k  \).
+These can have interesting links to energy minimization schemes and graphical models.</p>
+<h2 id="discrete-measures">Discrete measures</h2>
+<p>A large class of numerical algorithms cover cases where the measures are discrete, of the form \(  \mu = \sum_{i=0}^n \mu^i \delta_{x_i}  \). This case also represents histograms, where the \(  x_i  \) correspond to the histogram bins. Applying these methods to continuous-space problems (with density-based measures for instance) involves intermediary steps such as grid discretization and binning, although other methods for these problems can instead rely on using basis functions</p>
+<p>In the latter case, any joint distribution coupling \(  \mu  \) and \(  \nu  \) is of the form \(  \gamma = \sum_{i,j} \gamma^{ij}\delta_{(x_i,y_j)}  \), and denoting \(  \mathbf{C} = (c(x_i,y_j))_{i,j}  \). The transport problem reads</p>
+<p>$$
+\begin{aligned}
+\inf_{\gamma}{}&amp; \langle \mathbf{C}, \gamma \rangle  \
+\suchthat &amp;\gamma \mathbf{1} = \mu \
+&amp;\gamma^\top\mathbf{1} = \nu,
+\end{aligned}
+$$</p>
+<p>where \(  \langle \cdot,\cdot\rangle  \) is the Frobenius inner product.</p>
+<p>In this form, we see that the OT problem is merely a (high-dimensional) linear program (LP) with linear equality constraints, which can be solved efficiently using standard algorithms, namely <a href="https://en.wikipedia.org/wiki/Simplex_algorithm">Dantzig's simplex algorithm</a>.</p>
+<p>Popular packages for this are included in Google's <a href="https://developers.google.com/optimization/lp/glop"><em>Glop</em> included in OR-Tools</a>, or the <a href="https://www.gurobi.com/">Gurobi suite</a> of solvers, and of course <code>scipy</code> comes with its own <a href="https://www.gurobi.com/">LP module</a>.
+Enhancing methods for linear programming is still an active research domain, covering everything from dualization methods, interior point algorithms, or even making Dantzig's classic method more robust.</p>
+<h2 id="ot-at-scale-the-sinkhorn-algorithm">OT at scale: the Sinkhorn algorithm</h2>
+<p>For large-scale problems, using an LP solver, relying on the simplex method for instance, implies high computational cost.
+Relaxation techniques have to be used, and the more suited to the nature of the problem (mass transport between probability measures), the better. Cuturi [2] proposes a relaxation of the form</p>
+<p>$$
+\begin{equation}
+\inf \int_{\mathcal{X}\times \mathcal{Y}} c(x,y)d\gamma - \epsilon H(\gamma),
+\end{equation}
+$$</p>
+<p>where \(  H(p) = -\int (\log p(x) - 1)dp(x)  \) is the entropy of measure \(  p  \).</p>
+<p>Introducing the problem Lagrangian with Lagrange multipliers \( \alpha, \beta \) (also called <em>dual potentials</em>), we find that the optimal transport plan reads</p>
+<p>$$
+\gamma^\star_{ij} = \exp(-(C_{i,j} + \alpha_i + \beta_j)/\epsilon),
+$$</p>
+<p>with optimal Lagrange multipliers satisfying</p>
+<p>$$
+\begin{equation}\label{eq:SinkhornFixedPoint}
+u = \frac{\mu}{Kv}
+\quad v = \frac{\nu}{K^\top u}
+\end{equation}
+$$</p>
+<p>where \(  K = \exp(-\mathbf{C}/\epsilon)  \) and \( (u,v) = (\exp(-\alpha/\epsilon), \exp(-\beta/\epsilon))  \).</p>
+<p>The optimal transport plan is then recovered from \(  \gamma^\star_{i,j} = u_i K_{i,j}v_j  \), or \(  \gamma = K\odot (u \otimes v)  \).
+Sinkhorn iterations consist in solving the fixed-point mapping above iteratively.
+The minimizer is often denoted \(  \calW_\epsilon(\mu, \nu)  \) and is called the <em>Sinkhorn distance</em>.</p>
+<p>An important detail is how convergence is tested. One can test the value of the multipliers converges within some given tolerance \(  \tau &gt; 0  \) -- but this convergence criterion is sensitive to the choice of regularization \(  \epsilon  \).
+A better alternative is checking for primal feasibility, i.e. compliance with the constraints, which read \( u\odot Kv = \mu  \) and \(  v\odot K^\top u = \nu  \) in terms of the dual variables.
+$$
+\begin{equation}
+| u\odot Kv - \mu |_1 + | v\odot K^\top u - \nu |_1 \leq \tau.
+\end{equation}
+$$
+Using the form above is more computationally efficient than recomputing \(  \gamma  \) at every iteration and checking for \( \gamma \mathbf{1}=\mu \).</p>
+<p>Here is a basic, 20-line implementation of the Sinkhorn distance:</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">sinkhorn</span><span>(</span><span style="color:#bf616a;">mu</span><span>, </span><span style="color:#bf616a;">nu</span><span>, </span><span style="color:#bf616a;">C</span><span>, </span><span style="color:#bf616a;">eps</span><span>):
+</span><span>    u = np.</span><span style="color:#bf616a;">zeros_like</span><span>(mu)
+</span><span>    v = np.</span><span style="color:#bf616a;">empty_like</span><span>(nu)
+</span><span>    K = np.</span><span style="color:#bf616a;">exp</span><span>(-C/eps)
+</span><span>    thresh = </span><span style="color:#d08770;">1e-9
+</span><span>    max_iter = </span><span style="color:#d08770;">4000
+</span><span>    ress_ = []
+</span><span>    </span><span style="color:#b48ead;">for </span><span>t </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(max_iter):
+</span><span>        u[:] = mu / (K @ v)
+</span><span>
+</span><span>        ktu = K.T @ u
+</span><span>        r = v * ktu
+</span><span>        v[:] = nu / ktu
+</span><span>        s = u * (K @ v)
+</span><span>        res_mu = </span><span style="color:#96b5b4;">sum</span><span>(</span><span style="color:#96b5b4;">abs</span><span>(s - mu))
+</span><span>        res_nu = </span><span style="color:#96b5b4;">sum</span><span>(</span><span style="color:#96b5b4;">abs</span><span>(r - nu))
+</span><span>        res = res_mu + res_nu
+</span><span>        ress_.</span><span style="color:#bf616a;">append</span><span>(res)
+</span><span>        </span><span style="color:#b48ead;">if </span><span>res &lt; thresh:
+</span><span>            </span><span style="color:#b48ead;">break
+</span><span>    P_opt = np.</span><span style="color:#bf616a;">diag</span><span>(u) @ K @ np.</span><span style="color:#bf616a;">diag</span><span>(v)
+</span><span>    </span><span style="color:#b48ead;">return </span><span>P_opt, u, v, ress_
+</span></code></pre>
+<p>More details about the algorithm are available in <em>the</em> reference book by Peyré and Cuturi [1], in chapter 4.
+But let's elaborate on a possible interpretation of the algorithm as a proximal-point method.</p>
+<p>Introducing the so-called Gibbs matrix \(  K  \) into the regularized OT objective, we see that it can be rewritten as the Kullback-Leibler projection of \(  K  \) onto the coupling constraint:</p>
+<p>$$
+\begin{equation}
+\begin{aligned}
+&amp;\inf_\gamma \KL(\gamma | K)\ &amp;\suchthat  \gamma\mathbf{1} = \mu, \gamma^\top\mathbf{1} = \nu,
+\end{aligned}
+\end{equation}
+$$
+where \(   \KL(P|K) = \sum_{i,j} \log(\frac{P_{i,j}}{K_{i,j}})P_{i,j}  \).</p>
+<p>Below is an example, where we compute optimal transport between two discrete distributions sampled from a multivariate Gaussian (in blue) and a mixture of Gaussians (in orange).
+<img src="/sinkhorn_example.png" alt="example of Sinkhorn" /></p>
+<h3 id="pain-points-optimizing-the-algorithm">Pain points: optimizing the algorithm</h3>
+<p>Problems due to dimensionality of the problem still arise within the Sinkhorn iterations themselves: at each iteration, 2 matrix-vector products have to be computed, which has complexity \(  \mathcal{O}(nm \max(n,m)) \).</p>
+<p>One first optimization is to look for efficient ways to compute this matrix vector product. Depending on the structure of the cost function, we might get a factorization of the Gibbs matrix in the form \(  K_1K_2  \), where the \(  K_i  \) might have a sparsity pattern.</p>
+<p>An important case is when the cost is a separable function in some block coordinates of the points \(  x = (x^1, \ldots, x^K) \), such that
+$$
+c(x, y) = \sum_{s=1}^M c_s(x^s, y^s)
+$$
+then  \(K \) is separable with each factor operating only on the subspace corresponding to the  \(s\) -th coordinate (then,  \( K \) can be rewritten as a tensor product).</p>
+<p>[1, chap. 4] gives a classical example for the Gaussian Gibbs kernel \(  K_{i,j} = e^{-\frac{1}{\epsilon}|x_i-y_j|^2}  \) (associated with using the Euclidean distance as a ground cost), which has direct applications to working with images -- and has a link to Gaussian filtering.</p>
+<p>Another aspect is numerical stability. The classic trick of adding a small floating point number (close to floating point precision) in \eqref{eq:SinkhornFixedPoint} to avoid dividing by zero still applies. For additional robustness, one can use the logsumexp trick to instead carry out the updates in the log-domain.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The field of OT is incredibly rich, whether it be its theory, generalizations or applications, which is also reflected in how methods to solve OT problems connect to other subjects in mathematical optimization.
+This blog post merely scratched the surface. I cannot enough recommend Peyré and Cuturi's book <em>Computational Optimal Transport</em> [1], which is an easy read and a fantastic reference for anyone looking to learn more from a practicioner's perspective. It is further supported by the companion <a href="https://www.numerical-tours.com/python/">numerical tours</a>, which cover some of the aforementioned applications and algorithms (notably log-domain Sinkhorn).</p>
+<hr />
+<ul>
+<li>[1] Gabriel Peyré, Marco Cuturi, <em>Computational Optimal Transport</em>. <a href="https://optimaltransport.github.io/book/">https://optimaltransport.github.io/book/</a></li>
+<li>[2] Marco Cuturi, <em>Sinkhorn Distances: Lightspeed Computation of Optimal Transport</em>, NeurIPS 2013. <a href="http://marcocuturi.net/Papers/cuturi13sinkhorn.pdf">http://marcocuturi.net/Papers/cuturi13sinkhorn.pdf</a></li>
+</ul>
+
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                        <span class="button previous">
+                            <a href="https://manifoldfr.github.io/posts/lqr/">
+                                <span class="button__icon">←</span>&nbsp;
+                                <span class="button__text">Introduction to optimal control: LQR</span>
+                            </a>
+                        </span>
+                    
+                    
+                        <span class="button next">
+                            <a href="https://manifoldfr.github.io/posts/ddp/">
+                                <span class="button__text">Optimal Control II: Differential Dynamic Programming</span>&nbsp;
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    </div>
+            </div>
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2025
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

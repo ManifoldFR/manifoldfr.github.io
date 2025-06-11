@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Optimal Control II: Differential Dynamic Programming | ManifoldFR</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://manifoldfr.github.io/style.css">
+    <link rel="stylesheet" href="https://manifoldfr.github.io/color/orange.css">
+
+        <link rel="stylesheet" href="https://manifoldfr.github.io/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://manifoldfr.github.io/font-hack-subset.css">
+
+    <meta name="description" content="">
+
+    <meta property="og:description" content="">
+    <meta property="og:title" content="Optimal Control II: Differential Dynamic Programming | ManifoldFR">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://manifoldfr.github.io/posts/ddp/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="Optimal Control II: Differential Dynamic Programming | ManifoldFR">
+    <meta property="twitter:domain" content="manifoldfr.github.io">
+    <meta property="twitter:url" content="https://manifoldfr.github.io/posts/ddp/">
+
+        <link rel="shortcut icon" type="image/png" href="/favicon-32x32.png">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            // customised options
+            // • auto-render specific keys, e.g.:
+            delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: "\\begin{equation}", right: "\\end{equation}", display: true},
+            {left: "\\begin{align}", right: "\\end{align}", display: true},
+            {left: "\\begin{alignat}", right: "\\end{alignat}", display: true},           
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+            ],
+            macros: {
+                "\\R": "\\mathbb{R}",
+                "\\defeq": ":=",
+                "\\suchthat": "\\mathrm{s.t.}\\ ",
+                "\\argmin": "\\operatorname*{argmin}",
+                "\\argmax": "\\operatorname*{argmax}",
+                "\\dif": "\\operatorname*{d}\\!",
+                "\\prox": "\\operatorname*{prox}",
+                "\\KL": "\\operatorname{KL}",
+                "\\EE": "\\mathbb{E}",
+                "\\RR": "\\mathbb{R}",
+                "\\ZZ": "\\mathbb{Z}",
+                "\\NN": "\\mathbb{N}",
+                "\\calF": "\\mathcal{F}",
+                "\\calL": "\\mathcal{L}",
+                "\\calM": "\\mathcal{M}",
+                "\\calW": "\\mathcal{W}",
+                "\\calU": "\\mathcal{U}",
+                "\\calX": "\\mathcal{X}",
+                "\\calY": "\\mathcal{Y}",
+                "\\calZ": "\\mathcal{Z}",
+                "\\bfm": "\\mathbf",
+                "\\bfx": "\\bfm{x}",
+                "\\bfu": "\\bfm{u}",
+                "\\Aut": "\\operatorname{Aut}",
+                "\\Ad": "\\operatorname{Ad}",
+                "\\GL": "\\operatorname{GL}"
+            },
+            // • rendering keys, e.g.:
+            throwOnError : false
+        });
+    });
+</script>
+
+    <link rel="stylesheet" href='https://manifoldfr.github.io/custom.css'>
+</head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://manifoldfr.github.io" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            manifoldfr
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li class="active"><a href="https://manifoldfr.github.io/posts">posts</a></li>
+            
+                <li><a href="https://manifoldfr.github.io/publications">publications</a></li>
+            
+                <li><a href="https://github.com/ManifoldFR">github</a></li>
+            
+                <li><a href="https://scholar.google.com/citations?user=aVgy-0gAAAAJ&hl=en">google scholar</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://manifoldfr.github.io/posts/ddp/">Optimal Control II: Differential Dynamic Programming</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2021-09-16
+        </span>
+
+    </div>
+
+    
+
+        <div class="post-content">
+            <p>The <em>Differential Dynamic Programming</em> (DDP) is a nowadays quite popular optimal control algorithm, which was introduced by Jacobson all the way back in the 1970s. Recently, it has made a resurgence following work by Tassa and Todorov<sup class="footnote-reference"><a href="#Tassa12">1</a></sup>.</p>
+<span id="continue-reading"></span>
+<p>The discrete-time optimal control problem obtained by classical transcription of a continuous-time problem is the following nonlinear program (NLP):
+$$
+\newcommand{\bfx}{\bfm{x}}
+\newcommand{\bfu}{\bfm{u}}
+\begin{equation}
+\begin{aligned}
+&amp;\min_{\bfx,\bfu} J(\bfx, \bfu) = \sum_{t=0}^{T-1} \ell(x_t, u_t) + h(x_T)  \
+&amp;\suchthat \ x_{t+1} = f(x_t, u_t).
+\end{aligned}
+\tag{P}
+\label{eq:OCP}
+\end{equation}
+$$
+where \(  \ell  \) and \(  h  \) are the running and terminal costs, and \(  f  \) the system dynamics.</p>
+<p>Several methods for solving this problem exist. The obvious one is to use a general-purpose NLP solver such as IpOpt, which will yield a numerical solution after plugging in the problem's objective, constraints, and their derivatives. Providing the NLP solver with the sparsity pattern of the constraints will yield significantly better execution time. DDP, however, is a specific solver for OCPs of form \eqref{eq:OCP} and naturally handles the problem sparsity.</p>
+<p>If you haven't yet, I recommend you read <a href="/2021/04/25/lqr">the first post on LQR</a> to familiarize yourself with the notations used.</p>
+<h2 id="algorithm">Algorithm</h2>
+<h3 id="backward-pass">Backward pass</h3>
+<p>The OCP admits the following dynamic programming equation, which is a nonlinear variant of the LQR problem's dynamic programming principle,
+$$
+\begin{equation}
+V_t(x) = \min_u \ell(x, u) + V_{t+1}(f(x,u)).
+\end{equation}
+$$
+To solve this equation, DDP computes a Newton step in the control variate \(  u  \), for a given value \(  x + \delta x  \) of the previous stage's state \(  x_t  \) -- this allows us to approximate the Newton step \(  \delta u  \) as a function of \(  \delta x  \) using zeroth- and first-order sensitivities.</p>
+<p>The Hamiltonian \(  Q(x, u)  \) has the following partial derivatives:
+$$
+\begin{equation}
+\begin{aligned}
+q &amp;= \ell(x,u) + V'(f(x,u))  \
+Q_x &amp;= \ell_x + f_x^\top V'<em>x  \
+Q_u &amp;= \ell_u + f_u^\top V'<em>x  \
+Q</em>{xx} &amp;= \ell</em>{xx} + f_x^\top V'<em>{xx}f_x + V'<em>x \cdot f</em>{xx}  \
+Q</em>{xu} &amp;= \ell_{xu} + f_x^\top V'<em>{xx}f_u + V'<em>x \cdot f</em>{xu}  \
+Q</em>{uu} &amp;= \ell_{uu} + f_u^\top V'_{xx}f_u + V'<em>x \cdot f</em>{uu}
+\end{aligned}
+\end{equation}
+$$</p>
+<p>The Newton step for the dynamic programming equation is obtained by
+$$
+\begin{equation}
+\delta u = -Q_{uu}^{-1}Q_u -Q_{uu}^{-1}Q_{ux}\delta x = k + \bfm{K}\delta x
+\end{equation}
+$$
+where the vector \(  k  \) and matrix \(  \bfm{K} \in \RR^{n_x\times n_u}  \) are called the <em>feedforward</em> and <em>feedback</em> gains respectively.
+They are precisely the sensitivities of the Newton step \(  \delta u  \) with respect to a perturbation of the state \(  x  \).</p>
+<p>The derivatives of the value function around \(  x  \) along the new trajectory are given by
+$$
+\begin{equation}
+\begin{aligned}
+v &amp;= q - \frac{1}{2}k^\top Q_{uu}k  \
+V_x &amp;= Q_x + Q_{xu}k  \
+V_{xx} &amp;= Q_{xx} + Q_{xu}\bfm{K}.
+\end{aligned}
+\end{equation}
+$$
+This gives a local quadratic model of \(  V_t(x + \delta x)  \).</p>
+<h3 id="forward-pass">Forward pass</h3>
+<p>The forward pass is obtained by a so-called nonlinear rollout: let \(  x_0^+ = x_0  \) and
+$$
+\begin{equation}
+\begin{aligned}
+u_t^+ &amp;= u_t + \alpha k_t + \bfm{K}<em>t(x_t^+ - x_t) \
+x</em>{t+1}^+ &amp;= f(x_t^+, u_t^+).
+\end{aligned}
+\end{equation}
+$$
+where \(  \alpha \in (0, 1]  \) is a line-search parameter.
+This nonlinear rollout is where the DDP algorithm diverges completely from how a SQP method would work for the OCP.</p>
+<p>The algorithm actually treats the OCP as an unconstrained problem \(  \min_{\bfu} \mathcal{J}(\bfu)  \) where the state variables \(  \bfx  \) are removed by using the recurrence relation.</p>
+<h4 id="backtracking-line-search">Backtracking line search</h4>
+<p>To find the right \(  \alpha  \), a backtracking line search procedure is used: denoting \(  \phi(\alpha) = \mathcal{J}(\bfu^+(\alpha))  \) the value of the objective for parameter \(  \alpha  \), we look for the largest \(  \alpha  \) satisfying
+$$
+\begin{equation}
+\phi(\alpha) - \phi(0) \leq \Delta_1 \alpha + \frac{1}{2}\Delta_2\alpha^2.
+\end{equation}
+$$
+with a backtracking line search procedure.
+The coefficients \(  \Delta_1  \) and \(  \Delta_2  \) are the directional derivatives of \( \mathcal{J}(\bfu)  \) in the search direction obtained from the backward pass
+$$
+\begin{equation}
+\Delta_1 = \sum_{t=0}^{T-1} Q_{u,t}k_t,\quad \Delta_2 = \sum_{t=0}^{T-1} k_t^\top Q_{uu,t} k_t.
+\end{equation}
+$$</p>
+<h2 id="caveats">Caveats</h2>
+<p>The algorithm has a few drawbacks: the transcription from the continuous-time problem requires getting explicit-form discrete dynamics -- and several time-explicit numerical integrators for ODEs and DAEs are known to have very poor performance or do not work well with constrained dynamics. Also, every single iterate of the algorithm produces a feasible trajectory, which is not always desirable. This latter aspect is tackled in recent literature, for instance<sup class="footnote-reference"><a href="#Mas18">2</a></sup>.</p>
+<p>Also, the standard DDP cannot solve operational constraints on the controlled trajectory, whether it be equality or inequality constraints, for instance requiring the terminal state \(  x_T  \) be equal to some target value \(  \bar{x}  \).</p>
+<hr />
+<div class="footnote-definition" id="Tassa12"><sup class="footnote-definition-label">1</sup>
+<p>Y. Tassa, T. Erez, and E. Todorov, “Synthesis and stabilization of complex behaviors through online trajectory optimization,” Oct. 2012, pp. 4906–4913. doi: 10.1109/IROS.2012.6386025.</p>
+</div>
+<div class="footnote-definition" id="Mas18"><sup class="footnote-definition-label">2</sup>
+<p>C. Mastalli et al., “Crocoddyl: An Efficient and Versatile Framework for Multi-Contact Optimal Control,” arXiv:1909.04947 [cs, math], Mar. 2020, Accessed: Nov. 18, 2020. [Online]. Available: <a href="http://arxiv.org/abs/1909.04947">http://arxiv.org/abs/1909.04947</a></p>
+</div>
+
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                        <span class="button previous">
+                            <a href="https://manifoldfr.github.io/posts/ot/">
+                                <span class="button__icon">←</span>&nbsp;
+                                <span class="button__text">Optimal Transport: Wasserstein distance and Sinkhorn</span>
+                            </a>
+                        </span>
+                    
+                    
+                        <span class="button next">
+                            <a href="https://manifoldfr.github.io/posts/auglag/">
+                                <span class="button__text">Augmented Lagrangian methods</span>&nbsp;
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    </div>
+            </div>
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2025
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

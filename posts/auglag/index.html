@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Augmented Lagrangian methods | ManifoldFR</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://manifoldfr.github.io/style.css">
+    <link rel="stylesheet" href="https://manifoldfr.github.io/color/orange.css">
+
+        <link rel="stylesheet" href="https://manifoldfr.github.io/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://manifoldfr.github.io/font-hack-subset.css">
+
+    <meta name="description" content="">
+
+    <meta property="og:description" content="">
+    <meta property="og:title" content="Augmented Lagrangian methods | ManifoldFR">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://manifoldfr.github.io/posts/auglag/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="Augmented Lagrangian methods | ManifoldFR">
+    <meta property="twitter:domain" content="manifoldfr.github.io">
+    <meta property="twitter:url" content="https://manifoldfr.github.io/posts/auglag/">
+
+        <link rel="shortcut icon" type="image/png" href="/favicon-32x32.png">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            // customised options
+            // • auto-render specific keys, e.g.:
+            delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: "\\begin{equation}", right: "\\end{equation}", display: true},
+            {left: "\\begin{align}", right: "\\end{align}", display: true},
+            {left: "\\begin{alignat}", right: "\\end{alignat}", display: true},           
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+            ],
+            macros: {
+                "\\R": "\\mathbb{R}",
+                "\\defeq": ":=",
+                "\\suchthat": "\\mathrm{s.t.}\\ ",
+                "\\argmin": "\\operatorname*{argmin}",
+                "\\argmax": "\\operatorname*{argmax}",
+                "\\dif": "\\operatorname*{d}\\!",
+                "\\prox": "\\operatorname*{prox}",
+                "\\KL": "\\operatorname{KL}",
+                "\\EE": "\\mathbb{E}",
+                "\\RR": "\\mathbb{R}",
+                "\\ZZ": "\\mathbb{Z}",
+                "\\NN": "\\mathbb{N}",
+                "\\calF": "\\mathcal{F}",
+                "\\calL": "\\mathcal{L}",
+                "\\calM": "\\mathcal{M}",
+                "\\calW": "\\mathcal{W}",
+                "\\calU": "\\mathcal{U}",
+                "\\calX": "\\mathcal{X}",
+                "\\calY": "\\mathcal{Y}",
+                "\\calZ": "\\mathcal{Z}",
+                "\\bfm": "\\mathbf",
+                "\\bfx": "\\bfm{x}",
+                "\\bfu": "\\bfm{u}",
+                "\\Aut": "\\operatorname{Aut}",
+                "\\Ad": "\\operatorname{Ad}",
+                "\\GL": "\\operatorname{GL}"
+            },
+            // • rendering keys, e.g.:
+            throwOnError : false
+        });
+    });
+</script>
+
+    <link rel="stylesheet" href='https://manifoldfr.github.io/custom.css'>
+</head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://manifoldfr.github.io" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            manifoldfr
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li class="active"><a href="https://manifoldfr.github.io/posts">posts</a></li>
+            
+                <li><a href="https://manifoldfr.github.io/publications">publications</a></li>
+            
+                <li><a href="https://github.com/ManifoldFR">github</a></li>
+            
+                <li><a href="https://scholar.google.com/citations?user=aVgy-0gAAAAJ&hl=en">google scholar</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://manifoldfr.github.io/posts/auglag/">Augmented Lagrangian methods</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2022-01-15
+        </span>
+
+    </div>
+
+    
+
+        <div class="post-content">
+            <p>In general nonlinear optimization, we seek to solve problems of the form
+$$
+\begin{equation}\tag{NLP}
+\begin{aligned}
+\min_z{} &amp;\ell(z)  \
+\suchthat &amp;c(z) = 0
+\end{aligned}
+\end{equation}
+$$
+This kind of formulation is often encountered in machine learning, control problems and others where structured, constrained optimization crops up.</p>
+<span id="continue-reading"></span><h3 id="method-of-multipliers">Method of multipliers</h3>
+<p>The <em>method of multipliers</em> is a constrained nonlinear optimization method, which minimizes a penalized version of the problem Lagrangian called the <em>augmented Lagrangian</em>:
+$$
+\begin{equation}
+\calL_\mu(z, \lambda) = \ell(z) + \lambda^\top c(z) + \frac{\mu}{2} \|c(z)\|_2^2
+\end{equation}
+$$
+then updates the Lagrange multiplier $\lambda$:
+$$
+\begin{equation}
+\begin{aligned}
+z^{k+1} &amp;\in \argmin_z \calL_A(z, \lambda^k)  \
+\lambda^{k+1} &amp;= \lambda^k + \mu c(z^{k+1})
+\end{aligned}
+\end{equation}
+$$</p>
+<p>This is also a proximal algorithm, as outlined in Rockafellar's 1976 paper<sup class="footnote-reference"><a href="#Rock76">1</a></sup>. In fact, under suitable assumptions the above update is equivalent to the dual proximal-point iteration:
+$$
+\begin{equation}
+\lambda^{k+1} = \argmax_\lambda { \min_z
+\underbrace{\calL(z, \lambda) - \frac{1}{2\mu}| \lambda - \lambda^k |_2^2}_{\defeq \calL^{\prox}(z)}
+},
+\end{equation}
+$$
+as can be seen by interverting $\min$ and $\max$ and noticing taking the maximum over $\lambda$ of the inner expression yields a minimization of $\calL_A(z, \lambda^k; \mu)$. You can also notice that, under convexity assumptions, the inner minimum is the dual objective function of (NLP). This link between the augmented Lagrangian method of multipliers and dual proximal-point iterations was investigated in a 1976 paper<sup class="footnote-reference"><a href="#Rock76">1</a></sup> by R. Tyrrell Rockafellar, which is a good read that I recommend.</p>
+<p>Anyway, this shows that the next primal-dual iterate can be computed as minimization-then-update, or by solving a saddle-point with the proximal penalty in $\lambda$.
+One important aspect of this equivalence, is that the stationarity conditions for read
+$$
+\begin{equation}
+\begin{aligned}
+\nabla\ell(z) + J_c(z)^\top\lambda &amp;= 0  \\\
+\lambda = \lambda^k + {}&amp;\mu c(z)
+\end{aligned}
+\end{equation}
+$$
+which are exactly a rewrite of the first-order necessary conditions and the multiplier update.</p>
+<p>This remark is made more relevant below, as it helps with reinterpreting the method of multipliers in the framework of inexact proximal point methods, of which the BCL strategy for the method of multipliers<sup class="footnote-reference"><a href="#Conn91">2</a></sup> is a well-known example.</p>
+<h2 id="bcl-and-inexact-proximal-iterates">BCL and inexact proximal iterates</h2>
+<p>Solving the minimization in (2) (or equivalently the saddle-point) -- a step we will call the "<strong>proximal subproblem</strong>" -- exactly is a costly affair in general, outside of the classical linear-quadratic case. Indeed, in the general setting, one might have to use an iterative scheme such as gradient descent or (quasi-)Newton steps, with varying convergence speeds and computational costs depending on problem convexity, conditioning, and sparsity.</p>
+<p>Anyway, one might want to accelerate overall convergence of the proximal algorithm, not in terms of the number of proximal iterates (although there are methods to accelerate that) but in the total number of inner iterations used to solve the successive subproblems.</p>
+<p>What if we were to guarantee that we can still converge to the optimum without solving the subproblem exactly, but within a loose tolerance that we will tighten as optimization progresses? Something like,
+\begin{equation}
+\begin{aligned}
+&amp;\text{i.  solve } \lambda^{k+1} \approx \argmax_\lambda \min_z \calL^\mathrm{prox}(z, \lambda; \lambda^k, \mu)\quad \text{within tolerance } \epsilon_k &gt; 0  \\\
+&amp;\text{ii. update }\epsilon_{k+1} &lt; \epsilon_k
+\end{aligned}
+\end{equation}</p>
+<p>This is the idea behind inexact proximal methods.</p>
+<p>BCL can be seen as one of these. It chooses subsequent penalties $\mu_k$ and tolerances $\epsilon_k$ depending on what the value of the contraint $c(z^k)$ is, even rejecting the iterate if not good enough.</p>
+<hr />
+<div class="footnote-definition" id="Rock76"><sup class="footnote-definition-label">1</sup>
+<p>R. T. Rockafellar, “Augmented Lagrangians and Applications of the Proximal Point Algorithm in Convex Programming,” Mathematics of Operations Research, vol. 1, no. 2, pp. 97–116, 1976.</p>
+</div>
+<div class="footnote-definition" id="Conn91"><sup class="footnote-definition-label">2</sup>
+<p>A. Conn, N. Gould, and P. Toint, “A Globally Convergent Augmented Lagrangian Algorithm for Optimization with General Constraints and Simple Bounds,” SIAM Journal on Numerical Analysis, vol. 28, Apr. 1991, doi: 10.1137/0728030.</p>
+</div>
+<div class="footnote-definition" id="Carp21"><sup class="footnote-definition-label">3</sup>
+<p>J. Carpentier, R. Budhiraja, and N. Mansard, “Proximal and Sparse Resolution of Constrained Dynamic Equations,” Austin / Virtual, United States, Jul. 2021. Accessed: Sep. 17, 2021. [Online]. Available: <a href="https://hal.inria.fr/hal-03271811">https://hal.inria.fr/hal-03271811</a></p>
+</div>
+
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                        <span class="button previous">
+                            <a href="https://manifoldfr.github.io/posts/ddp/">
+                                <span class="button__icon">←</span>&nbsp;
+                                <span class="button__text">Optimal Control II: Differential Dynamic Programming</span>
+                            </a>
+                        </span>
+                    
+                    
+                        <span class="button next">
+                            <a href="https://manifoldfr.github.io/posts/oc3-hjb/">
+                                <span class="button__text">Optimal Control III: what is the Hamilton-Jacobi-Bellman equation?</span>&nbsp;
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    </div>
+            </div>
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2025
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

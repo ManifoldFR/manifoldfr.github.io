@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Asking ChatGPT to implement the LQR | ManifoldFR</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://manifoldfr.github.io/style.css">
+    <link rel="stylesheet" href="https://manifoldfr.github.io/color/orange.css">
+
+        <link rel="stylesheet" href="https://manifoldfr.github.io/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://manifoldfr.github.io/font-hack-subset.css">
+
+    <meta name="description" content="">
+
+    <meta property="og:description" content="">
+    <meta property="og:title" content="Asking ChatGPT to implement the LQR | ManifoldFR">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://manifoldfr.github.io/posts/gpt-lqr/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="Asking ChatGPT to implement the LQR | ManifoldFR">
+    <meta property="twitter:domain" content="manifoldfr.github.io">
+    <meta property="twitter:url" content="https://manifoldfr.github.io/posts/gpt-lqr/">
+
+        <link rel="shortcut icon" type="image/png" href="/favicon-32x32.png">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            // customised options
+            // • auto-render specific keys, e.g.:
+            delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: "\\begin{equation}", right: "\\end{equation}", display: true},
+            {left: "\\begin{align}", right: "\\end{align}", display: true},
+            {left: "\\begin{alignat}", right: "\\end{alignat}", display: true},           
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+            ],
+            macros: {
+                "\\R": "\\mathbb{R}",
+                "\\defeq": ":=",
+                "\\suchthat": "\\mathrm{s.t.}\\ ",
+                "\\argmin": "\\operatorname*{argmin}",
+                "\\argmax": "\\operatorname*{argmax}",
+                "\\dif": "\\operatorname*{d}\\!",
+                "\\prox": "\\operatorname*{prox}",
+                "\\KL": "\\operatorname{KL}",
+                "\\EE": "\\mathbb{E}",
+                "\\RR": "\\mathbb{R}",
+                "\\ZZ": "\\mathbb{Z}",
+                "\\NN": "\\mathbb{N}",
+                "\\calF": "\\mathcal{F}",
+                "\\calL": "\\mathcal{L}",
+                "\\calM": "\\mathcal{M}",
+                "\\calW": "\\mathcal{W}",
+                "\\calU": "\\mathcal{U}",
+                "\\calX": "\\mathcal{X}",
+                "\\calY": "\\mathcal{Y}",
+                "\\calZ": "\\mathcal{Z}",
+                "\\bfm": "\\mathbf",
+                "\\bfx": "\\bfm{x}",
+                "\\bfu": "\\bfm{u}",
+                "\\Aut": "\\operatorname{Aut}",
+                "\\Ad": "\\operatorname{Ad}",
+                "\\GL": "\\operatorname{GL}"
+            },
+            // • rendering keys, e.g.:
+            throwOnError : false
+        });
+    });
+</script>
+
+    <link rel="stylesheet" href='https://manifoldfr.github.io/custom.css'>
+</head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://manifoldfr.github.io" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            manifoldfr
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li class="active"><a href="https://manifoldfr.github.io/posts">posts</a></li>
+            
+                <li><a href="https://manifoldfr.github.io/publications">publications</a></li>
+            
+                <li><a href="https://github.com/ManifoldFR">github</a></li>
+            
+                <li><a href="https://scholar.google.com/citations?user=aVgy-0gAAAAJ&hl=en">google scholar</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://manifoldfr.github.io/posts/gpt-lqr/">Asking ChatGPT to implement the LQR</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2023-01-01
+        </span>
+
+    </div>
+
+    
+
+        <div class="post-content">
+            <p>There's been a lot of noise about large language models (LLMs) and them possibly replacing programmers in the near future -- a perspective shared by many technology enthusiasts but met with a tad more skepticism from researchers and software engineers. OpenAI's <a href="https://openai.com/blog/chatgpt/">release of ChatGPT</a> has generated lots of discussion on the subject. Although complete automation might be far off, some folks have already found some use for Copilot, automating things like rote boilerplate code.
+However, that does not necessarily translate to correct, let alone efficient, code especially in complex applications and specific domains. An obvious caveat: different language models lead to different results, and the randomness in the inference process can create a lot of variability -- some friends have told me OpenAI playground does generate more reliable code.</p>
+<span id="continue-reading"></span>
+<p>In this post, I did something very silly and asked ChatGPT to generate C++ code for the discrete-time linear-quadratic regulator (LQR), a standard problem in control theory.
+This will show how easily LQR can be implemented in C++, which might seem daunting to some, once we have a decent linear algebra library (here, <a href="https://eigen.tuxfamily.org/index.php?title=Main_Page">Eigen</a>). We will discuss some implementation details with Eigen and see the kind of code quality we could expect from ChatGPT at this point. (And also that you shouldn't necessarily trust it when it contradicts you.)</p>
+<p>If you haven't yet, I recommend you read <a href="/2021/04/25/lqr">the first post on LQR</a> to familiarize yourself with the notations and terminology used.</p>
+<p>To start off, I formulate the problem for ChatGPT as follows:</p>
+<blockquote>
+<p><strong>Me:</strong> Please implement the linear-quadratic regulator (LQR) in C++ using the Eigen library ; your implementation will output the state-control trajectories and feedback gain matrices.</p>
+<p><strong>ChatGPT:</strong> Here is a C++ implementation of the linear-quadratic regulator (LQR) that uses the Eigen library:</p>
+</blockquote>
+<pre data-lang="cpp" style="background-color:#2b303b;color:#c0c5ce;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">iostream</span><span>&gt;
+</span><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">Eigen/Dense</span><span>&gt;
+</span><span>
+</span><span style="color:#b48ead;">using namespace</span><span> std;
+</span><span style="color:#b48ead;">using namespace</span><span> Eigen;
+</span><span>
+</span><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">main</span><span>()
+</span><span>{
+</span><span>  </span><span style="color:#65737e;">// Define the matrices A, B, Q, and R
+</span><span>  MatrixXd </span><span style="color:#bf616a;">A</span><span>(</span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">2</span><span>);
+</span><span>  A &lt;&lt; </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>;
+</span><span>  MatrixXd </span><span style="color:#bf616a;">B</span><span>(</span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">1</span><span>);
+</span><span>  B &lt;&lt; </span><span style="color:#d08770;">5</span><span>, </span><span style="color:#d08770;">6</span><span>;
+</span><span>  MatrixXd </span><span style="color:#bf616a;">Q</span><span>(</span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">2</span><span>);
+</span><span>  Q &lt;&lt; </span><span style="color:#d08770;">7</span><span>, </span><span style="color:#d08770;">8</span><span>, </span><span style="color:#d08770;">9</span><span>, </span><span style="color:#d08770;">10</span><span>;
+</span><span>  MatrixXd </span><span style="color:#bf616a;">R</span><span>(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>);
+</span><span>  R &lt;&lt; </span><span style="color:#d08770;">11</span><span>;
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Compute the LQR gain matrix
+</span><span>  MatrixXd K = MatrixXd::</span><span style="color:#bf616a;">Zero</span><span>(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>);
+</span><span>  K = R.</span><span style="color:#bf616a;">inverse</span><span>() * B.</span><span style="color:#bf616a;">transpose</span><span>() * (A - B * R.</span><span style="color:#bf616a;">inverse</span><span>() * B.</span><span style="color:#bf616a;">transpose</span><span>()).</span><span style="color:#bf616a;">inverse</span><span>();
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Define the initial state and control inputs
+</span><span>  VectorXd </span><span style="color:#bf616a;">x</span><span>(</span><span style="color:#d08770;">2</span><span>);
+</span><span>  x &lt;&lt; </span><span style="color:#d08770;">12</span><span>, </span><span style="color:#d08770;">13</span><span>;
+</span><span>  VectorXd </span><span style="color:#bf616a;">u</span><span>(</span><span style="color:#d08770;">1</span><span>);
+</span><span>  u &lt;&lt; </span><span style="color:#d08770;">14</span><span>;
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Define the simulation time step and number of steps
+</span><span>  </span><span style="color:#b48ead;">double</span><span> dt = </span><span style="color:#d08770;">0.1</span><span>;
+</span><span>  </span><span style="color:#b48ead;">int</span><span> num_steps = </span><span style="color:#d08770;">10</span><span>;
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Simulate the system
+</span><span>  </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int</span><span> i = </span><span style="color:#d08770;">0</span><span>; i &lt; num_steps; i++) {
+</span><span>    </span><span style="color:#65737e;">// Update the control input
+</span><span>    u = -K * x;
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// Store the state and control trajectories
+</span><span>    cout &lt;&lt; &quot;</span><span style="color:#a3be8c;">State at step </span><span>&quot; &lt;&lt; i &lt;&lt; &quot;</span><span style="color:#a3be8c;">: </span><span>&quot; &lt;&lt; x.</span><span style="color:#bf616a;">transpose</span><span>() &lt;&lt; endl;
+</span><span>    cout &lt;&lt; &quot;</span><span style="color:#a3be8c;">Control input at step </span><span>&quot; &lt;&lt; i &lt;&lt; &quot;</span><span style="color:#a3be8c;">: </span><span>&quot; &lt;&lt; u.</span><span style="color:#bf616a;">transpose</span><span>() &lt;&lt; endl;
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// Update the state
+</span><span>    x = A * x + B * u;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Output the LQR gain matrix
+</span><span>  cout &lt;&lt; &quot;</span><span style="color:#a3be8c;">LQR gain matrix: </span><span>&quot; &lt;&lt; endl &lt;&lt; K &lt;&lt; endl;
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span>;
+</span><span>}
+</span></code></pre>
+<p>Now, a few things are wrong here.</p>
+<ol>
+<li>There is no proper backward sweep with a cost-to-go matrix to update the gains (we are in the finite-horizon setting)</li>
+<li>The formula for $K$ is wrong.</li>
+<li>It gives input matrices $Q$ and $R$ which are not symmetric.</li>
+<li>There's a pointless variable named <code>dt</code>. ChatGPT might be thinking about the continuous-time setting of LQR.</li>
+</ol>
+<p>So, I asked ChatGPT to fix a couple issues</p>
+<blockquote>
+<p>No this is wrong, you need a proper backward sweep with the cost-to-go matrix here. Also, matrices Q and R need to be symmetric and semidefinite positive.</p>
+</blockquote>
+<p>...and this is what it spat out:</p>
+<pre data-lang="cpp" style="background-color:#2b303b;color:#c0c5ce;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">main</span><span>()
+</span><span>{
+</span><span>  </span><span style="color:#65737e;">// ...
+</span><span>  MatrixXd </span><span style="color:#bf616a;">Q</span><span>(</span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">2</span><span>);
+</span><span>  Q &lt;&lt; </span><span style="color:#d08770;">7</span><span>, </span><span style="color:#d08770;">8</span><span>, </span><span style="color:#d08770;">9</span><span>, </span><span style="color:#d08770;">10</span><span>;
+</span><span>  MatrixXd </span><span style="color:#bf616a;">R</span><span>(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>);
+</span><span>  R &lt;&lt; </span><span style="color:#d08770;">11</span><span>;
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Check that Q and R are symmetric and positive semidefinite
+</span><span>  </span><span style="color:#b48ead;">if </span><span>(Q.</span><span style="color:#bf616a;">transpose</span><span>() != Q) {
+</span><span>    cerr &lt;&lt; &quot;</span><span style="color:#a3be8c;">Error: Q is not symmetric.</span><span>&quot; &lt;&lt; endl;
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">1</span><span>;
+</span><span>  }
+</span><span>  </span><span style="color:#b48ead;">if </span><span>(R.</span><span style="color:#bf616a;">transpose</span><span>() != R) {
+</span><span>    cerr &lt;&lt; &quot;</span><span style="color:#a3be8c;">Error: R is not symmetric.</span><span>&quot; &lt;&lt; endl;
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">1</span><span>;
+</span><span>  }
+</span><span>  </span><span style="color:#b48ead;">if </span><span>(Q.</span><span style="color:#bf616a;">selfadjointView</span><span>&lt;Lower&gt;().</span><span style="color:#bf616a;">eigenvalues</span><span>().</span><span style="color:#bf616a;">minCoeff</span><span>() &lt; </span><span style="color:#d08770;">0</span><span>) {
+</span><span>    cerr &lt;&lt; &quot;</span><span style="color:#a3be8c;">Error: Q is not positive semidefinite.</span><span>&quot; &lt;&lt; endl;
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">1</span><span>;
+</span><span>  }
+</span><span>  </span><span style="color:#b48ead;">if </span><span>(R.</span><span style="color:#bf616a;">selfadjointView</span><span>&lt;Lower&gt;().</span><span style="color:#bf616a;">eigenvalues</span><span>().</span><span style="color:#bf616a;">minCoeff</span><span>() &lt; </span><span style="color:#d08770;">0</span><span>) {
+</span><span>    cerr &lt;&lt; &quot;</span><span style="color:#a3be8c;">Error: R is not positive semidefinite.</span><span>&quot; &lt;&lt; endl;
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">1</span><span>;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Define the simulation time step and number of steps
+</span><span>  </span><span style="color:#b48ead;">double</span><span> dt = </span><span style="color:#d08770;">0.1</span><span>;
+</span><span>  </span><span style="color:#b48ead;">int</span><span> num_steps = </span><span style="color:#d08770;">10</span><span>;
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Compute the LQR gain matrices using a backward sweep
+</span><span>  MatrixXd K = MatrixXd::</span><span style="color:#bf616a;">Zero</span><span>(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>);
+</span><span>  MatrixXd P = Q;
+</span><span>  </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int</span><span> i = num_steps - </span><span style="color:#d08770;">1</span><span>; i &gt;= </span><span style="color:#d08770;">0</span><span>; i--) {
+</span><span>    K = R.</span><span style="color:#bf616a;">inverse</span><span>() * B.</span><span style="color:#bf616a;">transpose</span><span>() * P * B * R.</span><span style="color:#bf616a;">inverse</span><span>();
+</span><span>    P = Q + A.</span><span style="color:#bf616a;">transpose</span><span>() * P * A - A.</span><span style="color:#bf616a;">transpose</span><span>() * P * B * R.</span><span style="color:#bf616a;">inverse</span><span>() * B.</span><span style="color:#bf616a;">transpose</span><span>() * P * A;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Define the initial state and control inputs
+</span><span>  VectorXd </span><span style="color:#bf616a;">x</span><span>(</span><span style="color:#d08770;">2</span><span>);
+</span><span>  x &lt;&lt; </span><span style="color:#d08770;">12</span><span>, </span><span style="color:#d08770;">13</span><span>;
+</span><span>  VectorXd </span><span style="color:#bf616a;">u</span><span>(</span><span style="color:#d08770;">1</span><span>);
+</span><span>  u &lt;&lt; </span><span style="color:#d08770;">14</span><span>;
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Simulate the system
+</span><span>  </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int</span><span> i = </span><span style="color:#d08770;">0</span><span>; i &lt; num_steps; i++) {
+</span><span>    </span><span style="color:#65737e;">// Update the control input
+</span><span>    u = -K * x;
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// Store the state and control trajectories
+</span><span>    cout &lt;&lt; &quot;</span><span style="color:#a3be8c;">State at step </span><span>&quot; &lt;&lt; i &lt;&lt; &quot;</span><span style="color:#a3be8c;">: </span><span>&quot; &lt;&lt; x.</span><span style="color:#bf616a;">transpose</span><span>() &lt;&lt; endl;
+</span><span>    cout &lt;&lt; &quot;</span><span style="color:#a3be8c;">Control input at step </span><span>&quot; &lt;&lt; i &lt;&lt; &quot;</span><span style="color:#a3be8c;">: </span><span>&quot; &lt;&lt; u.</span><span style="color:#bf616a;">transpose</span><span>() &lt;&lt; endl;
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// Update the state
+</span><span>    x = A * x + B * u;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Output the LQR gain matrix
+</span><span>  cout &lt;&lt; &quot;</span><span style="color:#a3be8c;">LQR gain matrix: </span><span>&quot; &lt;&lt; endl &lt;&lt; K &lt;&lt; endl;
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span>;
+</span><span>}
+</span></code></pre>
+<p>Although the input $Q$ is still wrong, it's now actually checking the inputs by looking at the eigenvalues.
+It could be better by using Eigen's <a href="https://eigen.tuxfamily.org/dox/classEigen_1_1LLT.html">Cholesky module</a> and verifying the computation was carried out with no errors.
+Also there's a superfluous <code>dt</code> variable.</p>
+<blockquote>
+<p>The values of Q and R you gave are incorrect and would terminate the program. You could check if the matrices are semidefinite positive by using Cholesky. Also, the variable dt is not used.</p>
+</blockquote>
+<pre data-lang="cpp" style="background-color:#2b303b;color:#c0c5ce;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>  </span><span style="color:#65737e;">// ...
+</span><span>  MatrixXd </span><span style="color:#bf616a;">Q</span><span>(</span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">2</span><span>);
+</span><span>  Q &lt;&lt; </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">3</span><span>;
+</span><span>  MatrixXd </span><span style="color:#bf616a;">R</span><span>(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>);
+</span><span>  R &lt;&lt; </span><span style="color:#d08770;">1</span><span>;
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Check that Q and R are symmetric and positive semidefinite
+</span><span>  </span><span style="color:#b48ead;">if </span><span>(Q.</span><span style="color:#bf616a;">transpose</span><span>() != Q) {
+</span><span>    cerr &lt;&lt; &quot;</span><span style="color:#a3be8c;">Error: Q is not symmetric.</span><span>&quot; &lt;&lt; endl;
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">1</span><span>;
+</span><span>  }
+</span><span>  </span><span style="color:#b48ead;">if </span><span>(R.</span><span style="color:#bf616a;">transpose</span><span>() != R) {
+</span><span>    cerr &lt;&lt; &quot;</span><span style="color:#a3be8c;">Error: R is not symmetric.</span><span>&quot; &lt;&lt; endl;
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">1</span><span>;
+</span><span>  }
+</span><span>  LLT&lt;MatrixXd&gt; </span><span style="color:#bf616a;">llt_of_q</span><span>(Q);
+</span><span>  </span><span style="color:#b48ead;">if </span><span>(llt_of_q.</span><span style="color:#bf616a;">info</span><span>() != Success) {
+</span><span>    cerr &lt;&lt; &quot;</span><span style="color:#a3be8c;">Error: Q is not positive semidefinite.</span><span>&quot; &lt;&lt; endl;
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">1</span><span>;
+</span><span>  }
+</span><span>  LLT&lt;MatrixXd&gt; </span><span style="color:#bf616a;">llt_of_r</span><span>(R);
+</span><span>  </span><span style="color:#b48ead;">if </span><span>(llt_of_r.</span><span style="color:#bf616a;">info</span><span>() != Success) {
+</span><span>    cerr &lt;&lt; &quot;</span><span style="color:#a3be8c;">Error: R is not positive semidefinite.</span><span>&quot; &lt;&lt; endl;
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">1</span><span>;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Define the number of steps
+</span><span>  </span><span style="color:#b48ead;">int</span><span> num_steps = </span><span style="color:#d08770;">10</span><span>;
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Compute the LQR gain matrices using a backward sweep
+</span><span>  MatrixXd K = MatrixXd::</span><span style="color:#bf616a;">Zero</span><span>(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>);
+</span><span>  MatrixXd P = Q;
+</span><span>  </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int</span><span> i = num_steps - </span><span style="color:#d08770;">1</span><span>; i &gt;= </span><span style="color:#d08770;">0</span><span>; i--) {
+</span><span>    K = R.</span><span style="color:#bf616a;">inverse</span><span>() * B.</span><span style="color:#bf616a;">transpose</span><span>() * P * B * R.</span><span style="color:#bf616a;">inverse</span><span>();
+</span><span>    P = Q + A.</span><span style="color:#bf616a;">transpose</span><span>() * P * A - A.</span><span style="color:#bf616a;">transpose</span><span>() * P * B * R.</span><span style="color:#bf616a;">inverse</span><span>() * B.</span><span style="color:#bf616a;">transpose</span><span>() * P * A;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// ...
+</span><span>}
+</span></code></pre>
+<p>Now, this is rather impressive, because somehow it knew how to use <code>Eigen::LLT::info()</code> to get if the computation was successful.
+I ended up asking ChatGPT its "rationale" for it.</p>
+<blockquote>
+<p><strong>Me:</strong> How'd you know how to use the <code>info()</code> member function on the LLT object to check for symmetry?
+<strong>ChatGPT:</strong> The <code>info()</code> member function of the LLT object returns a value of the <code>ComputationInfo</code> enumeration, which specifies the outcome of the decomposition. If the decomposition was successful, the value of <code>info()</code> will be <code>Success</code>. If the decomposition failed, the value will be one of the other enumeration values, such as <code>NumericalIssue</code> or <code>NoConvergence</code>.
+In the implementation, we can use the <code>info()</code> member function to check whether the decomposition was successful, and if it was not, we can print an error message and exit the program. This allows us to detect and handle cases where the matrix is not positive semidefinite, which would cause the decomposition to fail.
+You can find more information about the <code>LLT</code> class and the <code>info()</code> member function in the Eigen documentation: <a href="https://eigen.tuxfamily.org/dox/classEigen_1_1LLT.html#aac6213e5d5c5f87b5e5e5d14b65f5d5c">https://eigen.tuxfamily.org/dox/classEigen_1_1LLT.html#aac6213e5d5c5f87b5e5e5d14b65f5d5c</a></p>
+</blockquote>
+<p>All that's left now is to get ChatGPT to fix the gain matrix $K$. It was not easy to get it to understand what was wrong.</p>
+<blockquote>
+<p><strong>Me:</strong> Your formula for K is wrong.</p>
+</blockquote>
+<p>ChatGPT returned the following code for $K$:</p>
+<pre data-lang="cpp" style="background-color:#2b303b;color:#c0c5ce;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span>    K = R.</span><span style="color:#bf616a;">ldlt</span><span>().</span><span style="color:#bf616a;">solve</span><span>(B.</span><span style="color:#bf616a;">transpose</span><span>() * P);
+</span></code></pre>
+<p>Some of you might recognize the formula as $K = R^{-1}B^TP$, which is the continuous-time gain matrix. Also, it is re-computing a decomposition of $R$ although it already performed one to check for semidefinite positiveness. Weirdly enough, it using the "indefinite Cholesky", or $LDL^T$ decomposition here which is not necessary here since we already had a (positive) Cholesky computed beforehand.</p>
+<p>I didn't notice this at first. I asked GPT to explain what it was doing.</p>
+<blockquote>
+<p><strong>Me:</strong> What is the formula you used for the gain matrix K?</p>
+</blockquote>
+<p><img src="/chatgpt-lqr.png" alt="chatgpt being overly confident" /></p>
+<p>Interestingly, the formula for the Riccati equation on $P$ itself is the correct one, although the formula it gave for $K$ was indeed the wrong one, but I was somehow persuaded by ChatGPT's explanation.
+My next query was for it to give a better implementation by reusing the Cholesky from the semidefiniteness check:</p>
+<blockquote>
+<p><strong>ChatGPT:</strong> I apologize for the mistake in the previous implementation. Here is a revised version that uses the Cholesky decomposition of R to compute the LQR gain matrix K:</p>
+</blockquote>
+<pre data-lang="cpp" style="background-color:#2b303b;color:#c0c5ce;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span>  </span><span style="color:#65737e;">// Compute the LQR gain matrix using a backward sweep
+</span><span>  MatrixXd K = MatrixXd::</span><span style="color:#bf616a;">Zero</span><span>(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>);
+</span><span>  MatrixXd P = Q;
+</span><span>  MatrixXd R_chol = llt_of_r.</span><span style="color:#bf616a;">matrixL</span><span>();
+</span><span>  MatrixXd R_chol_inv = R_chol.</span><span style="color:#bf616a;">inverse</span><span>();
+</span><span>  </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int</span><span> i = num_steps - </span><span style="color:#d08770;">1</span><span>; i &gt;= </span><span style="color:#d08770;">0</span><span>; i--) {
+</span><span>    K = R_chol_inv.</span><span style="color:#bf616a;">transpose</span><span>() * (R_chol_inv * B.</span><span style="color:#bf616a;">transpose</span><span>() * P).</span><span style="color:#bf616a;">eval</span><span>();
+</span><span>    P = Q + K.</span><span style="color:#bf616a;">transpose</span><span>() * R * K + (A - B * K).</span><span style="color:#bf616a;">transpose</span><span>() * P * (A - B * K);
+</span><span>  }
+</span></code></pre>
+<p>It <strong>is</strong> more efficient since it is reusing the LLT object decomposing $R = LL^T$ and computing the factors of the inverse before the loop; but here ChatGPT is allocating plain dense matrix objects to extract the factors into. The most efficient way is just use the <code>LLT::solve()</code> member function instead (it does the same thing <a href="https://eigen.tuxfamily.org/dox/LLT_8h_source.html">under the hood</a>, but using efficient back-substitution for the triangular matrices).
+I think maybe GPT is just applying something it might have seen in its training data that uses the inverse of $L$ (it might be educational code showing how one would use the decomposition by hand). Weirdly enough, the previous snippet <em>did</em> use the <code>.solve()</code> method.
+Anyway, the underlying formula is still wrong. 🙃</p>
+<p>This is a reminder that, as the website says when log on it, you shouldn't rely on ChatGPT to provide reliable and accurate information including code or algorithms. ChatGPT's model didn't really understand the full context of the formula itself -- that we wanted an implementation of <em>discrete-time</em> LQR, which has a different formula for the gain matrix. Just saying "LQR" is perhaps too ambiguous and not explicit enough. During the past year many people have remarked that word choice is important when asking things from GPT, Dall-E, Midjourney if we expect something specific -- this technique is called <a href="https://en.wikipedia.org/wiki/Prompt_engineering">prompt</a> <a href="https://microsoft.github.io/prompt-engineering/">engineering</a>.</p>
+<p>I used this info to try to get GPT to correct the code:</p>
+<blockquote>
+<p><strong>Me:</strong> Your formula for K is still wrong - you're using the formula from the continuous-time case
+<strong>ChatGPT:</strong> I apologize for the mistake in the previous implementation. Here is a revised version that uses the correct formula for the LQR gain matrix K for the discrete-time case:</p>
+</blockquote>
+<pre data-lang="cpp" style="background-color:#2b303b;color:#c0c5ce;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span>  </span><span style="color:#65737e;">// Compute the LQR gain matrix using a backward sweep
+</span><span>  MatrixXd K = MatrixXd::</span><span style="color:#bf616a;">Zero</span><span>(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>);
+</span><span>  MatrixXd P = Q;
+</span><span>  MatrixXd R_chol = llt_of_r.</span><span style="color:#bf616a;">matrixL</span><span>();
+</span><span>  MatrixXd R_chol_inv = R_chol.</span><span style="color:#bf616a;">inverse</span><span>();
+</span><span>  </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int</span><span> i = num_steps - </span><span style="color:#d08770;">1</span><span>; i &gt;= </span><span style="color:#d08770;">0</span><span>; i--) {
+</span><span>    K = R_chol_inv.</span><span style="color:#bf616a;">transpose</span><span>() * (R_chol_inv * B.</span><span style="color:#bf616a;">transpose</span><span>() * P * B * R_chol_inv.</span><span style="color:#bf616a;">transpose</span><span>()).</span><span style="color:#bf616a;">eval</span><span>();
+</span><span>    P = Q + K.</span><span style="color:#bf616a;">transpose</span><span>() * R * K + (A + B * K).</span><span style="color:#bf616a;">transpose</span><span>() * P * (A + B * K);
+</span><span>  }
+</span></code></pre>
+<p>Um, I got code for a formula that's somehow even more wrong, though ChatGPT now properly recognized that we wanted the discrete-time formula.
+I had to give a few more pointers:</p>
+<blockquote>
+<p>No, this is still the wrong formula for K. The right formula for K inverts the matrix <code>R + B.T * P * B</code></p>
+</blockquote>
+<pre data-lang="cpp" style="background-color:#2b303b;color:#c0c5ce;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span>  MatrixXd P = Q;
+</span><span>  </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int</span><span> i = num_steps - </span><span style="color:#d08770;">1</span><span>; i &gt;= </span><span style="color:#d08770;">0</span><span>; i--) {
+</span><span>    K = (B.</span><span style="color:#bf616a;">transpose</span><span>() * P * B + R).</span><span style="color:#bf616a;">inverse</span><span>() * B.</span><span style="color:#bf616a;">transpose</span><span>() * P * A;
+</span><span>    P = Q + K.</span><span style="color:#bf616a;">transpose</span><span>() * R * K + (A - B * K).</span><span style="color:#bf616a;">transpose</span><span>() * P * (A - B * K);
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Define the initial state and control inputs
+</span><span>  VectorXd </span><span style="color:#8fa1b3;">x</span><span>(</span><span style="color:#d08770;">2</span><span>);
+</span><span>  x &lt;&lt; </span><span style="color:#d08770;">12</span><span>, </span><span style="color:#d08770;">13</span><span>;
+</span><span>  VectorXd </span><span style="color:#8fa1b3;">u</span><span>(</span><span style="color:#d08770;">1</span><span>);
+</span><span>  u &lt;&lt; </span><span style="color:#d08770;">14</span><span>;
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Simulate the system
+</span><span>  </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int</span><span> i = </span><span style="color:#d08770;">0</span><span>; i &lt; num_steps; i++) {
+</span><span>    </span><span style="color:#65737e;">// Update the control input
+</span><span>    u = -K * x;
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// Store the state and control trajectories
+</span><span>    cout &lt;&lt; &quot;</span><span style="color:#a3be8c;">State at step </span><span>&quot; &lt;&lt; i &lt;&lt; &quot;</span><span style="color:#a3be8c;">: </span><span>&quot; &lt;&lt; x.</span><span style="color:#bf616a;">transpose</span><span>() &lt;&lt; endl;
+</span><span>    cout &lt;&lt; &quot;</span><span style="color:#a3be8c;">Control input at step </span><span>&quot; &lt;&lt; i &lt;&lt; &quot;</span><span style="color:#a3be8c;">: </span><span>&quot; &lt;&lt; u.</span><span style="color:#bf616a;">transpose</span><span>() &lt;&lt; endl;
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// Update the state
+</span><span>    x = A * x + B * u;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// Output the LQR gain matrix
+</span><span>  cout &lt;&lt; &quot;</span><span style="color:#a3be8c;">LQR gain matrix: </span><span>&quot; &lt;&lt; endl &lt;&lt; K &lt;&lt; endl;
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span>;
+</span><span style="background-color:#bf616a;color:#2b303b;">}</span><span>
+</span></code></pre>
+<p>Now the code is correct. Of course, it's still <em>very</em> inefficient. There are a lot of runtime allocations there. Just for computing $K$, the code ChatGPT produced does the following:</p>
+<ul>
+<li>forms <code>B.transpose() * P * B + R</code> which performs two memory allocations for the double matrix multiplication before creating the expression for the sum</li>
+<li>it evaluates the sum by calling <code>.inverse()</code> which is evaluated with the other matrix multiplications</li>
+</ul>
+<p>What's this about expressions and evaluating products? This point is very important when working with Eigen. Eigen manipulates simple expressions like scalar multiplication and addition of matrices without evaluating them, which avoids creating temporary variables -- thus allocating memory at runtime.
+The evaluations are carried out when evaluating into a variable. For matrix multiplication, it is slightly more complicated due to concerns about aliasing. This is what makes Eigen so brutally efficient and fast, but it means the user must take extra care when dealing with more complex calculations (typically, the Riccati equation). Read more here:
+<a href="https://eigen.tuxfamily.org/dox/TopicLazyEvaluation.html">https://eigen.tuxfamily.org/dox/TopicLazyEvaluation.html</a></p>
+<p>At the end of the day, this is still a very silly exercise if rather informative. Maybe some insights we got from this is the quality of the code in ChatGPT's dataset, and something something prompt engineering.</p>
+<p>One thing I'm thinking about now is, although this is far from production-quality code, it could be close to what an undergrad could hand in as an assignment. How would a TA or prof be able to tell if the code they're given does <strong>not</strong> come from ChatGPT? I definitely couldn't tell the difference and maybe I'm lucky I don't have to.</p>
+
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                        <span class="button previous">
+                            <a href="https://manifoldfr.github.io/posts/oc3-hjb/">
+                                <span class="button__icon">←</span>&nbsp;
+                                <span class="button__text">Optimal Control III: what is the Hamilton-Jacobi-Bellman equation?</span>
+                            </a>
+                        </span>
+                    
+                    
+                        <span class="button next">
+                            <a href="https://manifoldfr.github.io/posts/ot2/">
+                                <span class="button__text">Optimal Transport and Mean-field games</span>&nbsp;
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    </div>
+            </div>
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2025
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

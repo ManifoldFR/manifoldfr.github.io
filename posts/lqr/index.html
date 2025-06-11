@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Introduction to optimal control: LQR | ManifoldFR</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://manifoldfr.github.io/style.css">
+    <link rel="stylesheet" href="https://manifoldfr.github.io/color/orange.css">
+
+        <link rel="stylesheet" href="https://manifoldfr.github.io/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://manifoldfr.github.io/font-hack-subset.css">
+
+    <meta name="description" content="">
+
+    <meta property="og:description" content="">
+    <meta property="og:title" content="Introduction to optimal control: LQR | ManifoldFR">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://manifoldfr.github.io/posts/lqr/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="Introduction to optimal control: LQR | ManifoldFR">
+    <meta property="twitter:domain" content="manifoldfr.github.io">
+    <meta property="twitter:url" content="https://manifoldfr.github.io/posts/lqr/">
+
+        <link rel="shortcut icon" type="image/png" href="/favicon-32x32.png">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            // customised options
+            // • auto-render specific keys, e.g.:
+            delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: "\\begin{equation}", right: "\\end{equation}", display: true},
+            {left: "\\begin{align}", right: "\\end{align}", display: true},
+            {left: "\\begin{alignat}", right: "\\end{alignat}", display: true},           
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+            ],
+            macros: {
+                "\\R": "\\mathbb{R}",
+                "\\defeq": ":=",
+                "\\suchthat": "\\mathrm{s.t.}\\ ",
+                "\\argmin": "\\operatorname*{argmin}",
+                "\\argmax": "\\operatorname*{argmax}",
+                "\\dif": "\\operatorname*{d}\\!",
+                "\\prox": "\\operatorname*{prox}",
+                "\\KL": "\\operatorname{KL}",
+                "\\EE": "\\mathbb{E}",
+                "\\RR": "\\mathbb{R}",
+                "\\ZZ": "\\mathbb{Z}",
+                "\\NN": "\\mathbb{N}",
+                "\\calF": "\\mathcal{F}",
+                "\\calL": "\\mathcal{L}",
+                "\\calM": "\\mathcal{M}",
+                "\\calW": "\\mathcal{W}",
+                "\\calU": "\\mathcal{U}",
+                "\\calX": "\\mathcal{X}",
+                "\\calY": "\\mathcal{Y}",
+                "\\calZ": "\\mathcal{Z}",
+                "\\bfm": "\\mathbf",
+                "\\bfx": "\\bfm{x}",
+                "\\bfu": "\\bfm{u}",
+                "\\Aut": "\\operatorname{Aut}",
+                "\\Ad": "\\operatorname{Ad}",
+                "\\GL": "\\operatorname{GL}"
+            },
+            // • rendering keys, e.g.:
+            throwOnError : false
+        });
+    });
+</script>
+
+    <link rel="stylesheet" href='https://manifoldfr.github.io/custom.css'>
+</head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://manifoldfr.github.io" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            manifoldfr
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li class="active"><a href="https://manifoldfr.github.io/posts">posts</a></li>
+            
+                <li><a href="https://manifoldfr.github.io/publications">publications</a></li>
+            
+                <li><a href="https://github.com/ManifoldFR">github</a></li>
+            
+                <li><a href="https://scholar.google.com/citations?user=aVgy-0gAAAAJ&hl=en">google scholar</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://manifoldfr.github.io/posts/lqr/">Introduction to optimal control: LQR</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2021-04-25
+        </span>
+
+    </div>
+
+    
+
+        <div class="post-content">
+            <p>Most control loops out there used in real-world systems are simple feedback loops proportional to the error, its derivative or integral (this is called PID control). However, this kind of control can exhibit undesirable behavior such as oscillations or failing to converge to a given setpoint quickly if at all. Some more complex systems such robots, satellites or cars can come with precise performance requirements, and more carefully constructed control actions need to be supplied with guarantees about their optimality.</p>
+<span id="continue-reading"></span>
+<p>In this blog post, we'll be looking at the most basic system in control theory, the Linear Quadratic Regulator (LQR), which is analogous to the classic Kalman filter in signal processing.</p>
+<p>The goal is to control a linear dynamical system
+\[
+x_{t+1} = Ax_t + Bu_t
+\]
+where the state is \(x_t\in\RR^n\) and control actions \(u_t\in\RR^k\), which can represent motor torques in robotic systems for instance. The objective is to find a sequence of controls \(u_0,\ldots,u_{T-1}\).</p>
+<p>We define a running cost
+\[
+C(x,u) = \frac{1}{2}x^\top Qx + \frac{1}{2}u^\top Ru
+\]
+and terminal cost
+\[
+C_f(x) = \frac{1}{2}x^\top Q_fx
+\]
+which are quadratic functions in the state \(x\) and control \(u\). For assumptions, we assume \( Q \) is a semidefinite positive matrix and \( R \) is positive definite, making the cost function <em>strongly convex</em> in the control.</p>
+<p>This is the most basic form of the LQR problem: more complications can be introduced, such as state-control cross terms and linear terms in the cost functions, or making the dynamics affine rather than linear in \( (x_t, u_t) \).</p>
+<p>The optimal control problem is written as a constrained optimization problem
+\begin{align}
+&amp;\min_{u_0,\ldots,u_T} \sum_{t=0}^{T-1} C(x_t,u_t) + C_f(x_T)  \\\
+&amp;\mathrm{s.t.} \quad x_{t+1} = Ax_t + Bu_t
+\end{align}</p>
+<p>Obviously, one can solve the problem by writing the corresponding KKT conditions. Actually, this view reduces to a sparse least-squares problem. Looking at the KKT conditions also introduces the familiar co-state equations \( \lambda_t = A^\top \lambda_{t+1} \) for the Lagrange multipliers seen in Pontryagin's minimum principle when solving continuous-time problems.</p>
+<h2 id="dynamic-programming">Dynamic programming</h2>
+<p>The canonical way of solving this is by introducing the optimal <em>cost-to-go</em> or <em>value</em> function
+\[
+V_t(x) = \min_{u_t,u_{t+1},\ldots,u_T} \sum_{\tau=t}^{T-1} C(x_\tau, u_\tau) + C_f(x_T), \quad\text{where } x_t = x
+\]
+and showing that this sequence of functions obeys a dynamic programming principle, <em>Bellman's equation</em>:</p>
+<p>\[
+V_t(x) = \min_u C(x, u) + V_t(Ax + Bu)
+\]</p>
+<p>This equation can be solved by noticing that \( V_T(x) = \frac{1}{2}x^\top P_Tx \) with \( P_T = Q_f \) and introducing the <em>ansatz</em> \( V_t(x) = \frac{1}{2}x^\top P_tx \). This is an educated guess, as quadratics are closed under (partial) minimization.
+Plugging this into the Bellman equation yields</p>
+<p>\[
+V_t(x) = \min_u \frac12 x^\top (Q + A^\top P_{t+1}A)x + \frac12 u^\top (R + B^\top P_{t+1}B)u + u^\top B^\top P_{t+1} Ax.
+\]
+The optimum of this is \( u = K_tx\),
+\[
+K_t = -(R + B^\top P_{t+1}B)^{-1}B^\top P_{t+1} A
+\]
+is called the <em>feedback gain</em> matrix.
+The cost to go matrix then satisfies
+\begin{equation}
+P_t = Q + A^\top P_{t+1}A - K_t^\top B^\top P_{t+1}A =  Q + (A - BK_t)^\top P_{t+1}A
+\end{equation}</p>
+<h2 id="what-about-kkt-conditions">What about KKT conditions?</h2>
+<p>The equations above can still be derived using the Karush-Kuhn-Tucker conditions of the control problem, seeing it as a quadratic program over the variables \(\underline{x}=(x_1,\ldots,x_T), \underline{u}=(u_0,\ldots,u_{T-1})\).</p>
+<p>Its Lagrangian reads
+\[
+L(x,u,\lambda) = \sum_{t=0}^{T-1}\frac12u_t^\top Ru_t + \frac12x_t^\top Qx_t + \lambda_{t+1}^\top(x_{t+1} - Ax_t - Bu_t)
++ \frac{1}{2}x_T^\top Q_f x_T
+\]
+Its associated KKT conditions boil down to
+\begin{align}
+\lambda_t &amp;= A^\top\lambda_{t+1} - Qx_t,  \ t = 1,\ldots,T-1  \\\
+\lambda_T &amp;= -Q_f x_T  \\\
+u_t &amp;= B^\top\lambda_{t+1}
+\end{align}
+Notice at least semi-definiteness is required to write these KKT conditions, and positiveness is required from \( R \) to solve for \( u_t \) and get a well-defined solution.
+The Lagrange multipliers are also called the <em>co-states</em>. This result is a discrete equivalent to Pontryaguin's minimum principle, that is established in continuous-time control literature.</p>
+<p><strong>Derivation and equivalence to dynamic programming.</strong> We can introduce a co-state gain matrix \( M_t \) such that \(  \lambda_t = -M_tx_t \), and the feedback \( u_t = K_tx_t \). The terminal co-state matrix is \( M_T = Q_f \). Let's establish a recurrence equation for these matrices: starting from the KKT conditions,
+\begin{equation}
+\begin{aligned}
+\lambda_t &amp;= A^\top\lambda_{t+1} - Qx_t  \\\
+&amp;= -A^\top M_{t+1}x_{t+1} - Qx_t
+\end{aligned}
+\end{equation}
+then
+\begin{equation}
+\begin{aligned}
+\lambda_t &amp;= -(A^\top M_{t+1}A + Q)x_t - A^\top M_{t+1} B u_t  \\\
+&amp;= -(A^\top M_{t+1}A + Q - A^\top M_{t+1}BK_t)x_t
+\end{aligned}
+\end{equation}
+That is, \( M_t = Q + A^\top M_{t+1}(A - BK_t) \).
+Also, \( Ru_t = B^\top M_{t+1}x_{t+1} = -B^\top M_{t+1} (Ax_t + Bu_t) \), thus
+\begin{equation}
+(R + B^\top M_{t+1}B)u_t = -B^\top M_{t+1}A
+\quad\Rightarrow \quad
+K_t = -(R + B^\top M_{t+1}B)^{-1}B^\top M_{t+1}A
+\end{equation}</p>
+<p>Hence, the sequence of co-state and control feedback matrices \( (M_t)_t \) and \( (K_t)_t \) satisfy the same recurrence equations as the Riccati and feedback matrices of the dynamic programming approach, thus they are identical.</p>
+
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                    
+                        <span class="button next">
+                            <a href="https://manifoldfr.github.io/posts/ot/">
+                                <span class="button__text">Optimal Transport: Wasserstein distance and Sinkhorn</span>&nbsp;
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    </div>
+            </div>
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2025
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>
