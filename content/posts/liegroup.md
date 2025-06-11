@@ -43,14 +43,24 @@ $$
   (\dif L_g)_h \colon T_h G \xrightarrow{\simeq} T\_{gh } G.
 $$
 
-Furthermore, it holds that, as functions, $L\_{gh} = L_g \circ L_h$ for all $g,h\in G$. Hence $g \mapsto L_g$ is a group homomorphism between $G$ and the automorphism group $\mathrm{Aut}(G)$.
+Furthermore, it holds that, as functions, $L\_{gh} = L_g \circ L_h$ for all $g,h\in G$. Hence $g \mapsto L_g$ is a group homomorphism between $G$ and the automorphism group $\Aut(G)$.
+
+This further implies that for all $g,h\in G$, by the chain rule
+$$
+\begin{equation}
+  (\dif L_{gh})_e = \dif (L_g \circ L_h)_e = (\dif L_g)_h \circ (\dif L_h)_e
+\end{equation}
+$$
+This makes sense: the right factor maps $T_eG \to T_hG$, the left factor maps $T_hG \to T\_{gh} G $.
+
+### Group action on the Lie algebra
 
 We can define a (left) _group action_ of $G$ on its Lie algebra $\mathfrak{g}$ as follows: for $g\in G$ and $\xi \in \mathfrak{g}$,
 \begin{equation}
     g \cdot \xi \defeq (\dif L_g)_e(\xi).
 \end{equation}
 
-Similarly, $G$ can act on the right by defining
+Similarly, $G$ can act on $\mathfrak{g}$ from the right by defining
 $$
   \xi \cdot g \defeq (\dif R_g)_e(\xi) = \frac{d}{dt}(\gamma(t)g)\lvert\_{t=0}
 $$
