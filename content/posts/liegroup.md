@@ -164,7 +164,7 @@ i.e.
 $$
 \begin{equation}
 \boxed{
-  J(\xi) \defeq (\dif L_h^H)_e^{-1} \circ (\dif f_g) \circ (\dif L_g^G)_e.
+  J \defeq (\dif L_h^H)_e^{-1} \circ (\dif f_g) \circ (\dif L_g^G)_e.
 }
 \end{equation}
 $$
