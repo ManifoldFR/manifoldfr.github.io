@@ -40,7 +40,7 @@ These maps are smooth by the axioms of Lie groups, and their inverses $L_{g^{-1}
 
 This implies that for every $g\in G$, the differential of $L_g$ (or $R_g$) at $h\in G$ defines an isomorphism between tangent spaces:
 $$
-  (\dif L_g)_h \colon T_h G \xrightarrow{\simeq} T\_{gh } G.
+  (\dif{L_g})_h \colon T_h G \xrightarrow{\simeq} T\_{gh } G.
 $$
 
 Furthermore, it holds that, as functions, $L\_{gh} = L_g \circ L_h$ for all $g,h\in G$. Hence $g \mapsto L_g$ is a group homomorphism between $G$ and the automorphism group $\Aut(G)$.
@@ -48,7 +48,7 @@ Furthermore, it holds that, as functions, $L\_{gh} = L_g \circ L_h$ for all $g,h
 This further implies that for all $g,h\in G$, by the chain rule
 $$
 \begin{equation}
-  (\dif L_{gh})_e = \dif (L_g \circ L_h)_e = (\dif L_g)_h \circ (\dif L_h)_e
+  (\dif{L_{gh}})_e = \dif (L_g \circ L_h)_e = (\dif{L_g})_h \circ (\dif L_h)_e
 \end{equation}
 $$
 This makes sense: the right factor maps $T_eG \to T_hG$, the left factor maps $T_hG \to T\_{gh} G $.
@@ -57,22 +57,30 @@ This makes sense: the right factor maps $T_eG \to T_hG$, the left factor maps $T
 
 We can define a (left) _group action_ of $G$ on its Lie algebra $\mathfrak{g}$ as follows: for $g\in G$ and $\xi \in \mathfrak{g}$,
 \begin{equation}
-    g \cdot \xi \defeq (\dif L_g)_e(\xi).
+    g \cdot \xi \defeq \dif(R\_{g^{-1}} \circ L_g)_e(\xi) \in \mathfrak{g}.
 \end{equation}
-
-Similarly, $G$ can act on $\mathfrak{g}$ from the right by defining
+This is indeed an action, because it holds that
 $$
-  \xi \cdot g \defeq (\dif R_g)_e(\xi) = \frac{d}{dt}(\gamma(t)g)\lvert\_{t=0}
+  h \cdot (g\cdot \xi) = (hg) \cdot \xi.
 $$
-(for some curve $\gamma$ satisfying $\gamma(0)=e$, $\dot\gamma(0) = \xi$).
 
-By the isomorphism property, note that the left- and right-actions $g\cdot$ and $\cdot g$ on the Lie algebra are *both* isomorphisms from the Lie algebra $\mathfrak{g}$ to the tangent space $T_gG$.
+
+This action is called the *adjoint* action, denoted
+$$
+\begin{aligned}
+    \Ad_g \colon \mathfrak{g} &\longrightarrow \mathfrak{g}
+    \\\\
+    \xi &\longmapsto \Ad_g(\xi) = (\dif\Phi_g)_e(\xi)
+\end{aligned}
+$$
+where $\Phi_g$ is the inner automorphism $\Phi_g = R\_{g^{-1}} \circ L_g $.
+
 
 ## Trivialisations
 
-The question of trivialisation is actually that of choosing _a representation of the tangent spaces_ to the Lie group $G$ through the Lie algebra $\mathfrak{g}$, using the isomorphisms given by the tangent maps $\dif L_g$ and $\dif R_g$.
+The question of trivialisation is actually that of choosing _a representation of the tangent spaces_ to the Lie group $G$ through the Lie algebra $\mathfrak{g}$, using the isomorphisms given by the tangent maps $(\dif L_g)_e$ and $(\dif R_g)_e$.
 
-_Left-trivialisation_, obviously, represents elements in the tangent space $ T_gG $ as $g \cdot \xi$ for $\xi \in \mathfrak{g}$ (where $\cdot$ is the group-on-Lie algebra action efined previously).
+_Left-trivialisation_, obviously, represents elements in the tangent space $ T_gG $ as $g \cdot \xi$ for $\xi \in \mathfrak{g}$.
 
 Pinocchio, for instance, uses _left-trivialisations_.
 
@@ -100,10 +108,13 @@ where the last notation often appears in the robotics literature.
 
 ### Multiplication map
 
-Denote $m(g, h) = g\cdot h$ the multiplication map $m\colon G\times G \rightarrow G$, which is smooth. For $(\xi, \eta) \in \mathfrak{g} \times \mathfrak{g}$, the differential of $m$ is
+Denote $m(g, h) = g\cdot h$ the multiplication map $m\colon G\times G \rightarrow G$, which is smooth. For $(u, v) \in T_gG \times T_hG$, the differential of $m$ is
 \begin{equation}
-    \dif m_{(g,h)}(\xi, \eta) = \dif R_h\cdot \xi + \dif L_g\cdot \eta.
+    \dif m_{(g,h)}(u, v) = (\dif R_h)_g(u) + (\dif L_g)_h(v).
 \end{equation}
+
+Trivialising the tangent vectors as $u = g\cdot \xi$, $v = h \cdot \eta$ with $(\xi,\eta) \in \mathfrak{g}\times \mathfrak{g}$, we can rewrite
+
 
 ### Differential of the inverse
 
@@ -125,22 +136,6 @@ If $G \subset \mathrm{GL}_{n}(\RR)$ is a subgroup of the general linear matrix L
 \begin{equation}
     \dif i_g(v) = - g^{-1} v g^{-1}.
 \end{equation}
-
-## The Inner automorphism and the Adjoint map
-
-$$
-\begin{equation}
-    \Phi_g(h) \triangleq g h g^{-1}
-\end{equation}
-$$
-The derivative of this map at the neutral element $e\in G$, called the adjoint map, is the mapping
-$$
-\begin{aligned}
-    \Ad_g \colon \mathfrak{g} &\longrightarrow \mathfrak{g}
-    \\\\
-    \xi &\longmapsto \Ad_g(\xi) = (\dif\Phi_g)_e(\xi).
-\end{aligned}
-$$
 
 
 ## Other resources
