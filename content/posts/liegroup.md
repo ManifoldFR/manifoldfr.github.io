@@ -114,6 +114,23 @@ If $G \subset \mathrm{GL}_{n}(\RR)$ is a subgroup of the general linear matrix L
     \dif i_g(v) = - g^{-1} v g^{-1}.
 \end{equation}
 
+## The Inner automorphism and the Adjoint map
+
+$$
+\begin{equation}
+    \Phi_g(h) \triangleq g h g^{-1}
+\end{equation}
+$$
+The derivative of this map at the neutral element $e\in G$, called the adjoint map, is the mapping
+$$
+\begin{aligned}
+    \Ad_g \colon \mathfrak{g} &\longrightarrow \mathfrak{g}
+    \\\\
+    \xi &\longmapsto \Ad_g(\xi) = (\dif\Phi_g)_e(\xi).
+\end{aligned}
+$$
+
+
 ## Other resources
 
 On [Maxime Tournier's blog](https://maxime-tournier.github.io/notes/lie-groups.html).
