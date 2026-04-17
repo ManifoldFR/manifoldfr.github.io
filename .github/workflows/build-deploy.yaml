@@ -2,7 +2,8 @@ name: Build and deploy Zola website
 on:
   push:
     branches:
-      - master
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -34,4 +35,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
