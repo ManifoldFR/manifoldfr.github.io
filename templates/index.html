@@ -2,7 +2,7 @@
 
 {% block main %}
 {%- filter indent -%}{%- filter indent -%}
-<div id="subheader">
+<section id="subheader">
     <div class="profile-picture">
         <img src="/picture.jpg" alt="picture">
     </div>
@@ -25,7 +25,7 @@
             and computer science (<a href="https://www.master-mva.com">MVA</a>) from <a href="https://ens-paris-saclay.fr/">ENS Paris-Saclay</a>.
         </p>
     </div>
-</div>
+</section>
 
 {%- if section.extra.section_path -%}
     {%- set blog_section = get_section(path=section.extra.section_path) -%}
