@@ -3,28 +3,43 @@
     padding: 10px;
     width: 100%;
     margin: 0 auto;
-    display: flex;
-    div:first-of-type {
-        padding-left: 0;
-    }
+    overflow: hidden;
+    text-align: justify;
     p {
+        margin-top: 15px;
         margin-bottom: 0;
     }
 }
 
 div.profile-picture {
-    flex-shrink: 0;
+    float: left;
+    margin-right: 14px;
+    border-radius: 3%;
+    overflow: hidden;
     img {
-        display: block;
         width: 180px;
         height: auto;
-        border-radius: 3%;
+        display: block;
+        margin: auto 0;
     }
 }
 
-.subheader-right {
-    text-align: justify;
-    margin-left: 10px;
+@media (max-width: 440px) {
+    div.profile-picture {
+        float: none;
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: min(250px, 100%);
+        aspect-ratio: 720 / 920;
+        margin-left: auto;
+        margin-right: auto;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 50%;
+        }
+    }
 }
 
 .address {
