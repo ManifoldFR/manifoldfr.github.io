@@ -23,6 +23,8 @@ layout = "center"
 katex = true
 show_default_author = false
 
+color_scheme = "catppuccin-latte"
+
 favicon = "favicon-32x32.png"
 
 main_menu = [
