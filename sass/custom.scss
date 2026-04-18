@@ -53,14 +53,14 @@ a.pub-link:link, a.pub-link:visited {
     width: 100%;
     margin: 0 auto;
     padding: 0 10px;
+    p {
+        text-indent: -1.2rem;
+        margin-inline-start: 1.2rem;
+    }
 }
 
 .pub-year {
     font-weight: normal;
-}
-
-.pub-journal {
-    font-style: italic;
 }
 
 .my-video {

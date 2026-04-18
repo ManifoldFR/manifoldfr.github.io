@@ -15,10 +15,9 @@
     {% endif -%}
 
     <div class="publication">
-        {% set _title = macros::process_bib(text=bib.tags.title) %}
-        <h2>{{_title}}</h2>
+        <h3>{{macros::bibstrip(text=bib.tags.title)}}</h3>
         <p>
-            {{macros::print_ref(bib=bib)}}
+            {{macros::print_ref(ref=bib)}}
         </p>
     </div>
     {% endfor -%}

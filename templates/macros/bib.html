@@ -1,10 +1,10 @@
-{% macro process_bib(text) %}
+{% macro bibstrip(text) %}
     {{ text | replace(from="--",to="—") | replace(from="{", to="") | replace(from="}", to="") | safe }}
 {% endmacro %}
 
 {% macro bib_proceedings(ref) %}
     {{ ref.tags.author }},
-    in <span class="pub-journal">{{ref.tags.booktitle}},</span>
+    <em>{{ref.tags.booktitle}},</em>
     {% if ref.tags.address %}{{ref.tags.address}},{% endif %}
     {% if ref.tags.pages %}pp. {{ ref.tags.pages }},{% endif %}
     {{ ref.tags.year }}.
@@ -12,29 +12,27 @@
 
 {% macro bib_journal(ref) %}
     {{ ref.tags.author }},
-    in <span class="pub-journal">
-        {{ ref.tags.journal }},
-    </span>
+    <em>{{ ref.tags.journal }}</em>,
     vol. {{ ref.tags.volume }},
     pp. {{ ref.tags.pages }},
     {% if ref.tags.month %}{{ref.tags.month}}{% endif %}
     {{ ref.tags.year }}.
 {% endmacro %}
 
-{% macro print_ref(bib) %}
-    {%- if bib.entry_type == "inproceedings" %}
-        {{macros::process_bib(text=macros::bib_proceedings(ref=bib))}}
-    {%- elif bib.entry_type == "article" %}
-        {{macros::process_bib(text=macros::bib_journal(ref=bib))}}
+{% macro print_ref(ref) %}
+    {%- if ref.entry_type == "inproceedings" %}
+        {{macros::bibstrip(text=macros::bib_proceedings(ref=ref))}}
+    {%- elif ref.entry_type == "article" %}
+        {{macros::bibstrip(text=macros::bib_journal(ref=ref))}}
     {%- else %}
-        {{ bib.tags.author }},
-        {% if bib.tags.month %}{{bib.tags.month}}{% endif %}
-        {{ bib.tags.year }}.
+        {{ ref.tags.author }},
+        {% if ref.tags.month %}{{ref.tags.month}}{% endif %}
+        {{ ref.tags.year }}.
     {% endif %}
-    {%- if bib.tags.doi -%}
-        DOI:<a href="https://doi.org/{{ bib.tags.doi }}" class="pub-link">{{ bib.tags.doi }}</a>
+    {%- if ref.tags.doi -%}
+        DOI:<a href="https://doi.org/{{ ref.tags.doi }}" class="pub-link">{{ ref.tags.doi }}</a>
     {%- endif -%}
-    {%- if bib.tags.hal_id -%}
-        <a href="https://hal.science/{{ bib.tags.hal_id }}" class="pub-link">&lang;{{ bib.tags.hal_id }}&rang;</a>
+    {%- if ref.tags.hal_id -%}
+        <a href="https://hal.science/{{ ref.tags.hal_id }}" class="pub-link">&lang;{{ ref.tags.hal_id }}&rang;</a>
     {%- endif -%}
 {% endmacro print_ref %}
