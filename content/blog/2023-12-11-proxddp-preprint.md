@@ -1,6 +1,10 @@
 +++
 title = "New preprint"
+
+[taxonomies]
+tags = ["news"]
 +++
+
 
 We have submitted a new journal paper, _PROXDDP: Proximal Constrained Trajectory Optimization_.
 

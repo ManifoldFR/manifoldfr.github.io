@@ -1,8 +1,10 @@
----
-layout: post
-title: "A WIP renderer for robotics based on SDL3-GPU"
-tags: rendering, visualization, robotics, 3D graphics
----
++++
+title = "A WIP renderer for robotics based on SDL3-GPU"
+
+[taxonomies]
+tags = ["rendering", "visualization", "robotics", "3D graphics"]
++++
+
 
 <video controls autoplay class="my-video">
     <source src="/ur5.mp4" type="video/mp4">

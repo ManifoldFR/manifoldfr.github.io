@@ -1,8 +1,10 @@
----
-layout: post
-title: "Transactions on Robotics (T-RO) paper online"
-tags: robotics
----
++++
+title = "Transactions on Robotics (T-RO) paper online"
+
+[taxonomies]
+tags = ["news", "robotics"]
++++
+
 
 Our paper, _PROXDDP: Proximal Constrained Trajectory Optimization_, is now available on IEEE Xplore!
 

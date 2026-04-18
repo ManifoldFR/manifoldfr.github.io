@@ -1,9 +1,12 @@
 +++
 title = "Some notes on Lie groups"
-tags = "lie-group geometry"
 draft = false
-date = 2024-10-10
+date = "2024-10-10"
+
+[taxonomies]
+tags = ["lie-group", "geometry"]
 +++
+
 
 Lie groups are an essential element of modelling in applications such as computer vision and computer graphics (namely handling cameras), and also robotics and machine learning.
 

@@ -10,6 +10,10 @@ compile_sass = true
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = true
 
+taxonomies = [
+    { name = "tags", feed = true },
+]
+
 [markdown.highlighting]
 style = "inline"
 theme = "monokai"
@@ -22,7 +26,7 @@ show_default_author = false
 favicon = "favicon-32x32.png"
 
 main_menu = [
-    { name = "posts", url = "posts", trailing_slash = true },
+    { name = "blog", url = "blog", trailing_slash = true },
     { name = "publications", url = "publications", trailing_slash = true },
     { name = "github", url = "https://github.com/ManifoldFR", new_tab = true },
     { name = "google scholar", url = "https://scholar.google.com/citations?user=aVgy-0gAAAAJ&hl=en", new_tab = true },

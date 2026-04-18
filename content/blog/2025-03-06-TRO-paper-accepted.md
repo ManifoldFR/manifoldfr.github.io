@@ -1,8 +1,10 @@
----
-layout: post
-title: "IEEE T-RO paper accepted"
-tags: robotics, paper
----
++++
+title = "IEEE T-RO paper accepted"
+
+[taxonomies]
+tags = ["news", "robotics", "paper"]
++++
+
 
 I am very happy to announce that our _IEEE Transactions on Robotics_ (T-RO) paper, _PROXDDP: Proximal Constrained Trajectory Optimization_, has been accepted!
 This was the main journal paper of my PhD.
