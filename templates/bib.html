@@ -1,9 +1,9 @@
-{% import "macros.html" as macros %}
+{% import "macros/bib.html" as macros %}
 {% extends "index.html" %}
 
 {% block main %}
 
-{% set citations = load_data(path="static/references.bib", format="bibtex") -%}
+{% set citations = load_data(path="static/publications.bib", format="bibtex") -%}
 {% set sorted_bib = citations.bibliographies %}
 
 <div>

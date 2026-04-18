@@ -26,8 +26,15 @@
         {{macros::process_bib(text=macros::bib_proceedings(ref=bib))}}
     {%- elif bib.entry_type == "article" %}
         {{macros::process_bib(text=macros::bib_journal(ref=bib))}}
-    {%- endif %}
+    {%- else %}
+        {{ bib.tags.author }},
+        {% if bib.tags.month %}{{bib.tags.month}}{% endif %}
+        {{ bib.tags.year }}.
+    {% endif %}
     {%- if bib.tags.doi -%}
-        DOI: <a href="https://doi.org//{{ bib.tags.doi }}" class="pub-link">{{ bib.tags.doi }}</a>
+        DOI:<a href="https://doi.org/{{ bib.tags.doi }}" class="pub-link">{{ bib.tags.doi }}</a>
+    {%- endif -%}
+    {%- if bib.tags.hal_id -%}
+        <a href="https://hal.science/{{ bib.tags.hal_id }}" class="pub-link">&lang;{{ bib.tags.hal_id }}&rang;</a>
     {%- endif -%}
 {% endmacro print_ref %}
