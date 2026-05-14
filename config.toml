@@ -30,6 +30,10 @@ favicon = "favicon-32x32.png"
 main_menu = [
     { name = "blog", url = "blog", trailing_slash = true },
     { name = "publications", url = "publications", trailing_slash = true },
-    { name = "github", url = "https://github.com/ManifoldFR", new_tab = true },
-    { name = "google scholar", url = "https://scholar.google.com/citations?user=aVgy-0gAAAAJ&hl=en", new_tab = true },
+]
+
+socials = [
+    { name = "github", url = "https://github.com/ManifoldFR" },
+    { name = "linkedin", url = "https://www.linkedin.com/in/will-jallet/" },
+    { name = "google-scholar", url = "https://scholar.google.com/citations?user=aVgy-0gAAAAJ" }
 ]
