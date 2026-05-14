@@ -3,6 +3,7 @@ title = "Wilson Jallet"
 base_url = "https://manifoldfr.github.io"
 
 theme = "terminus"
+author = "Wilson Jallet"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
@@ -21,7 +22,7 @@ theme = "monokai"
 [extra]
 layout = "center"
 katex = true
-show_default_author = false
+show_default_author = true
 
 color_scheme = "catppuccin-latte"
 
