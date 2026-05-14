@@ -1,13 +1,13 @@
 {% extends "terminus/templates/index.html" %}
 
-{% block main %}
-{%- filter indent -%}{%- filter indent -%}
-<section id="subheader">
-    <div class="profile-picture">
+{%- block main -%}
+<header
+        class="content {%- if section.extra.framed %} framed{%- endif -%}">
+    <div id="profile-picture">
         <img src="/picture.jpg" alt="picture">
     </div>
-    {{ section.content | safe }}
-</section>
+    {{ section.content | indent | safe }}
+</header>
 
 {%- if section.extra.section_path -%}
     {%- set blog_section = get_section(path=section.extra.section_path) -%}
@@ -34,5 +34,4 @@
     </ul>
 </nav>
 {%- endif %}
-{%- endfilter -%}{%- endfilter -%}
-{% endblock main %}
+{%- endblock main -%}

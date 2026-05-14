@@ -2,6 +2,7 @@
 sort_by = "date"
 
 [extra]
+framed = true
 section_path = "blog/_index.md"
 max_posts = 5
 +++
@@ -15,8 +16,8 @@ Quantitative researcher, Capital Fund Management
 
 I am a quantitative researcher at [Capital Fund Management](https://www.cfm.com/) (CFM).
 
-Previously, I was a postdoctoral researcher at INRIA, in the [WILLOW project-team](https://www.di.ens.fr/willow/).
-I did my PhD between Willow and the [Gepetto team](https://www.laas.fr/public/fr/gepetto) at LAAS-CNRS, under the supervision of both [Nicolas Mansard](https://gepettoweb.laas.fr/nmansard) and [Justin Carpentier](https://jcarpent.github.io).
+I was previously a postdoctoral researcher at INRIA, in the [WILLOW project-team](https://www.di.ens.fr/willow/).
+During my PhD, I was between the Willow and [Gepetto](https://www.laas.fr/public/fr/gepetto) teams at Inria Paris and LAAS-CNRS respectively, under the supervision of [Nicolas Mansard](https://gepettoweb.laas.fr/nmansard) and [Justin Carpentier](https://jcarpent.github.io).
 During both my PhD and post-doc, my work focused on real-time numerical optimization-based control for robotics (and beyond).
 
 I obtained an engineering degree from [École polytechnique](https://www.polytechnique.edu/), and a master's degree in applied mathematics
